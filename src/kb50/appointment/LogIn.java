@@ -12,9 +12,4 @@ public class LogIn extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
     }
-    
-    public void onClick(View v){
-    	Intent i = new Intent(LogIn.this, TabLayout.class);
-    	startActivity(i);
-    }
 }

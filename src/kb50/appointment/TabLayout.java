@@ -60,12 +60,12 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
         
         initializeTabHost(savedInstanceState);
         if(savedInstanceState != null){
-        	mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
+        	mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
         }
     }
     
     protected void onSaveInstanceState(Bundle outState){
-    	outState.putString("tab", mTabHost.getCurrentTabTag());
+    	outState.putString("tab", mTabHost.getCurrentTabTag()); //save the tab selected
     	super.onSaveInstanceState(outState);
     }
     

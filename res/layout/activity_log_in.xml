@@ -5,17 +5,9 @@
     android:gravity="center"
     android:orientation="vertical" >
 
-    <!--
-          <Space
+    <Space
         android:layout_width="1dp"
         android:layout_height="150dp" />
-    -->
-
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Derp" />
 
     <EditText
         android:id="@+id/usernameField"
