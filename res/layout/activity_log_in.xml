@@ -1,12 +1,65 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <!--
+          <Space
+        android:layout_width="1dp"
+        android:layout_height="150dp" />
+    -->
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Derp" />
+
+    <EditText
+        android:id="@+id/usernameField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/username" />
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="10dp" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickLogin"
+        android:text="@string/login" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="10dp" />
 
     <TextView
+        android:id="@+id/regText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/regText" />
 
-</RelativeLayout>
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickReg"
+        android:text="@string/register" />
+
+</LinearLayout>
