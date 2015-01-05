@@ -3,7 +3,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FF0000" >
-    
+    android:background="#000000" >
+	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:background="#0000FF"
+        android:orientation="horizontal" >
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            
+            android:layout_gravity="top"
+            android:adjustViewBounds="true"
+            
+            android:contentDescription="@string/ProfielPic"
+            android:src="@drawable/pq" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" 
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" 
+                android:text="@string/userName"
+                android:textColor="#FFFFFF"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" 
+                android:text="@string/userEmail"
+                android:textColor="#FFFFFF"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/userPhone"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
+
+	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6" 
+        android:background="#FF0000">
+        
+	   	  <fragment
+        android:id="@+id/First2Appointments"
+        android:name="kb50.appointment.ProfielListFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+   			/>
+	     
+	    <!-- <ListView
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" 
+	        android:id="@+id/simple_list_item_1">
+	        
+	    </ListView> 
+	     -->
+	     <!-- http://www.learn2crack.com/2014/05/android-working-with-fragments.html -->
+	    
+	
+	</LinearLayout>
+    
 </LinearLayout>

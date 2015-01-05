@@ -1,7 +1,6 @@
 package kb50.appointment;
 
 import java.util.HashMap;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,18 +9,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.content.res.Resources;
 
 public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeListener {
-	//<---- CODE PROVIDED BY http://thepseudocoder.wordpress.com/2011/10/04/android-tabs-the-fragment-way/ ------>
 	private TabHost mTabHost;
 	private HashMap mapTabInfo = new HashMap();
 	private TabInfo mLastTab = null;
+	private Resources res;
 	
 	private class TabInfo{
 		private String tag;
 		private Class clss;
 		private Bundle args;
 		private Fragment fragment;
+		
 		
 		TabInfo(String tag, Class clss, Bundle args){
 			this.tag = tag;
@@ -57,15 +58,16 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_layout);
-        
+
+		res = getResources();
         initializeTabHost(savedInstanceState);
         if(savedInstanceState != null){
-        	mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
+        	mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
     }
     
     protected void onSaveInstanceState(Bundle outState){
-    	outState.putString("tab", mTabHost.getCurrentTabTag()); //save the tab selected
+    	outState.putString("tab", mTabHost.getCurrentTabTag());
     	super.onSaveInstanceState(outState);
     }
     
@@ -73,9 +75,10 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
     	mTabHost = (TabHost)findViewById(android.R.id.tabhost);
     	mTabHost.setup();
     	TabInfo tabInfo = null;
-    	TabLayout.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator("Tab 1"), (tabInfo = new TabInfo("Tab1", Profile.class, args)));
+    	
+    	TabLayout.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab1").setIndicator(res.getString(R.string.Profiel)), (tabInfo = new TabInfo("Tab1", Profile.class, args)));
     	this.mapTabInfo.put(tabInfo.tag, tabInfo);
-    	TabLayout.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator("Tab 2"), (tabInfo = new TabInfo("Tab2", AppointmentList.class, args)));
+    	TabLayout.addTab(this, this.mTabHost, this.mTabHost.newTabSpec("Tab2").setIndicator(res.getString(R.string.Appointment)), (tabInfo = new TabInfo("Tab2", AppointmentList.class, args)));
     	this.mapTabInfo.put(tabInfo.tag, tabInfo);
     	
     	//Default to first tab

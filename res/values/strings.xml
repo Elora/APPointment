@@ -7,5 +7,21 @@
     <string name="login">Log In</string>
     <string name="register">Register</string>
     <string name="regText">No account yet? Click this button:</string>
+	
+	<string name="Profiel">Profiel</string>
+    <string name="Appointment">Appointment</string>
+    <string name="ProfielPic">Profiel picture</string>
+    
+    <string name="userName">naam</string>
+    <string name="userEmail">email</string>
+    <string name="userPhone">0192012</string>
 
+    <string name="alter">Alter appointment</string>
+    <string name="sendmessage">Send message</string>
+    <string name="viewmap">View map</string>
+    <string name="delete">Delete</string>
+    <string name="back">Back</string>
+    
+    
+    
 </resources>

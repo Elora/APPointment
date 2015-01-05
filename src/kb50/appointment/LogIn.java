@@ -12,4 +12,9 @@ public class LogIn extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
     }
+    
+    public void clcickcic(View v) {
+    	Intent single = new Intent(this, TabLayout.class);
+		startActivity(single);
+	}
 }

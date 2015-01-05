@@ -5,6 +5,13 @@
     android:gravity="center"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/button1temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" 
+        android:onClick="clcickcic"/>
+
     <Space
         android:layout_width="1dp"
         android:layout_height="150dp" />
