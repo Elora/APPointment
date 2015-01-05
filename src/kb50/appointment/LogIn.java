@@ -12,8 +12,8 @@ public class LogIn extends Activity {
 
 	private EditText username;
 	private EditText password;
-	private final String TEMP_USER = "Tony";
-	private final String TEMP_PASS = "isAwesome";
+	private final String TEMP_USER = "a";
+	private final String TEMP_PASS = "a";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {

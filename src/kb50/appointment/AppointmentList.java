@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class AppointmentList extends Fragment {
 	private static View view;
@@ -38,5 +39,10 @@ public class AppointmentList extends Fragment {
         }
         return (LinearLayout)inflater.inflate(R.layout.appointment_list_layout, container, false); */
     }
-
+	
+	public void onClick(View v){
+		Toast.makeText(getActivity(), "new appointment, to be made" , Toast.LENGTH_SHORT).show();
+	      
+	}
+	}
 }

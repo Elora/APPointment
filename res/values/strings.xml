@@ -21,6 +21,8 @@
     <string name="viewmap">View map</string>
     <string name="delete">Delete</string>
     <string name="back">Back</string>
+    <string name="New_appointment">New appointment</string>
+    
 
     <string name="pic">Profile picture</string>
     <string name="title_activity_register">RegisterActivity</string>

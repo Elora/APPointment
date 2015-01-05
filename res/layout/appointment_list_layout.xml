@@ -5,6 +5,13 @@
     android:background="#FF1346"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/New_appointment" 
+        android:onClick="onClick"/>
+
       <fragment
         android:id="@+id/Appointments"
         android:name="kb50.appointment.AppointmentListFragment"
