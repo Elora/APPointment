@@ -10,7 +10,8 @@
         android:layout_height="200dp"
         android:src="@drawable/pic"
         android:contentDescription="@string/pic" />
-    
+   
+
     <Space
         android:layout_width="1dp"
         android:layout_height="5dp" />
