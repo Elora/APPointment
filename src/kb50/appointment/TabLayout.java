@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.Toast;
 import android.content.res.Resources;
 
 public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeListener {
@@ -65,6 +66,11 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
         	mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
     }
+    
+    public void onClickNewApp(View v){
+		Toast.makeText(this, "new appointment, to be made" , Toast.LENGTH_SHORT).show();
+	      
+	}
     
     protected void onSaveInstanceState(Bundle outState){
     	outState.putString("tab", mTabHost.getCurrentTabTag());
