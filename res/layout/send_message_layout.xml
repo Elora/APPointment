@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/hintToNumber" 
         android:inputType="number"
-        />"
+        />
 
     <Spinner
     android:id="@+id/Default_messages"

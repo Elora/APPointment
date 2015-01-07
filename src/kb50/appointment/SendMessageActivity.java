@@ -17,7 +17,7 @@ public class SendMessageActivity extends Activity{
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.send_message_lauout);
+        setContentView(R.layout.send_message_layout);
         eTextMblNumber = (EditText) findViewById(R.id.ToNumber);
         eTextMsg = (EditText) findViewById(R.id.Message);
 	     
