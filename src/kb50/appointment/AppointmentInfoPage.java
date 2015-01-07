@@ -33,8 +33,8 @@ public class AppointmentInfoPage extends Activity{
 	             
 	        	break;
 	        case R.id.button_sendMessage:
-	        	Toast.makeText(this, "to be implemented, send an sms", Toast.LENGTH_SHORT).show();
-	            
+	        	Intent i = new Intent(this, SendMessageActivity.class);
+	            startActivity(i);
 	        	break;
 	        case R.id.button_viewmap:
 	        	Toast.makeText(this, "to be implemented, google maps", Toast.LENGTH_SHORT).show();

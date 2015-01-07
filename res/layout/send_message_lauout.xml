@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical">
+
+    
+    <EditText
+        android:id="@+id/ToNumber"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hintToNumber" 
+        android:inputType="number"
+        />"
+
+    <Spinner
+    android:id="@+id/Default_messages"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" />
+    
+     <EditText
+        android:id="@+id/Message"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:hint="@string/hintMessage" />
+    
+    <Button
+        android:id="@+id/SendMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SendMessage"
+        android:text="@string/BtnSend" />
+    
+    
+</LinearLayout>

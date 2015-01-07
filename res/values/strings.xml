@@ -38,4 +38,19 @@
 	<string name="reg_pass1">Password</string>
 	<string name="reg_pass2">Password again</string>
 	
+	<!-- Send message -->
+	<string name="hintToNumber">To number</string>
+	<string name="hintMessage">(Optional) Extra message</string>
+	<string name="BtnSend">Send</string>
+	<string-array name="Default_messages">
+        <item>I am late.</item>
+        <item>I cannot make it.</item>
+        <item>You are an ass.</item>
+        <item>Stuck in traffic.</item>
+        <item>I am sick.</item>
+        <item>I am early.</item>
+        <item>I am waiting.</item>
+    </string-array>
+	
+	
 </resources>
