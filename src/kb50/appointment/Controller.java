@@ -1,8 +1,8 @@
 package kb50.appointment;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,12 +10,13 @@ import org.json.JSONObject;
 
 import android.os.AsyncTask;
 
-public class Controller extends AsyncTask<ApiConnector, Long, JSONArray> {
+
+public class Controller extends AsyncTask<ApiConnector, Long, List<Object>> {
 
 	private String url = "";
-	public List<User> users = new ArrayList<User>();
-	private List<Location> locations = new ArrayList<Location>();
-	private List<Appointment> appointments = new ArrayList<Appointment>();
+	public List<Object> users = new ArrayList<Object>();
+	private List<Object> locations = new ArrayList<Object>();
+	private List<Object> appointments = new ArrayList<Object>();
 
 	public Controller(String url) {
 
@@ -23,13 +24,43 @@ public class Controller extends AsyncTask<ApiConnector, Long, JSONArray> {
 		this.execute(new ApiConnector());
 	}
 
-	public void appointmentsToList(JSONArray jsonArray) {
+	public List<Object> appointmentsToList(JSONArray jsonArray) {
 
 		// url = "http://eduweb.hhs.nl/~13061798/GetAppointments.php";
 
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject json = null;
+			try {
+
+				json = jsonArray.getJSONObject(i);
+				Appointment a = new Appointment();
+
+				a.setId(json.getInt("id"));
+				a.setDate(json.getString("date"));
+				a.setName(json.getString("name"));
+				a.setPriority(json.getInt("priority"));
+				a.setDescription(json.getString("description"));
+				for(Object o : locations){
+					Location l = (Location)o;
+					if(l.getId() == json.getInt("locationid")){
+						
+						a.setLocation(l);
+						
+					}
+				}
+			
+				appointments.add(a);
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+
+			}
+		}
+
+		return appointments;
 	}
 
-	public void locationsToList(JSONArray jsonArray) {
+	public List<Object> locationsToList(JSONArray jsonArray) {
 
 		// url = "http://eduweb.hhs.nl/~13061798/GetLocations.php";
 
@@ -41,10 +72,10 @@ public class Controller extends AsyncTask<ApiConnector, Long, JSONArray> {
 				Location l = new Location();
 
 				l.setId(json.getInt("id"));
-				l.setCountry(json.getString("country"));
-				l.setCity(json.getString("city"));
-				l.setAddress(json.getString("address"));
-				l.setHouseNumber(json.getInt("house_number"));
+				l.setCountry(json.getString("Country"));
+				l.setCity(json.getString("City"));
+				l.setAddress(json.getString("Address"));
+				l.setHouseNumber(json.getInt("HouseNumber"));
 				l.setPostalCode(json.getString("postal_code"));
 				locations.add(l);
 
@@ -54,10 +85,10 @@ public class Controller extends AsyncTask<ApiConnector, Long, JSONArray> {
 			}
 
 		}
-
+		return locations;
 	}
 
-	public void usersToList(JSONArray jsonArray) {
+	public List<Object> usersToList(JSONArray jsonArray) {
 
 		// url = "http://eduweb.hhs.nl/~13061798/GetUsers.php";
 
@@ -66,6 +97,8 @@ public class Controller extends AsyncTask<ApiConnector, Long, JSONArray> {
 			try {
 
 				json = jsonArray.getJSONObject(i);
+				// Object o = new Object();
+
 				User u = new User();
 
 				u.setId(json.getInt("id"));
@@ -82,45 +115,21 @@ public class Controller extends AsyncTask<ApiConnector, Long, JSONArray> {
 			}
 
 		}
-
-	}
-
-	public List<Location> getLocations() {
-
-		return locations;
-
-	}
-
-	public List<User> getUsers() {
-
 		return users;
-
-	}
-
-	public List<Appointment> getAppointments() {
-
-		return appointments;
-
 	}
 
 	@Override
-	protected JSONArray doInBackground(ApiConnector... params) {
-		return params[0].getTable(url);
-	}
+	protected List<Object> doInBackground(ApiConnector... params) {
 
-	@Override
-	protected void onPostExecute(JSONArray jsonArray) {
-
-		
 		if (url.contains("Users")) {
-			usersToList(jsonArray);
-		
-		}
-		if (url.contains("Locations")) {
-			locationsToList(jsonArray);
-		}
-		if (url.contains("Appointments")) {
-			appointmentsToList(jsonArray);
+			return usersToList(params[0].getTable(url));
+
+		} else if (url.contains("Locations")) {
+			return locationsToList(params[0].getTable(url));
+		} else {
+			usersToList(params[0].getTable(url));
+			locationsToList(params[0].getTable(url));
+			return appointmentsToList(params[0].getTable(url));
 		}
 
 	}

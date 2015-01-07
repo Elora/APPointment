@@ -9,7 +9,7 @@ public class Appointment {
 	private int id;
 	private String name;
 	private String description;
-	private Date date;
+	private String date;
 	private int priority;
 	private List<User> users;
 	private Location location;
@@ -38,11 +38,11 @@ public class Appointment {
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
