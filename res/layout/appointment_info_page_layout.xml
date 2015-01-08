@@ -106,6 +106,19 @@
                 android:text="@string/delete" />
         </LinearLayout>
     </LinearLayout>
+    
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            class="com.google.android.gms.maps.MapFragment" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_Back"
