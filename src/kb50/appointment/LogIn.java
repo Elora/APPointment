@@ -3,13 +3,11 @@ package kb50.appointment;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import org.json.JSONArray;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,8 +16,7 @@ public class LogIn extends Activity {
 
 	private EditText username;
 	private EditText password;
-	private final String TEMP_USER = "a";
-	private final String TEMP_PASS = "a";
+
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +26,7 @@ public class LogIn extends Activity {
         username = (EditText) findViewById(R.id.usernameField);
         password = (EditText) findViewById(R.id.passwordField);
         
-     
+        
         
     }
     
@@ -57,7 +54,7 @@ public class LogIn extends Activity {
     	// TODO replace with DB check
     	boolean passCheck = false;
     	   try {
-   			List<Object> users = new Controller("http://eduweb.hhs.nl/~13061798/GetUsers.php").get();
+   			List<Object> users = new Controller().new Select("http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(new ApiConnector()).get();
    			for(Object user : users){
    				User u = (User)user;
    				if(usern.equals(u.getEmail()) && password.equals(u.getPwd())){

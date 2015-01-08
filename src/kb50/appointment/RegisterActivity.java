@@ -1,5 +1,6 @@
 package kb50.appointment;
 
+import kb50.appointment.Controller.Insert;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,60 +17,73 @@ public class RegisterActivity extends Activity {
 	private EditText mail;
 	private EditText password1;
 	private EditText password2;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		
+
 		username = (EditText) findViewById(R.id.reg_user_field);
 		phoneNum = (EditText) findViewById(R.id.reg_phone_field);
 		mail = (EditText) findViewById(R.id.reg_mail_field);
 		password1 = (EditText) findViewById(R.id.reg_pass1_field);
 		password2 = (EditText) findViewById(R.id.reg_pass2_field);
 	}
-	
-	public void onClickBtnCancel(View v){
+
+	public void onClickBtnCancel(View v) {
 		startActivity(new Intent(RegisterActivity.this, LogIn.class));
 	}
-	
-	public void onClickBtnSubmit(View v){
-		String user = username.getText().toString();
-		String phone = phoneNum.getText().toString();
-		String email = mail.getText().toString();
+
+	public void onClickBtnSubmit(View v) {
+
 		String pass1 = password1.getText().toString();
 		String pass2 = password2.getText().toString();
-		
-		if(userAvailable(user) == true && matchingPassword(pass1, pass2) == true){
+
+		User u = new User();
+		u.setEmail(mail.getText().toString());
+		u.setName(username.getText().toString());
+		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
+		u.setPwd(pass1);
+		u.setImageurl("http://test.com/test.jpg");
+
+		if (userAvailable(u.getName()) == true
+				&& matchingPassword(pass1, pass2) == true) {
 			Context context = getApplicationContext();
+
+			new Controller().new Insert(u,
+					"http://eduweb.hhs.nl/~13061798/CreateUser.php")
+					.execute(new ApiConnector());
+			
 			CharSequence text = "Registration complete";
 			int duration = Toast.LENGTH_SHORT;
+			
 
 			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();			
-		}else{
+			toast.show();
+			this.finish();
+		} else {
 			Context context = getApplicationContext();
 			CharSequence text = "Registration failed";
 			int duration = Toast.LENGTH_SHORT;
 
 			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();			
+			toast.show();
 		}
-		
+
 	}
-	
-	private boolean matchingPassword(String pass1, String pass2){
-		if(pass1.equals(pass2)){
+
+	private boolean matchingPassword(String pass1, String pass2) {
+		if (pass1.equals(pass2)) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	private boolean userAvailable(String user){
-		if(user.equalsIgnoreCase(TEMP_USER)){
+
+	private boolean userAvailable(String user) {
+		if (user.equalsIgnoreCase(TEMP_USER)) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
