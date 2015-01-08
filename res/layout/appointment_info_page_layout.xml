@@ -2,15 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:background="#0000FF"
+        android:layout_weight="0.3"
+        android:background="@drawable/appointment_bg"
         android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="top"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/image" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -22,95 +31,89 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userName"
-                android:textColor="#FFFFFF" />
+                android:text="@string/userName" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userEmail"
-                android:textColor="#FFFFFF" />
+                android:text="@string/userEmail" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userPhone"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/userName"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/userEmail"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/userPhone"
-                android:textColor="#FFFFFF" />
+                android:text="@string/userPhone" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:background="#FF0000"
+        android:layout_weight="0.1"
+        android:background="#FFFFFF"
         android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/button_alter"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/edit"
                 android:onClick="onClick"
-                android:text="@string/alter" />
+                android:text="@string/alter"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button_sendMessage"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/send"
                 android:onClick="onClick"
-                android:text="@string/sendmessage" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:orientation="vertical" >
+                android:text="@string/sendmessage"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button_viewmap"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/map"
                 android:onClick="onClick"
-                android:text="@string/viewmap" />
+                android:text="@string/viewmap"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button_delete"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/delete"
                 android:onClick="onClick"
-                android:text="@string/delete" />
+                android:text="@string/delete"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
-    
-     <LinearLayout
-        android:layout_width="fill_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7">
+        android:layout_weight="0.6"
+        android:background="#FFFFFF"
+        android:orientation="horizontal" >
 
         <fragment
             android:id="@+id/map"
@@ -124,8 +127,10 @@
         android:id="@+id/button_Back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button"
         android:onClick="onClick"
-        android:text="@string/back" >
+        android:text="@string/back"
+        android:textColor="#FFFFFF" >
     </Button>
 
 </LinearLayout>

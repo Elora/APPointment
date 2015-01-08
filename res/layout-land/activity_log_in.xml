@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="70dp"
+            android:layout_toLeftOf="@+id/usernameField"
+            android:onClick="clcickcic"
+            android:src="@drawable/icon" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/usernameField"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:hint="@string/username" />
+
+            <EditText
+                android:id="@+id/passwordField"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/usernameField"
+                android:layout_marginRight="40dp"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/passwordField"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickLogin"
+                android:text="@string/login"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/regText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/loginBtn"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/regText" />
+
+            <Button
+                android:id="@+id/registerBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/regText"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickReg"
+                android:text="@string/register"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

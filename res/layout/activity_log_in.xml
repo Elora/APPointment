@@ -6,20 +6,17 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/pic"
-        android:contentDescription="@string/pic" />
-   
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="5dp" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/pic"
+        android:src="@drawable/icon" />
 
     <EditText
         android:id="@+id/usernameField"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:hint="@string/username" />
 
     <EditText
@@ -37,12 +34,14 @@
         android:id="@+id/loginBtn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button"
         android:onClick="onClickLogin"
-        android:text="@string/login" />
+        android:text="@string/login"
+        android:textColor="#FFFFFF" />
 
     <Space
         android:layout_width="1dp"
-        android:layout_height="10dp" />
+        android:layout_height="30dp" />
 
     <TextView
         android:id="@+id/regText"
@@ -52,13 +51,15 @@
 
     <Space
         android:layout_width="1dp"
-        android:layout_height="5dp" />
+        android:layout_height="10dp" />
 
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button"
         android:onClick="onClickReg"
-        android:text="@string/register" />
+        android:text="@string/register"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

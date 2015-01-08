@@ -16,15 +16,15 @@
     <string name="userEmail">email</string>
     <string name="userPhone">0192012</string>
 
-    <string name="alter">Alter appointment</string>
-    <string name="sendmessage">Send message</string>
-    <string name="viewmap">View map</string>
+    <string name="alter">Edit</string>
+    <string name="sendmessage">Send</string>
+    <string name="viewmap">Maps</string>
     <string name="delete">Delete</string>
     <string name="back">Back</string>
     <string name="New_appointment">New appointment</string>
     
 
-    <string name="pic">Profile picture</string>
+    <string name="pic">Logo</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="hello_world">Hello world!</string>
 	
