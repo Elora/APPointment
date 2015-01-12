@@ -1,9 +1,7 @@
-
 package kb50.appointment;
 
 import java.io.IOException;
 import java.util.List;
-
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -33,7 +32,7 @@ public class AppointmentInfoPage extends Activity {
 
 	private Geocoder gc;
 	private Resources res;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +51,7 @@ public class AppointmentInfoPage extends Activity {
 			Context context = getApplicationContext();
 			CharSequence text = "IOException!!!!!!! :(";
 			int duration = Toast.LENGTH_SHORT;
-			
+
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 		}
@@ -136,27 +135,31 @@ public class AppointmentInfoPage extends Activity {
 			Intent i = new Intent(this, SendMessageActivity.class);
 			startActivity(i);
 			break;
-		case R.id.button_viewmap:
-			Toast.makeText(this, "to be implemented, google maps",
-					Toast.LENGTH_SHORT).show();
+		case R.id.button_route:
+			String uri = "https://maps.google.com/maps?f=d&daddr=" + lat + ","
+					+ lng;
+			Intent route = new Intent(android.content.Intent.ACTION_VIEW,
+			// Uri.parse(("geo:" + lat + ", " + lng)));
+					Uri.parse(uri));
+			startActivity(route);
 
 			break;
 		}
 
 	}
-	public void deleteAppoinment(){
 
-		DeleteFragment dialogFragment = DeleteFragment.newInstance(res 
+	public void deleteAppoinment() {
+
+		DeleteFragment dialogFragment = DeleteFragment.newInstance(res
 				.getString(R.string.Deletemessage));
 		dialogFragment.show(getFragmentManager(), "dialog");
-		
-		
+
 	}
+
 	public void doPositiveClick() {
 	}
 
 	public void doNegativeClick() {
 	}
 
-	
 }
