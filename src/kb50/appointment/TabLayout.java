@@ -1,16 +1,18 @@
 package kb50.appointment;
 
 import java.util.HashMap;
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
-import android.widget.TabHost.TabContentFactory;
 import android.widget.Toast;
-import android.content.res.Resources;
+import android.widget.TabHost.TabContentFactory;
 
 public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeListener {
 	private TabHost mTabHost;
@@ -68,8 +70,7 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
     }
     
     public void onClickNewApp(View v){
-		Toast.makeText(this, "new appointment, to be made" , Toast.LENGTH_SHORT).show();
-	      
+		startActivity(new Intent(TabLayout.this, NewAppointment.class));
 	}
     
     protected void onSaveInstanceState(Bundle outState){

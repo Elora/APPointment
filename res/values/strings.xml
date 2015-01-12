@@ -23,14 +23,15 @@
     <string name="back">Back</string>
     <string name="New_appointment">New appointment</string>
     
-
     <string name="pic">Logo</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="hello_world">Hello world!</string>
 	
 	<string name="btn_submit">Submit</string>
 	<string name="btn_cancel">Cancel</string>
-
+    <string name="date">Pick Date</string>
+    <string name="time">Pick Time</string>
+    
     <!-- strings for register activity -->
 	<string name="reg_username">User name</string>
 	<string name="reg_phone">Phone Number</string>
@@ -53,6 +54,20 @@
     </string-array>
 	
 	<string name="Deletemessage">Are you sure you want to delete this appointment?</string>
-	
-	
+
+    <!-- strings for new appointment (may be re-used for altering an appointment -->
+    <string name="appointment_name">Name</string>
+    <string name="appointment_desc">Description</string>
+    <string name="appointment_date">Date</string>
+    <string name="appointment_location">Location</string>
+    <string name="appointment_priority">Priority</string>
+    <string name="appointment_reminder">Reminder</string>
+
+    <!-- Priority spinner in when creating new appointment -->
+    <string-array name="priority_array">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+
 </resources>

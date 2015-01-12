@@ -3,11 +3,15 @@ package kb50.appointment;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.method.KeyListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,9 +29,6 @@ public class LogIn extends Activity {
         
         username = (EditText) findViewById(R.id.usernameField);
         password = (EditText) findViewById(R.id.passwordField);
-        
-        
-        
     }
     
     public void onClickLogin(View v){    	

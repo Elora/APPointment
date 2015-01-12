@@ -13,12 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 public class AppointmentListFragment extends ListFragment {
 
-	
-
+	//temp data
+    String[] nameApp = new String[] {
+        "docter",
+        "school"};
+    String[] dateApp = new String[]{
+        "2 september 2015",
+        "3 september 2015"};
+    String[] timeApp = new String[]{
+            "9:00 pm",
+            "8:00 am"};
+    //end temp data
+    
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -80,8 +89,6 @@ public class AppointmentListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int pos, long id) {
 		super.onListItemClick(l, v, pos, id);
-		Toast.makeText(getActivity(), "Item " + pos + " was clicked",
-				Toast.LENGTH_SHORT).show();
 		Intent i = new Intent(getActivity(), AppointmentInfoPage.class);
 		i.putExtra("ID", "id van de class");
 		startActivity(i);

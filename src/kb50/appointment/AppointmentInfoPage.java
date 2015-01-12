@@ -39,8 +39,6 @@ public class AppointmentInfoPage extends Activity {
 		Intent intent = getIntent();
 		String id = intent.getStringExtra("ID");
 		setContentView(R.layout.appointment_info_page_layout);
-		Toast.makeText(this, "Item " + id + " was passed", Toast.LENGTH_SHORT)
-				.show();
 		try {
 			map = ((MapFragment) getFragmentManager()
 					.findFragmentById(R.id.map)).getMap();
