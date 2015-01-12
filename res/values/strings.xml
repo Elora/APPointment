@@ -18,7 +18,7 @@
 
     <string name="alter">Edit</string>
     <string name="sendmessage">Send</string>
-    <string name="viewmap">Maps</string>
+    <string name="viewmap">Route</string>
     <string name="delete">Delete</string>
     <string name="back">Back</string>
     <string name="New_appointment">New appointment</string>

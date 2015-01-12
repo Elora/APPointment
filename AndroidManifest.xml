@@ -74,11 +74,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
+        <!-- Domi 
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBNngWCW_Dk6pyAv-90P4hyJneYnqImfkU" />
+            -->
+        <!-- Katrin -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDH-nyMu5bOk_zzdr68Rf8rFchk9RnRL3o" />
-        
+         
        <meta-data
            android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version"/>
