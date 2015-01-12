@@ -7,7 +7,9 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,11 +66,15 @@ public class AppointmentListFragment extends ListFragment {
 
 	public List<Appointment> getAppointments() {
 
+		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()); 
+		int id = mSharedPreference.getInt("id", 0);
+		
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		try {
 			for (Object o : new Controller().new Select(
-					"http://eduweb.hhs.nl/~13061798/GetAppointments.php")
-					.execute(new ApiConnector()).get()) {
+					"http://eduweb.hhs.nl/~13061798/GetAppointments.php?id="
+							+ id).execute(
+					new ApiConnector()).get()) {
 
 				appointments.add((Appointment) o);
 

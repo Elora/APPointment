@@ -36,8 +36,8 @@ public class AppointmentInfoPage extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent intent = getIntent();
-		String id = intent.getStringExtra("ID");
+		//Intent intent = getIntent();
+		//String id = intent.getStringExtra("ID");
 		setContentView(R.layout.appointment_info_page_layout);
 		try {
 			map = ((MapFragment) getFragmentManager()

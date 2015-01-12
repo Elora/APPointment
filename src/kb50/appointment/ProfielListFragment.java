@@ -9,7 +9,9 @@ import java.util.concurrent.ExecutionException;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +25,7 @@ import android.widget.Toast;
 public class ProfielListFragment extends ListFragment {
 	View view;
 	Button btn;
-
+	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,11 +73,15 @@ public class ProfielListFragment extends ListFragment {
 
 	public List<Appointment> getAppointments() {
 
+		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()); 
+		int id = mSharedPreference.getInt("id", 0);
+		
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		try {
 			for (Object o : new Controller().new Select(
-					"http://eduweb.hhs.nl/~13061798/GetAppointments.php")
-					.execute(new ApiConnector()).get()) {
+					"http://eduweb.hhs.nl/~13061798/GetAppointments.php?id="
+							+ id).execute(
+					new ApiConnector()).get()) {
 
 				appointments.add((Appointment) o);
 
@@ -98,6 +104,8 @@ public class ProfielListFragment extends ListFragment {
 		super.onListItemClick(l, v, pos, id);
 		Toast.makeText(getActivity(), "Item " + pos + " was clicked " + id,
 				Toast.LENGTH_SHORT).show();
+		
+		
 		Intent i = new Intent(getActivity(), AppointmentInfoPage.class);
 		i.putExtra("ID", "id van de class");
 		startActivity(i);
