@@ -65,11 +65,9 @@ public class LogIn extends Activity {
    				
    			}
    		} catch (InterruptedException e) {
-   			// TODO Auto-generated catch block
    			e.printStackTrace();
    			return false;
    		} catch (ExecutionException e) {
-   			// TODO Auto-generated catch block
    			e.printStackTrace();
    			return false;
    		}

@@ -4,9 +4,11 @@ package kb50.appointment;
 import java.io.IOException;
 import java.util.List;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -30,7 +32,8 @@ public class AppointmentInfoPage extends Activity {
 	private double lng;
 
 	private Geocoder gc;
-
+	private Resources res;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,10 +52,12 @@ public class AppointmentInfoPage extends Activity {
 			Context context = getApplicationContext();
 			CharSequence text = "IOException!!!!!!! :(";
 			int duration = Toast.LENGTH_SHORT;
-
+			
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 		}
+
+		res = getResources();
 	}
 
 	private void gotoLocation(double lat, double lng, float zoom) {
@@ -125,9 +130,7 @@ public class AppointmentInfoPage extends Activity {
 			finish();
 			break;
 		case R.id.button_delete:
-			Toast.makeText(this, "to delete appointment", Toast.LENGTH_SHORT)
-					.show();
-
+			deleteAppoinment();
 			break;
 		case R.id.button_sendMessage:
 			Intent i = new Intent(this, SendMessageActivity.class);
@@ -141,5 +144,20 @@ public class AppointmentInfoPage extends Activity {
 		}
 
 	}
+	public void deleteAppoinment(){
 
+		DeleteFragment dialogFragment = DeleteFragment.newInstance(res 
+				.getString(R.string.Deletemessage));
+		dialogFragment.show(getFragmentManager(), "dialog");
+		
+		
+	}
+	public void doPositiveClick() {
+		
+	}
+
+	public void doNegativeClick() {
+	}
+
+	
 }
