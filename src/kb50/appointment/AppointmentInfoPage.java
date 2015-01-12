@@ -153,7 +153,6 @@ public class AppointmentInfoPage extends Activity {
 		
 	}
 	public void doPositiveClick() {
-		
 	}
 
 	public void doNegativeClick() {

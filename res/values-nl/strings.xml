@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">APPointment</string>
+    <string name="username">Usernaam</string>
+    <string name="password">Wachtwoord</string>
+    <string name="login">Log In</string>
+    <string name="register">Registeren</string>
+    <string name="regText">Nog geen account account? Click Hier:</string>
+	
+	<string name="Profiel">Profiel</string>
+    <string name="Appointment">Afspraak</string>
+    <string name="ProfielPic">Profiel plaatje</string>
+    
+    <string name="userName">naam</string>
+    <string name="userEmail">email</string>
+    <string name="userPhone">0192012</string>
+
+    <string name="alter">Aanpassen</string>
+    <string name="sendmessage">Verzenden</string>
+    <string name="viewmap">Route</string>
+    <string name="delete">Delete</string>
+    <string name="back">Terug</string>
+    <string name="New_appointment">Nieuw afspraak</string>
+    
+
+    <string name="pic">Logo</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="hello_world">Hello world!</string>
+	
+	<string name="btn_submit">Verstuur</string>
+	<string name="btn_cancel">Anuleren</string>
+
+    <!-- strings for register activity -->
+	<string name="reg_username">User naam</string>
+	<string name="reg_phone">Telephone nummer</string>
+	<string name="reg_mail">E-mail</string>
+	<string name="reg_pass1">Wachtwoord</string>
+	<string name="reg_pass2">Wachtwoord herhalen</string>
+	
+	<!-- Send message -->
+	<string name="hintToNumber">Naar nummer</string>
+	<string name="hintMessage">(Optioneel) Extra bericht</string>
+	<string name="BtnSend">Verstuur</string>
+	<string-array name="Default_messages">
+        <item>Ik ben verlaat.</item>
+        <item>Ik kan het niet halen.</item>
+        <item>You are an ass.</item>
+        <item>Vast in het verkeer.</item>
+        <item>Ik ben ziek.</item>
+        <item>Ik ben er vroeger.</item>
+        <item>Ik ben aan het wachten.</item>
+    </string-array>
+	
+	<string name="Deletemessage">Weet je zeker dat je deze afspraak wilt verwijderen?</string>
+	
+	
+</resources>
