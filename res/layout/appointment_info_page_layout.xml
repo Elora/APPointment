@@ -57,7 +57,7 @@
                 android:drawableLeft="@drawable/edit"
                 android:onClick="onClick"
                 android:text="@string/alter"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/button_sendMessage"
@@ -69,7 +69,7 @@
                 android:drawableLeft="@drawable/send"
                 android:onClick="onClick"
                 android:text="@string/sendmessage"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/button_route"
@@ -81,7 +81,7 @@
                 android:drawableLeft="@drawable/map"
                 android:onClick="onClick"
                 android:text="@string/viewmap"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/button_delete"
@@ -93,7 +93,7 @@
                 android:drawableLeft="@drawable/delete"
                 android:onClick="onClick"
                 android:text="@string/delete"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 

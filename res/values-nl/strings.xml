@@ -16,8 +16,8 @@
     <string name="userEmail">email</string>
     <string name="userPhone">0192012</string>
 
-    <string name="alter">Aanpassen</string>
-    <string name="sendmessage">Verzenden</string>
+    <string name="alter">Edit</string>
+    <string name="sendmessage">Bericht</string>
     <string name="viewmap">Route</string>
     <string name="delete">Delete</string>
     <string name="back">Terug</string>
@@ -51,6 +51,7 @@
         <item>Ik ben er vroeger.</item>
         <item>Ik ben aan het wachten.</item>
     </string-array>
+	<string name="selectmessage">Select message</string>
 	
 	<string name="Deletemessage">Weet je zeker dat je deze afspraak wilt verwijderen?</string>
 	

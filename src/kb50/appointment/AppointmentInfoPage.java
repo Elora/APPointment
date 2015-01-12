@@ -11,6 +11,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -130,8 +131,7 @@ public class AppointmentInfoPage extends Activity {
 			deleteAppoinment();
 			break;
 		case R.id.button_sendMessage:
-			Intent i = new Intent(this, SendMessageActivity.class);
-			startActivity(i);
+			SendMessage();
 			break;
 		case R.id.button_route:
 			String uri = "https://maps.google.com/maps?f=d&daddr=" + lat + ","
@@ -146,9 +146,11 @@ public class AppointmentInfoPage extends Activity {
 
 	}
 
-	public void deleteAppoinment() {
 
-		DeleteFragment dialogFragment = DeleteFragment.newInstance(res
+
+	public void deleteAppoinment(){
+
+		DeleteFragment dialogFragment = DeleteFragment.newInstance(res 
 				.getString(R.string.Deletemessage));
 		dialogFragment.show(getFragmentManager(), "dialog");
 
@@ -159,5 +161,28 @@ public class AppointmentInfoPage extends Activity {
 
 	public void doNegativeClick() {
 	}
+	
 
+	public void SendMessage(){
+		SendFragment dialogFragment2 = SendFragment.newInstance();
+		dialogFragment2.show(getFragmentManager(), "dialog");
+	}
+
+	public void doPositiveClickSendMessage(int mSelectedItem) {
+		String[] array = res.getStringArray(R.array.Default_messages);
+		String item = array[mSelectedItem];
+
+		
+		Toast.makeText(this, item + " get number ",Toast.LENGTH_SHORT).show();
+		//TODO get numbers
+		
+		SmsManager sm = SmsManager.getDefault();
+		//sm.sendTextMessage("0636512", null, item , null, null);
+		//31634144093 <<-- real number do not use :P
+}
+	
+
+	public void doNegativeClickSendMessage() {
+	}
+	
 }

@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.SEND_SMS" />
+        <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
     
     <permission
@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.SEND_SMS" />
-
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
@@ -88,13 +87,23 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDH-nyMu5bOk_zzdr68Rf8rFchk9RnRL3o" />
+
          	-->
         
-        <!-- Tony --> 	
+        <!-- Tony  	
         <meta-data 
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAe9hTYWUrE4BmA4VR0CF-Kxup4e0gASiM"/>
+       
+         -->
+         
+         <!-- Kelly:
+         -->
+	        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAbzTnrSqYPVX_icrDFlM9dzyKj6K8WV7k" />
         
+	        
        <meta-data
            android:name="com.google.android.gms.version"
            android:value="@integer/google_play_services_version"/>
