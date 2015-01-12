@@ -44,7 +44,7 @@ public class RegisterActivity extends Activity {
 		u.setName(username.getText().toString());
 		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
 		u.setPwd(pass1);
-		u.setImageurl("http://test.com/test.jpg");
+		u.setImageurl("http://image.com/test.jpg");
 
 		if (userAvailable(u.getName()) == true
 				&& matchingPassword(pass1, pass2) == true) {

@@ -54,7 +54,7 @@ public class Controller {
 					Appointment a = new Appointment();
 
 					a.setId(json.getInt("id"));
-					a.setDate(json.getString("date"));
+					a.setDate(json.getString("datetime"));
 					a.setName(json.getString("name"));
 					a.setPriority(json.getInt("priority"));
 					a.setDescription(json.getString("description"));
