@@ -2,20 +2,7 @@
 package kb50.appointment;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.TimeoutException;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,11 +17,17 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AppointmentInfoPage extends Activity {
 	private GoogleMap map;
 	private float zoom = 14;
+
+	private double lat;
+	private double lng;
 
 	private Geocoder gc;
 
@@ -51,6 +44,7 @@ public class AppointmentInfoPage extends Activity {
 					.findFragmentById(R.id.map)).getMap();
 			map.setMyLocationEnabled(true);
 			getLocation();
+			onMapReady(map);
 		} catch (IOException e) {
 			Context context = getApplicationContext();
 			CharSequence text = "IOException!!!!!!! :(";
@@ -80,7 +74,8 @@ public class AppointmentInfoPage extends Activity {
 				int count = 0, maxretry = 5;
 				while (!worked && count < maxretry) {
 					try {
-						list = gc.getFromLocationName("vienna", 1);
+						list = gc.getFromLocationName(
+								"waldorpstraat 47, den haag", 1);
 						worked = true;
 					} catch (Exception te) {
 						System.err.println(te
@@ -96,8 +91,8 @@ public class AppointmentInfoPage extends Activity {
 
 					Toast.makeText(this, locality, Toast.LENGTH_SHORT).show();
 
-					double lng = addresses.getLongitude();
-					double lat = addresses.getLatitude();
+					lng = addresses.getLongitude();
+					lat = addresses.getLatitude();
 
 					gotoLocation(lat, lng, zoom);
 				}
@@ -109,6 +104,14 @@ public class AppointmentInfoPage extends Activity {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public void onMapReady(GoogleMap map) {
+		Marker marker = map.addMarker(new MarkerOptions().position(new LatLng(
+				lat, lng)));
+
+		marker.setIcon(BitmapDescriptorFactory
+				.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 	}
 
 	public void onClick(View v) {
