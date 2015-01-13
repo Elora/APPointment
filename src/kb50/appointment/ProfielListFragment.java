@@ -47,6 +47,7 @@ public class ProfielListFragment extends ListFragment {
 
 		for (int i = 0; i < aantalApp; i++) {
 			HashMap<String, String> hm = new HashMap<String, String>();
+			hm.put("id", getAppointments().get(i).getId()+"");
 			hm.put("name", getAppointments().get(i).getName());
 			hm.put("date", getAppointments().get(i).getDate().substring(0, 10));
 			hm.put("time", getAppointments().get(i).getDate().substring(10));
@@ -102,14 +103,30 @@ public class ProfielListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int pos, long id) {
 		super.onListItemClick(l, v, pos, id);
-		Toast.makeText(getActivity(), "Item " + pos + " was clicked " + id,
-				Toast.LENGTH_SHORT).show();
-		
-		
 		Intent i = new Intent(getActivity(), AppointmentInfoPage.class);
-		i.putExtra("ID", "id van de class");
+		for (Appointment a : getAppointments()) {
+
+			@SuppressWarnings("unchecked")
+			HashMap<String, String> map = (HashMap<String, String>) l
+					.getAdapter().getItem(pos);
+
+			if (a.getId() == Integer.parseInt(map.get("id"))) {
+
+				i.putExtra("appointment_id", a.getId());
+				i.putExtra("appointment_name", a.getName());
+				i.putExtra("appointment_priority", a.getPriority());
+				i.putExtra("appointment_description", a.getDescription());
+				i.putExtra("appointment_date", a.getDate());
+				
+			
+			}
+
+		}
+
 		startActivity(i);
 	}
+
+
 
 }
 

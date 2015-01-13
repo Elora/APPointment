@@ -32,10 +32,11 @@
                 android:text="@string/appointment_desc" />
 
             <TextView
-                 android:id="@+id/appointment_date"
+                android:id="@+id/appointment_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/appointment_date" />
+
         </LinearLayout>
     </LinearLayout>
 
