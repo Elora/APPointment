@@ -9,13 +9,14 @@
         android:id="@+id/reg_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/reg_username" />
+        android:text="@string/reg_name" />
 
     <EditText
         android:id="@+id/reg_user_field"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/reg_username" />
+        android:hint="@string/reg_name"
+        android:inputType="text" />
     
     <Space
         android:layout_width="1dp"

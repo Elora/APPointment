@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">APPointment</string>
-    <string name="username">Username</string>
+    <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
     <string name="register">Register</string>
@@ -13,7 +13,7 @@
     <string name="ProfielPic">Profiel picture</string>
     
     <string name="userName">naam</string>
-    <string name="userEmail">email</string>
+    <string name="userEmail">Email</string>
     <string name="userPhone">0192012</string>
 
     <string name="alter">Edit</string>
@@ -33,7 +33,7 @@
     <string name="time">Pick Time</string>
     
     <!-- strings for register activity -->
-	<string name="reg_username">User name</string>
+	<string name="reg_name">Name</string>
 	<string name="reg_phone">Phone Number</string>
 	<string name="reg_mail">E-mail</string>
 	<string name="reg_pass1">Password</string>

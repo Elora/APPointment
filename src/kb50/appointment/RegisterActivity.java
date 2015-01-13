@@ -1,6 +1,10 @@
 package kb50.appointment;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import kb50.appointment.Controller.Insert;
+import kb50.appointment.Controller.Select;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +16,7 @@ import android.widget.Toast;
 public class RegisterActivity extends Activity {
 
 	private final String TEMP_USER = "Tony";
-	private EditText username;
+	private EditText name;
 	private EditText phoneNum;
 	private EditText mail;
 	private EditText password1;
@@ -23,7 +27,7 @@ public class RegisterActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 
-		username = (EditText) findViewById(R.id.reg_user_field);
+		name = (EditText) findViewById(R.id.reg_user_field);
 		phoneNum = (EditText) findViewById(R.id.reg_phone_field);
 		mail = (EditText) findViewById(R.id.reg_mail_field);
 		password1 = (EditText) findViewById(R.id.reg_pass1_field);
@@ -41,12 +45,12 @@ public class RegisterActivity extends Activity {
 
 		User u = new User();
 		u.setEmail(mail.getText().toString());
-		u.setName(username.getText().toString());
+		u.setName(name.getText().toString());
 		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
 		u.setPwd(pass1);
 		u.setImageurl("http://image.com/test.jpg");
 
-		if (userAvailable(u.getName()) == true
+		if (emailAvailable(u.getEmail()) == true
 				&& matchingPassword(pass1, pass2) == true) {
 			Context context = getApplicationContext();
 
@@ -61,13 +65,19 @@ public class RegisterActivity extends Activity {
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 			this.finish();
-		} else {
-			Context context = getApplicationContext();
-			CharSequence text = "Registration failed";
-			int duration = Toast.LENGTH_SHORT;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
+		} else if(matchingPassword(pass1, pass2) == false) {
+			Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+			
+			//Set focus on first password field & reset password fields
+			password1.requestFocus();
+			password1.setText("");
+			password2.setText("");
+			
+		}else if(emailAvailable(u.getEmail()) == false){
+			Toast.makeText(this, "Email address already in use", Toast.LENGTH_SHORT).show();
+			
+			//Reset email address, otherwise it will keep saying the email address is in use
+			u.setEmail("");
 		}
 
 	}
@@ -80,11 +90,26 @@ public class RegisterActivity extends Activity {
 		}
 	}
 
-	private boolean userAvailable(String user) {
-		if (user.equalsIgnoreCase(TEMP_USER)) {
-			return false;
-		} else {
-			return true;
+	private boolean emailAvailable(String email) {
+		boolean avail = false; 	   
+		
+		try {
+			List<Object> users = new Controller().new Select("http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(new ApiConnector()).get();
+			for(Object user : users){
+				User u = (User)user;
+				if(email.equalsIgnoreCase(u.getEmail())){
+					avail = false;
+					break;
+				}else{
+					avail = true;
+				}
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
 		}
+		
+		return avail;
 	}
 }
