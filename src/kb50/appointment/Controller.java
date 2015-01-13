@@ -33,11 +33,32 @@ public class Controller {
 				return usersToList(params[0].getTable(url));
 
 			} else if (url.contains("GetLocations")) {
+
 				return locationsToList(params[0].getTable(url));
 			} else {
+				
+				if (params[0].getTable(url) == null) {
+
+					Appointment a = new Appointment();
+					a.setId(1111);
+					a.setDescription("Leeg");
+					a.setDate("Geen");
+					a.setName("Leeg");
+					a.setPriority(0);
+					
+					List<Object> obs = new ArrayList<Object>();
+					obs.add(a);
+					
+					return obs;
+					
+				}
+				else{
+				
 				usersToList(params[0].getTable(url));
 				locationsToList(params[0].getTable(url));
 				return appointmentsToList(params[0].getTable(url));
+			}
+
 			}
 
 		}
@@ -48,6 +69,7 @@ public class Controller {
 
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject json = null;
+
 				try {
 
 					json = jsonArray.getJSONObject(i);
@@ -152,46 +174,45 @@ public class Controller {
 
 		@Override
 		protected List<Object> doInBackground(ApiConnector... params) {
-		
- 
-            // Building Parameters
-			if(url.contains("CreateUser")){
-				User u = (User)o;
-				
+
+			// Building Parameters
+			if (url.contains("CreateUser")) {
+				User u = (User) o;
+
 				JSONParser jsonParser = new JSONParser();
-			    List<NameValuePair> insertParams = new ArrayList<NameValuePair>();
-			    insertParams.add(new BasicNameValuePair("name", u.getName()));
-			    insertParams.add(new BasicNameValuePair("email", u.getEmail()));
-			    insertParams.add(new BasicNameValuePair("password", u.getPwd()));
-			    insertParams.add(new BasicNameValuePair("phonenumber", u.getPhone()+""));
-			    insertParams.add(new BasicNameValuePair("imageurl", u.getImageurl()));
-				
-			
-        
-		
-            // getting JSON Object
-            // Note that create product url accepts POST method
-            JSONObject json = jsonParser.makeHttpRequest(url,
-                    "POST", insertParams);
- 
-            // check log cat for response
-            Log.d("Create Response", json.toString());
- 
-            // check for success tag
-            try {
-                int success = json.getInt("succes");
- 
-                if (success == 1) {
-                	 Log.d("succes","succes");
-                 
-                } else {
-                 Log.d("fail","fail");
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+				List<NameValuePair> insertParams = new ArrayList<NameValuePair>();
+				insertParams.add(new BasicNameValuePair("name", u.getName()));
+				insertParams.add(new BasicNameValuePair("email", u.getEmail()));
+				insertParams
+						.add(new BasicNameValuePair("password", u.getPwd()));
+				insertParams.add(new BasicNameValuePair("phonenumber", u
+						.getPhone() + ""));
+				insertParams.add(new BasicNameValuePair("imageurl", u
+						.getImageurl()));
+
+				// getting JSON Object
+				// Note that create product url accepts POST method
+				JSONObject json = jsonParser.makeHttpRequest(url, "POST",
+						insertParams);
+
+				// check log cat for response
+				Log.d("Create Response", json.toString());
+
+				// check for success tag
+				try {
+					int success = json.getInt("succes");
+
+					if (success == 1) {
+						Log.d("succes", "succes");
+
+					} else {
+						Log.d("fail", "fail");
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
-            return null;
+			return null;
 		}
 
 	}

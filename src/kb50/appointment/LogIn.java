@@ -26,22 +26,24 @@ public class LogIn extends Activity {
 
 	SharedPreferences prefs;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
-        
-        email = (EditText) findViewById(R.id.emailField);
-        password = (EditText) findViewById(R.id.passwordField);
-    }
-    
-    public void onClickLogin(View v){    	
-    	String user = email.getText().toString();
-    	String pass = password.getText().toString(); 
-    	
-    	if(checkCredentials(user, pass) == true){
-    		startActivity(new Intent(LogIn.this, TabLayout.class));
-    	}else{
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_log_in);
+
+		email = (EditText) findViewById(R.id.emailField);
+		password = (EditText) findViewById(R.id.passwordField);
+		
+		 prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	}
+
+	public void onClickLogin(View v) {
+		String user = email.getText().toString();
+		String pass = password.getText().toString();
+
+		if (checkCredentials(user, pass) == true) {
+			startActivity(new Intent(LogIn.this, TabLayout.class));
+		} else {
 			Context context = getApplicationContext();
 			CharSequence text = "Wrong email or password";
 			int duration = Toast.LENGTH_SHORT;
@@ -56,51 +58,57 @@ public class LogIn extends Activity {
 		startActivity(new Intent(LogIn.this, RegisterActivity.class));
 	}
 
-	private List<User> getUsers() {
+	@Override
+	protected void onResume() {
+		final SharedPreferences mSharedPreference = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
 
-		List<User> users = new ArrayList<User>();
+		if (mSharedPreference.contains("username")) {
+			if (mSharedPreference.contains("password")) {
+				Intent i = new Intent(this, TabLayout.class);
+				startActivity(i);
 
+			}
+		}
+		super.onResume();
+	}
+
+	
+
+	private boolean checkCredentials(String usern, String password) {
+		boolean passCheck = false;
 		try {
-			for (Object o : new Controller().new Select(
-					"http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(
-					new ApiConnector()).get()) {
 
-				users.add((User) o);
+			List<Object> users = new Controller().new Select(
+					"http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(
+					new ApiConnector()).get();
+			for (Object user : users) {
+				User u = (User) user;
+					userId = u.getId();
+					
+				if (usern.equals(u.getEmail()) && password.equals(u.getPwd())) {
+					Editor editor = prefs.edit();
+
+	    			editor.putInt("id", userId);
+	    			editor.putString("username", usern);
+	    			editor.putString("password", password);
+	    			editor.commit();
+					
+					passCheck = true;
+					break;
+				} else {
+					passCheck = false;
+				}
 
 			}
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 
-		return users;
+		return passCheck;
 	}
-    
-    private boolean checkCredentials(String usern, String password){
-    	boolean passCheck = false;
-    	   try {
-   			List<Object> users = new Controller().new Select("http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(new ApiConnector()).get();
-   			for(Object user : users){
-   				User u = (User)user;
-   				if(usern.equals(u.getEmail()) && password.equals(u.getPwd())){
-   					passCheck = true;
-   					break;
-   		    	}else{
-   		    		passCheck = false;
-   		    	}
-   				
-   			}
-   		} catch (InterruptedException e) {
-   			e.printStackTrace();
-   			return false;
-   		} catch (ExecutionException e) {
-   			e.printStackTrace();
-   			return false;
-   		}
-    	
-    	return passCheck;
-    }
 }
