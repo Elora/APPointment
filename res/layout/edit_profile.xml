@@ -1,0 +1,120 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/reg_userEPA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_name" />
+
+    <EditText
+        android:id="@+id/reg_user_fieldEPA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_name"
+        android:inputType="text" />
+    
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />    
+    
+    <TextView
+        android:id="@+id/reg_phoneEPA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_phone" />
+    
+    <EditText
+        android:id="@+id/reg_phone_fieldEPA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_phone"
+        android:inputType="phone" />
+    
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />    
+    
+    <TextView
+        android:id="@+id/reg_mailEPA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_mail" />
+    
+    <EditText
+        android:id="@+id/reg_mail_fieldEPA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_mail"
+        android:inputType="textEmailAddress" />
+    
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />    
+    
+    <TextView
+        android:id="@+id/reg_pass1EPA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_pass1" />
+    
+    <EditText
+        android:id="@+id/reg_pass1_fieldEPA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_pass1"
+        android:inputType="textPassword" />
+    
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />    
+    
+    <TextView
+        android:id="@+id/reg_pass2EPA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_pass2" />
+    
+    <EditText
+        android:id="@+id/reg_pass2_fieldEPA"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_pass1"
+        android:inputType="textPassword" />  
+        
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:gravity="center">
+        
+        <Button 
+            android:id="@+id/reg_btnCancelEPA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/btn_cancel" 
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
+            android:onClick="onClickBtnCancel" />
+        
+        <Button
+            android:id="@+id/reg_btnSubmitEPA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_submit"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
+            android:onClick="onClickBtnSubmit" />
+        
+    </LinearLayout>
+
+</LinearLayout>

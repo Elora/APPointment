@@ -73,6 +73,14 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
 		startActivity(new Intent(TabLayout.this, NewAppointment.class));
 	}
     
+    public void onClickEditProfiel(View v){
+    	Intent i = new Intent(TabLayout.this, EditProfielActivity.class);
+    	
+    	//i.putExtra(name, value);
+    	
+    	startActivity(i);
+    }
+    
     protected void onSaveInstanceState(Bundle outState){
     	outState.putString("tab", mTabHost.getCurrentTabTag());
     	super.onSaveInstanceState(outState);

@@ -68,5 +68,7 @@
     </string-array>
 
     <string name="title_activity_edit_appointment">EditAppointment</string>
-
+	<string name="EditProfile">EditProfile</string>
+	
+    
 </resources>

@@ -54,6 +54,7 @@
 	<string name="selectmessage">Select message</string>
 	
 	<string name="Deletemessage">Weet je zeker dat je deze afspraak wilt verwijderen?</string>
-	
+	<string name="EditProfile">EditProfiel</string>
+		
 	
 </resources>
