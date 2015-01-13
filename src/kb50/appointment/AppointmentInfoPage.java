@@ -1,7 +1,9 @@
 package kb50.appointment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -34,12 +38,30 @@ public class AppointmentInfoPage extends Activity {
 	private Geocoder gc;
 	private Resources res;
 
+	private String date;
+	private String name;
+	private String id;
+	private String description;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Intent intent = getIntent();
-		//String id = intent.getStringExtra("ID");
+		Intent intent = getIntent();
+		id = intent.getStringExtra("appointment_id");
+		name = intent.getStringExtra("appointment_name");
+		description = intent.getStringExtra("appointment_description");
+		date = intent.getStringExtra("appointment_date");
+
 		setContentView(R.layout.appointment_info_page_layout);
+
+		TextView appointmentName = (TextView) findViewById(R.id.appointment_name);
+		TextView appointmentDescr = (TextView) findViewById(R.id.appointment_desc);
+		TextView appointmentDate = (TextView) findViewById(R.id.appointment_date);
+
+		appointmentName.setText(name);
+		appointmentDescr.setText(description);
+		appointmentDate.setText(date);
+
 		try {
 			map = ((MapFragment) getFragmentManager()
 					.findFragmentById(R.id.map)).getMap();
@@ -146,11 +168,9 @@ public class AppointmentInfoPage extends Activity {
 
 	}
 
+	public void deleteAppoinment() {
 
-
-	public void deleteAppoinment(){
-
-		DeleteFragment dialogFragment = DeleteFragment.newInstance(res 
+		DeleteFragment dialogFragment = DeleteFragment.newInstance(res
 				.getString(R.string.Deletemessage));
 		dialogFragment.show(getFragmentManager(), "dialog");
 
@@ -161,9 +181,31 @@ public class AppointmentInfoPage extends Activity {
 
 	public void doNegativeClick() {
 	}
-	
 
-	public void SendMessage(){
+	public List<User> getUsersSelectedAppointment(int id) {
+
+		List<User> users = new ArrayList<User>();
+
+		try {
+			for (Object o : new Controller().new Select(
+					"http://eduweb.hhs.nl/~13061798/GetAppointmentUsers.php?id="
+							+ id).execute(new ApiConnector()).get()) {
+
+				users.add((User) o);
+
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return users;
+	}
+
+	public void SendMessage() {
 		SendFragment dialogFragment2 = SendFragment.newInstance();
 		dialogFragment2.show(getFragmentManager(), "dialog");
 	}
@@ -172,17 +214,15 @@ public class AppointmentInfoPage extends Activity {
 		String[] array = res.getStringArray(R.array.Default_messages);
 		String item = array[mSelectedItem];
 
-		
-		Toast.makeText(this, item + " get number ",Toast.LENGTH_SHORT).show();
-		//TODO get numbers
-		
+		Toast.makeText(this, item + " get number ", Toast.LENGTH_SHORT).show();
+		// TODO get numbers
+
 		SmsManager sm = SmsManager.getDefault();
-		//sm.sendTextMessage("0636512", null, item , null, null);
-		//31634144093 <<-- real number do not use :P
-}
-	
+		// sm.sendTextMessage("0636512", null, item , null, null);
+		// 31634144093 <<-- real number do not use :P
+	}
 
 	public void doNegativeClickSendMessage() {
 	}
-	
+
 }

@@ -39,18 +39,13 @@ public class Controller {
 				
 				if (params[0].getTable(url) == null) {
 
-					Appointment a = new Appointment();
-					a.setId(1111);
-					a.setDescription("Leeg");
-					a.setDate("Geen");
-					a.setName("Leeg");
-					a.setPriority(0);
+					
 					
 					List<Object> obs = new ArrayList<Object>();
-					obs.add(a);
+					
 					
 					return obs;
-					
+				
 				}
 				else{
 				

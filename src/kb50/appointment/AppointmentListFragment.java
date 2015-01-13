@@ -96,7 +96,20 @@ public class AppointmentListFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int pos, long id) {
 		super.onListItemClick(l, v, pos, id);
 		Intent i = new Intent(getActivity(), AppointmentInfoPage.class);
-		i.putExtra("ID", "id van de class");
+		for(Appointment a : getAppointments()){
+		//	l.getAdapter().getItem(1).
+			if(a.getId() == id){
+				
+				i.putExtra("appointment_id",a.getId());
+				i.putExtra("appointment_name",a.getName());
+				i.putExtra("appointment_priority",a.getPriority());
+				i.putExtra("appointment_description",a.getDescription());
+				i.putExtra("appointment_date", a.getDate().substring(10));;
+				//i.putExtra("appointment_id",a.get);
+			}
+			
+		}
+		
 		startActivity(i);
 	}
 

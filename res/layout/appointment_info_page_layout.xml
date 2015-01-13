@@ -20,19 +20,22 @@
             android:orientation="vertical" >
 
             <TextView
+                  android:id="@+id/appointment_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userName" />
+                android:text="@string/appointment_name" />
 
             <TextView
+                  android:id="@+id/appointment_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userEmail" />
+                android:text="@string/appointment_desc" />
 
             <TextView
+                 android:id="@+id/appointment_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userPhone" />
+                android:text="@string/appointment_date" />
         </LinearLayout>
     </LinearLayout>
 
