@@ -20,7 +20,8 @@
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/ProfielPic"
-            android:src="@drawable/profilpic" />
+            android:src="@drawable/profilpic" 
+            android:id="@+id/ImagePL"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -33,19 +34,24 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userName"
-                android:textColor="#000000" />
+                android:textColor="#000000" 
+                android:id="@+id/UserNamePL"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userEmail"
-                android:textColor="#000000" />
+                android:textColor="#000000"  
+                android:id="@+id/UserEmailPL"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/userPhone"
-                android:textColor="#000000" />
+                android:textColor="#000000" 
+                android:id="@+id/UserPhonePL"/>
+                
+            
         </LinearLayout>
     </LinearLayout>
 

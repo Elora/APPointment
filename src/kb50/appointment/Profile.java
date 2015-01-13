@@ -6,15 +6,32 @@ package kb50.appointment;
 
 
 //import android.content.res.Resources;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import kb50.appointment.Controller.Select;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Profile extends Fragment{
@@ -34,6 +51,28 @@ public class Profile extends Fragment{
 	    } catch (InflateException e) {
 	        /* map is already there, just return view as it is */
 	    }
+	    
+	    User user = GetUser();
+	    
+	    TextView UN = (TextView)view.findViewById(R.id.UserNamePL);
+        UN.setText(user.getName());
+        TextView UE = (TextView)view.findViewById(R.id.UserEmailPL);
+        UE.setText(user.getEmail());
+        TextView UP = (TextView)view.findViewById(R.id.UserPhonePL);
+        //UP.setText("" + user.getPhone());
+        
+        //Uri uri = Uri.parse(user.getImageurl()+ ".jpg");
+        
+        //ImageView UI = (ImageView)view.findViewById(R.id.ImagePL);
+        //UI.setImageURI(uri);
+        
+        new DownloadImageTask((ImageView) view.findViewById(R.id.ImagePL))
+        .execute(user.getImageurl());
+
+
+        
+        
+        
 	    return view;
 		
 		
@@ -52,8 +91,53 @@ public class Profile extends Fragment{
         return (LinearLayout)inflater.inflate(R.layout.profile_layout, container, false);*/
     }
 	
+	public User GetUser(){
 
+		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()); 
+		int id = mSharedPreference.getInt("id", 0);
+		
+		List<User> users = new ArrayList<User>();
+		users = GetProfiels();
+		
+		User user = new User();
+		for(int i = 0; i<users.size(); i++){
+			if (users.get(i).getId() == (id)){
+				user=users.get(i);
+			}
+		}
+		return user;
+			
+	}
+	
+	
+	public List<User> GetProfiels(){
+		
+		List<User> users = new ArrayList<User>();
+		try {
+			for (Object o : new Controller().new Select(
+					"http://eduweb.hhs.nl/~13061798/GetUsers.php"
+							).execute(
+					new ApiConnector()).get()) {
+
+				users.add((User) o);
+
+			}
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return users;
+	}
+
+	
+	
 }
-	 
+	
+
 	 
 
