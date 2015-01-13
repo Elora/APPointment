@@ -46,9 +46,9 @@ public class AppointmentInfoPage extends Activity {
 			map.setMyLocationEnabled(true);
 			getLocation();
 			onMapReady(map);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Context context = getApplicationContext();
-			CharSequence text = "IOException!!!!!!! :(";
+			CharSequence text = "Exception!!!!!!! :(";
 			int duration = Toast.LENGTH_SHORT;
 
 			Toast toast = Toast.makeText(context, text, duration);
