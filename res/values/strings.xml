@@ -7,43 +7,39 @@
     <string name="login">Log In</string>
     <string name="register">Register</string>
     <string name="regText">No account yet? Click this button:</string>
-	
-	<string name="Profiel">Profiel</string>
+    <string name="Profiel">Profiel</string>
     <string name="Appointment">Appointment</string>
     <string name="ProfielPic">Profiel picture</string>
-    
     <string name="userName">naam</string>
     <string name="userEmail">Email</string>
     <string name="userPhone">0192012</string>
-
     <string name="alter">Edit</string>
     <string name="sendmessage">Send</string>
     <string name="viewmap">Route</string>
     <string name="delete">Delete</string>
     <string name="back">Back</string>
     <string name="New_appointment">New appointment</string>
-    
     <string name="pic">Logo</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="hello_world">Hello world!</string>
-	
-	<string name="btn_submit">Submit</string>
-	<string name="btn_cancel">Cancel</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_cancel">Cancel</string>
     <string name="date">Pick Date</string>
     <string name="time">Pick Time</string>
-    
+
     <!-- strings for register activity -->
-	<string name="reg_name">Name</string>
-	<string name="reg_phone">Phone Number</string>
-	<string name="reg_mail">E-mail</string>
-	<string name="reg_pass1">Password</string>
-	<string name="reg_pass2">Password again</string>
-	
-	<!-- Send message -->
-	<string name="hintToNumber">To number</string>
-	<string name="hintMessage">(Optional) Extra message</string>
-	<string name="BtnSend">Send</string>
-	<string-array name="Default_messages">
+    <string name="reg_name">Name</string>
+    <string name="reg_phone">Phone Number</string>
+    <string name="reg_mail">E-mail</string>
+    <string name="reg_pass1">Password</string>
+    <string name="reg_pass2">Password again</string>
+
+    <!-- Send message -->
+    <string name="hintToNumber">To number</string>
+    <string name="hintMessage">(Optional) Extra message</string>
+    <string name="BtnSend">Send</string>
+
+    <string-array name="Default_messages">
         <item>I am late.</item>
         <item>I cannot make it.</item>
         <item>You are an ass.</item>
@@ -52,10 +48,9 @@
         <item>I am early.</item>
         <item>I am waiting.</item>
     </string-array>
-	<string name="selectmessage">Select message</string>
-	
-	
-	<string name="Deletemessage">Are you sure you want to delete this appointment?</string>
+
+    <string name="selectmessage">Select message</string>
+    <string name="Deletemessage">Are you sure you want to delete this appointment?</string>
 
     <!-- strings for new appointment (may be re-used for altering an appointment -->
     <string name="appointment_name">Name</string>
@@ -71,5 +66,7 @@
         <item>Medium</item>
         <item>Low</item>
     </string-array>
+
+    <string name="title_activity_edit_appointment">EditAppointment</string>
 
 </resources>

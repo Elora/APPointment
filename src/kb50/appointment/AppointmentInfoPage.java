@@ -142,9 +142,7 @@ public class AppointmentInfoPage extends Activity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_alter:
-			Toast.makeText(this, "going to alter table intent or ...",
-					Toast.LENGTH_SHORT).show();
-
+			startActivity(new Intent(AppointmentInfoPage.this, EditAppointment.class));
 			break;
 		case R.id.button_Back:
 			finish();

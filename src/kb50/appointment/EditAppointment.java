@@ -1,5 +1,6 @@
 package kb50.appointment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -11,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewAppointment extends FragmentActivity {
+public class EditAppointment extends FragmentActivity {
 
 	private Spinner prioritySpinner;
 	private static Button datePicker;
@@ -21,21 +22,32 @@ public class NewAppointment extends FragmentActivity {
 	
 	private EditText name;
 	private EditText description;
-	private EditText location;
+	private EditText location;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_new_appointment);
+		setContentView(R.layout.activity_edit_appointment);
+		
+		// TODO: retrieve appointment by ID and retrieve info from that appointment
+		Appointment a = new Appointment();
 		
 		prioritySpinner = (Spinner) findViewById(R.id.priority_spinner);
+		prioritySpinner.setSelection(a.getPriority());
+		
 		datePicker = (Button) findViewById(R.id.date_picker);
+		datePicker.setText(a.getDate());
 		timePicker =(Button) findViewById(R.id.time_picker);
+		
 		reminderDatePicker = (Button) findViewById(R.id.reminder_date_picker);
 		reminderTimePicker = (Button) findViewById(R.id.reminder_time_picker);
 		
 		name = (EditText) findViewById(R.id.appointment_name_field);
+		name.setText(a.getName());
+		
 		description = (EditText) findViewById(R.id.appointment_desc_field);
+		description.setText(a.getDescription());
+		
 		location = (EditText) findViewById(R.id.location_field);
 		
 		// Create an ArrayAdapter using the String array and a default spinner layout
@@ -43,11 +55,11 @@ public class NewAppointment extends FragmentActivity {
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply adapter to the spinner
-		prioritySpinner.setAdapter(adapter);
+		prioritySpinner.setAdapter(adapter);		
 	}
 	
 	public void onClickCancel(View v){
-		startActivity(new Intent(NewAppointment.this, TabLayout.class)); 
+		startActivity(new Intent(EditAppointment.this, AppointmentInfoPage.class)); 
 		this.finish();
 	}
 	
@@ -68,7 +80,7 @@ public class NewAppointment extends FragmentActivity {
 		new Controller().new Insert(a,
 				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
 				.execute(new ApiConnector());
-		this.finish();
+		this.finish();		
 	}
 	
 	public void onClickDatePicker(View v){
@@ -137,5 +149,5 @@ public class NewAppointment extends FragmentActivity {
 		}
 		
 		return p;
-	}
+	}	
 }
