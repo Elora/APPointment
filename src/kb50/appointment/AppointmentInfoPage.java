@@ -232,7 +232,6 @@ public class AppointmentInfoPage extends Activity {
 		
 		
 		
-		// 31634144093 <<-- real number do not use :P
 	}
 
 	public void doNegativeClickSendMessage() {
