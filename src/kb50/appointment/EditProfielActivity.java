@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import kb50.appointment.Controller.Insert;
-import kb50.appointment.Controller.Select;
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -61,6 +57,8 @@ public class EditProfielActivity extends Activity {
 
 	public void onClickBtnSubmit(View v) {
 
+		Toast.makeText(this, "to come, press back pls", Toast.LENGTH_SHORT).show();
+		
 		/*String pass1 = password1.getText().toString();
 		String pass2 = password2.getText().toString();
 

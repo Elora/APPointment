@@ -47,7 +47,8 @@ public class AppointmentInfoPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
-		id = intent.getStringExtra("appointment_id");
+		int idtemp =intent.getIntExtra("appointment_id", 0); 
+		id = Integer.toString(idtemp);
 		name = intent.getStringExtra("appointment_name");
 		description = intent.getStringExtra("appointment_description");
 		date = intent.getStringExtra("appointment_date");
@@ -180,7 +181,7 @@ public class AppointmentInfoPage extends Activity {
 	public void doNegativeClick() {
 	}
 
-	public List<User> getUsersSelectedAppointment(int id) {
+	public List<User> getUsersSelectedAppointment(String id) {
 
 		List<User> users = new ArrayList<User>();
 
@@ -212,11 +213,21 @@ public class AppointmentInfoPage extends Activity {
 		String[] array = res.getStringArray(R.array.Default_messages);
 		String item = array[mSelectedItem];
 
-		Toast.makeText(this, item + " get number ", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, item + " get number ", Toast.LENGTH_SHORT).show();
 		// TODO get numbers
 
 		SmsManager sm = SmsManager.getDefault();
-		// sm.sendTextMessage("0636512", null, item , null, null);
+
+		List<User> users = new ArrayList<User>();
+		users = getUsersSelectedAppointment(id);
+		for (int i=0; i<users.size(); i++){
+			String temp= Integer.toString(users.get(i).getPhone());
+			sm.sendTextMessage(temp, null, item , null, null);
+		}
+		
+		
+		
+		
 		// 31634144093 <<-- real number do not use :P
 	}
 
