@@ -143,7 +143,11 @@ public class AppointmentInfoPage extends Activity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_alter:
-			startActivity(new Intent(AppointmentInfoPage.this, EditAppointment.class));
+			Intent i = new Intent(this, EditAppointment.class);
+			i.putExtra("id", this.id);
+			startActivity(i);
+			
+			//startActivity(new Intent(AppointmentInfoPage.this, EditAppointment.class));
 			break;
 		case R.id.button_Back:
 			finish();
