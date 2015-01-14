@@ -22,6 +22,7 @@ public class EditProfielActivity extends Activity {
 	private EditText mail;
 	private EditText password1;
 	private EditText password2;
+	private int id;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class EditProfielActivity extends Activity {
 
 	public void onClickBtnSubmit(View v) {
 
-		Toast.makeText(this, "to come, press back pls", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "to come, press back pls", Toast.LENGTH_SHORT).show();
 		
 		
 		String pass1 = password1.getText().toString();
@@ -69,14 +70,14 @@ public class EditProfielActivity extends Activity {
 		u.setName(name.getText().toString());
 		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
 		u.setPwd(pass1);
-		
-		u.setImageurl("http://image.com/test.jpg");
+		u.setId(id);
+		u.setImageurl("http://eduweb.hhs.nl/~13061798/Profile/profilepic.jpg");
 
 		if (matchingPassword(pass1, pass2) == true) {
 			Context context = getApplicationContext();
 
 			new Controller().new Insert(u,
-					"http://eduweb.hhs.nl/~13061798/EditUser.php?id="+u.getId())
+					"http://eduweb.hhs.nl/~13061798/EditUser.php?id="+id)
 					.execute(new ApiConnector());
 			
 			CharSequence text = "Edit complete";
@@ -85,6 +86,7 @@ public class EditProfielActivity extends Activity {
 
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
+			setResult(RESULT_OK);
 			this.finish();
 			
 		} else if(matchingPassword(pass1, pass2) == false) {
@@ -109,8 +111,9 @@ public class EditProfielActivity extends Activity {
 
 	public User GetUser(){
 
-		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext()); 
-		int id = mSharedPreference.getInt("id", 0);
+		final SharedPreferences mSharedPreference= PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext()); 
+		id = mSharedPreference.getInt("id", 0);
 		
 		List<User> users = new ArrayList<User>();
 		users = GetProfiels();

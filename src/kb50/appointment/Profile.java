@@ -92,6 +92,8 @@ public class Profile extends Fragment{
         return (LinearLayout)inflater.inflate(R.layout.profile_layout, container, false);*/
     }
 	
+
+	
 	public User GetUser(){
 
 		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()); 

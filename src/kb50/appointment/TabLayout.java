@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TabHost.TabContentFactory;
 
@@ -75,10 +76,25 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
     
     public void onClickEditProfiel(View v){
     	Intent i = new Intent(TabLayout.this, EditProfielActivity.class);
-    	
-    	//i.putExtra(name, value);
-    	
-    	startActivity(i);
+    	//startActivity(i);
+    	startActivityForResult(i,1);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 1) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+            	
+    			startActivity(new Intent(this, TabLayout.class));
+    			//this.finish();
+            	
+                // Do something with the contact here (bigger example below)
+            }
+        }
     }
     
     protected void onSaveInstanceState(Bundle outState){
