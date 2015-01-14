@@ -32,8 +32,10 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 		String date = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(year);
 		if(btn.equals("normal")){
 			NewAppointment.setDateButton(date);
+			EditAppointment.setDateButton(date);
 		}else{
-			NewAppointment.setReminderDateButton(date);
+			//NewAppointment.setReminderDateButton(date);
+			EditAppointment.setReminderDateButton(date);
 		}
 	}
 }

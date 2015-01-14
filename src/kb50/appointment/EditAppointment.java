@@ -104,7 +104,7 @@ public class EditAppointment extends FragmentActivity {
 
 	public void onClickSubmit(View v) {
 		// TODO: write data to database
-		Toast.makeText(this, "push to DB", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "push to DB", Toast.LENGTH_SHORT).show();
 
 		String priority = prioritySpinner.getSelectedItem().toString();
 		int p = setPriority(priority);
@@ -112,13 +112,25 @@ public class EditAppointment extends FragmentActivity {
 		Appointment a = new Appointment();
 		a.setName(name.getText().toString());
 		a.setDescription(description.getText().toString());
-		a.setDate(datePicker.getText().toString());
+		a.setDate(datePicker.getText().toString() + " " +timePicker.getText().toString());
 		a.setLocation(null); // TODO: ADD locations (Domi is working on this)
 		a.setPriority(p);
 
 		new Controller().new Insert(a,
 				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
 				.execute(new ApiConnector());
+		
+		String[] date = reminderDatePicker.getText().toString().split("-");
+		int day = Integer.parseInt(date[2]);
+		int month = Integer.parseInt(date[1]);
+		int year = Integer.parseInt(date[0]);
+		
+		String[] time = reminderTimePicker.getText().toString().split(":");
+		int hour = Integer.parseInt(time[0]); 
+		int minute = Integer.parseInt(time[1]);
+		
+		Toast.makeText(this, hour + ":" + minute, Toast.LENGTH_LONG).show();
+		
 		this.finish();
 	}
 
