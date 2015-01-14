@@ -171,7 +171,7 @@ public class Controller {
 		protected List<Object> doInBackground(ApiConnector... params) {
 
 			// Building Parameters
-			if (url.contains("CreateUser")) {
+			if (url.contains("CreateUser") || url.contains("EditUser")) {
 				User u = (User) o;
 
 				JSONParser jsonParser = new JSONParser();

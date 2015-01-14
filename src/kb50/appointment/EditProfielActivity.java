@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -59,31 +60,33 @@ public class EditProfielActivity extends Activity {
 
 		Toast.makeText(this, "to come, press back pls", Toast.LENGTH_SHORT).show();
 		
-		/*String pass1 = password1.getText().toString();
+		
+		String pass1 = password1.getText().toString();
 		String pass2 = password2.getText().toString();
 
 		User u = new User();
-		u.setEmail(mail.getText().toString());
+		u.setEmail("abc");
 		u.setName(name.getText().toString());
 		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
 		u.setPwd(pass1);
+		
 		u.setImageurl("http://image.com/test.jpg");
 
-		if (emailAvailable(u.getEmail()) == true
-				&& matchingPassword(pass1, pass2) == true) {
+		if (matchingPassword(pass1, pass2) == true) {
 			Context context = getApplicationContext();
 
 			new Controller().new Insert(u,
-					"http://eduweb.hhs.nl/~13061798/CreateUser.php")
+					"http://eduweb.hhs.nl/~13061798/EditUser.php?id="+u.getId())
 					.execute(new ApiConnector());
 			
-			CharSequence text = "Registration complete";
+			CharSequence text = "Edit complete";
 			int duration = Toast.LENGTH_SHORT;
 			
 
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 			this.finish();
+			
 		} else if(matchingPassword(pass1, pass2) == false) {
 			Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show();
 			
@@ -92,13 +95,7 @@ public class EditProfielActivity extends Activity {
 			password1.setText("");
 			password2.setText("");
 			
-		}else if(emailAvailable(u.getEmail()) == false){
-			Toast.makeText(this, "Email address already in use", Toast.LENGTH_SHORT).show();
-			
-			//Reset email address, otherwise it will keep saying the email address is in use
-			u.setEmail("");
 		}
-*/
 	}
 
 	private boolean matchingPassword(String pass1, String pass2) {
@@ -109,28 +106,6 @@ public class EditProfielActivity extends Activity {
 		}
 	}
 
-	private boolean emailAvailable(String email) {
-		boolean avail = false; 	   
-		
-		try {
-			List<Object> users = new Controller().new Select("http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(new ApiConnector()).get();
-			for(Object user : users){
-				User u = (User)user;
-				if(email.equalsIgnoreCase(u.getEmail())){
-					avail = false;
-					break;
-				}else{
-					avail = true;
-				}
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
-		
-		return avail;
-	}
 
 	public User GetUser(){
 
