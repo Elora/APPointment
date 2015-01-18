@@ -13,7 +13,16 @@ public class Appointment {
 	private int priority;
 	private List<User> users;
 	private Location location;
+	private int owner;
 
+	public int getOwner() {
+		return owner;
+	}
+
+	public void setOwner(int owner) {
+		this.owner = owner;
+	}
+	
 	public int getId() {
 		return id;
 	}

@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 public class EditProfielActivity extends Activity {
 
-	private final String TEMP_USER = "Tony";
 	private EditText name;
 	private EditText phoneNum;
 	private EditText mail;
@@ -66,7 +65,7 @@ public class EditProfielActivity extends Activity {
 		String pass2 = password2.getText().toString();
 
 		User u = new User();
-		u.setEmail("abc");
+		u.setEmail(mail.getText().toString());
 		u.setName(name.getText().toString());
 		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
 		u.setPwd(pass1);

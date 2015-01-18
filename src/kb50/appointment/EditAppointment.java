@@ -103,8 +103,7 @@ public class EditAppointment extends FragmentActivity {
 	}
 
 	public void onClickSubmit(View v) {
-		// TODO: write data to database
-		//Toast.makeText(this, "push to DB", Toast.LENGTH_SHORT).show();
+		
 
 		String priority = prioritySpinner.getSelectedItem().toString();
 		int p = setPriority(priority);
@@ -113,13 +112,17 @@ public class EditAppointment extends FragmentActivity {
 		a.setName(name.getText().toString());
 		a.setDescription(description.getText().toString());
 		a.setDate(datePicker.getText().toString() + " " +timePicker.getText().toString());
-		a.setLocation(null); // TODO: ADD locations (Domi is working on this)
+		
+		Location l = new Location();
+		l.setId(1);
+		a.setLocation(l); // TODO: ADD locations (Domi is working on this)
+		
 		a.setPriority(p);
 
 		new Controller().new Insert(a,
-				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
+				"http://eduweb.hhs.nl/~13061798/EditAppointment.php?id="+appointment_id)
 				.execute(new ApiConnector());
-		
+				
 		String[] date = reminderDatePicker.getText().toString().split("-");
 		int day = Integer.parseInt(date[2]);
 		int month = Integer.parseInt(date[1]);
@@ -130,6 +133,8 @@ public class EditAppointment extends FragmentActivity {
 		int minute = Integer.parseInt(time[1]);
 		
 		Toast.makeText(this, hour + ":" + minute, Toast.LENGTH_LONG).show();
+		
+	
 		
 		this.finish();
 	}

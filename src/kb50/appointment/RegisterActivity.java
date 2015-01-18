@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
-	private final String TEMP_USER = "Tony";
+	
 	private EditText name;
 	private EditText phoneNum;
 	private EditText mail;
@@ -94,22 +94,22 @@ public class RegisterActivity extends Activity {
 		boolean avail = false; 	   
 		
 		try {
-			List<Object> users = new Controller().new Select("http://eduweb.hhs.nl/~13061798/GetUsers.php").execute(new ApiConnector()).get();
-			for(Object user : users){
-				User u = (User)user;
-				if(email.equalsIgnoreCase(u.getEmail())){
-					avail = false;
-					break;
-				}else{
-					avail = true;
-				}
+			List<Object> users = new Controller().new Select("http://eduweb.hhs.nl/~13061798/CheckUserExist.php?email="+email).execute(new ApiConnector()).get();
+			if(users.isEmpty()){
+				avail = true;	
+				
 			}
 		} catch (InterruptedException e) {
+			avail = false;
 			e.printStackTrace();
 		} catch (ExecutionException e) {
+			avail = false;
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+				
 		return avail;
 	}
 }

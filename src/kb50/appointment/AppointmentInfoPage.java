@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import javax.xml.datatype.Duration;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.InputFilter.LengthFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -180,6 +183,13 @@ public class AppointmentInfoPage extends Activity {
 	}
 
 	public void doPositiveClick() {
+		
+		new Controller().new Select("http://eduweb.hhs.nl/~13061798/DeleteAppointment.php?id="+id).execute(new ApiConnector());
+		Toast toast = Toast.makeText(this, "Appointment deleted!", Toast.LENGTH_SHORT);
+		toast.show();
+		startActivity(new Intent(this,AppointmentListFragment.class));
+		this.finish();
+		
 	}
 
 	public void doNegativeClick() {

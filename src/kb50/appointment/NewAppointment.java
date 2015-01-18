@@ -1,7 +1,9 @@
 package kb50.appointment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -52,8 +54,10 @@ public class NewAppointment extends FragmentActivity {
 	}
 	
 	public void onClickSubmit(View v){
-		//TODO: write data to database
-		Toast.makeText(this, "push to DB", Toast.LENGTH_SHORT).show();
+			
+		
+		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext()); 
+		int owner = mSharedPreference.getInt("id", 0);
 		
 		String priority = prioritySpinner.getSelectedItem().toString();
 		int p = setPriority(priority);
@@ -61,13 +65,18 @@ public class NewAppointment extends FragmentActivity {
 		Appointment a = new Appointment();
 		a.setName(name.getText().toString());
 		a.setDescription(description.getText().toString());
-		a.setDate(datePicker.getText().toString());
-		a.setLocation(null); //TODO: ADD locations (Domi is working on this)
-		a.setPriority(p);
+		a.setDate("2015-01-01 10:15:00");//TEMP.  Datepicker gives NULLPOINTER?
+	
+		Location l = new Location();
+		l.setId(1);
+		a.setLocation(l); //TODO: ADD locations (Domi is working on this)
 		
+		a.setPriority(p);
+		a.setOwner(owner);
 		new Controller().new Insert(a,
 				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
 				.execute(new ApiConnector());
+		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
 		this.finish();
 	}
 	

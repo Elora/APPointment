@@ -109,7 +109,7 @@ public class AppointmentListFragment extends ListFragment {
 			}
 
 		}
-
+		getActivity().finish();
 		startActivity(i);
 	}
 

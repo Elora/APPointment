@@ -29,31 +29,23 @@ public class Controller {
 		@Override
 		protected List<Object> doInBackground(ApiConnector... params) {
 
-			if (url.contains("GetUsers")) {
+			if (params[0].getTable(url) == null) {
+
+				List<Object> obs = new ArrayList<Object>();
+
+				return obs;
+			}
+			if (url.contains("GetUsers") || url.contains("CheckUserExist")) {
 				return usersToList(params[0].getTable(url));
 
 			} else if (url.contains("GetLocations")) {
 
 				return locationsToList(params[0].getTable(url));
 			} else {
-				
-				if (params[0].getTable(url) == null) {
 
-					
-					
-					List<Object> obs = new ArrayList<Object>();
-					
-					
-					return obs;
-				
-				}
-				else{
-				
 				usersToList(params[0].getTable(url));
 				locationsToList(params[0].getTable(url));
 				return appointmentsToList(params[0].getTable(url));
-			}
-
 			}
 
 		}
@@ -178,10 +170,8 @@ public class Controller {
 				List<NameValuePair> insertParams = new ArrayList<NameValuePair>();
 				insertParams.add(new BasicNameValuePair("name", u.getName()));
 				insertParams.add(new BasicNameValuePair("email", u.getEmail()));
-				insertParams
-						.add(new BasicNameValuePair("password", u.getPwd()));
-				insertParams.add(new BasicNameValuePair("phonenumber", u
-						.getPhone() + ""));
+				insertParams.add(new BasicNameValuePair("password", u.getPwd()));
+				insertParams.add(new BasicNameValuePair("phone_number", u.getPhone() + ""));
 				insertParams.add(new BasicNameValuePair("imageurl", u
 						.getImageurl()));
 
@@ -207,6 +197,48 @@ public class Controller {
 					e.printStackTrace();
 				}
 			}
+
+			if (url.contains("CreateAppointment")
+					|| url.contains("EditAppointment")) {
+				Appointment a = (Appointment) o;
+
+				JSONParser jsonParser = new JSONParser();
+				List<NameValuePair> insertParams = new ArrayList<NameValuePair>();
+				insertParams.add(new BasicNameValuePair("name", a.getName()));
+				insertParams.add(new BasicNameValuePair("description", a
+						.getDescription()));
+				insertParams.add(new BasicNameValuePair("priority", a
+						.getPriority() + ""));
+				insertParams.add(new BasicNameValuePair("datetime", a.getDate()
+						+ ""));
+				insertParams.add(new BasicNameValuePair("locationid", a
+						.getLocation().getId() + ""));
+				insertParams.add(new BasicNameValuePair("owner", a.getOwner()
+						+ ""));
+
+				// getting JSON Object
+				// Note that create product url accepts POST method
+				JSONObject json = jsonParser.makeHttpRequest(url, "POST",
+						insertParams);
+
+				// check log cat for response
+				Log.d("Create Response", json.toString());
+
+				// check for success tag
+				try {
+					int success = json.getInt("succes");
+
+					if (success == 1) {
+						Log.d("succes", "succes");
+
+					} else {
+						Log.d("fail", "fail");
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+
 			return null;
 		}
 
