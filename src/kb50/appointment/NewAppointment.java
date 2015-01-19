@@ -1,17 +1,10 @@
 package kb50.appointment;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -19,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,61 +22,85 @@ import android.widget.Toast;
 public class NewAppointment extends FragmentActivity {
 
 	private Spinner prioritySpinner;
+	private Spinner locationSpinner;
 	private static Button datePicker;
 	private static Button timePicker;
 	private static Button reminderDatePicker;
 	private static Button reminderTimePicker;
-	
+	private static Button searchLocation;
+
+	private ArrayAdapter<String> adapter;
+	/*
+	 * Number of times we will try to contact the google map server after
+	 * timeouts to resolve an address to longitude and latitude
+	 */
+	private static final int maxretry = 5;
+	/* Max Number of addresses that we get from resolving the address by name */
+	private static final int maxaddresses = 5;
+
 	private EditText name;
 	private EditText description;
-	
+
+	private EditText location;
+
+	private Geocoder gc;
+	private Resources res;
+
+	private double lat;
+	private double lng;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_appointment);
-		
+
 		prioritySpinner = (Spinner) findViewById(R.id.priority_spinner);
+		locationSpinner = (Spinner) findViewById(R.id.location_spinner);
 		datePicker = (Button) findViewById(R.id.date_picker);
-		timePicker =(Button) findViewById(R.id.time_picker);
+		timePicker = (Button) findViewById(R.id.time_picker);
 		reminderDatePicker = (Button) findViewById(R.id.reminder_date_picker);
 		reminderTimePicker = (Button) findViewById(R.id.reminder_time_picker);
-		
+		searchLocation = (Button) findViewById(R.id.button_location);
+
 		name = (EditText) findViewById(R.id.appointment_name_field);
 		description = (EditText) findViewById(R.id.appointment_desc_field);
-					
-		// Create an ArrayAdapter using the String array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,  R.array.priority_array, android.R.layout.simple_spinner_item);
+		location = (EditText) findViewById(R.id.location_field);
+
+		// Create an ArrayAdapter using the String array and a default spinner
+		// layout
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+				this, R.array.priority_array,
+				android.R.layout.simple_spinner_item);
+
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply adapter to the spinner
 		prioritySpinner.setAdapter(adapter);
 	}
-	
-	
-	
-	public void onClickCancel(View v){
-		startActivity(new Intent(NewAppointment.this, TabLayout.class)); 
+
+	public void onClickCancel(View v) {
+		startActivity(new Intent(NewAppointment.this, TabLayout.class));
 		this.finish();
 	}
-	
-	public void onClickSubmit(View v){
-			
-		
-		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext()); 
+
+	public void onClickSubmit(View v) {
+
+		final SharedPreferences mSharedPreference = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
 		int owner = mSharedPreference.getInt("id", 0);
-		
+
 		String priority = prioritySpinner.getSelectedItem().toString();
 		int p = setPriority(priority);
-		
+
 		Appointment a = new Appointment();
 		a.setName(name.getText().toString());
 		a.setDescription(description.getText().toString());
-		a.setDate("2015-01-01 10:15:00");//TEMP.  Datepicker gives NULLPOINTER?
-	
+		a.setDate("2015-01-01 10:15:00");// TEMP. Datepicker gives NULLPOINTER?
+
 		Location l = new Location();
 		l.setId(1);
-		a.setLocation(l); //TODO: ADD locations (Domi is working on this)
-		
+		a.setLocation(l); // TODO: ADD locations (Domi is working on this)
+
 		a.setPriority(p);
 		a.setOwner(owner);
 		new Controller().new Insert(a,
@@ -91,21 +109,20 @@ public class NewAppointment extends FragmentActivity {
 
 		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
 
-		
 		String[] date = reminderDatePicker.getText().toString().split("-");
 		int day = Integer.parseInt(date[2]);
 		int month = Integer.parseInt(date[1]);
 		int year = Integer.parseInt(date[0]);
-		
+
 		String[] time = reminderTimePicker.getText().toString().split(":");
-		int hour = Integer.parseInt(time[0]); 
+		int hour = Integer.parseInt(time[0]);
 		int minute = Integer.parseInt(time[1]);
 
 		this.finish();
 	}
-	
-	public void onClickDatePicker(View v){
-		switch(v.getId()){
+
+	public void onClickDatePicker(View v) {
+		switch (v.getId()) {
 		case R.id.date_picker:
 			DialogFragment dateFragment = new DatePickerFragment();
 			Bundle args = new Bundle();
@@ -118,13 +135,14 @@ public class NewAppointment extends FragmentActivity {
 			Bundle args2 = new Bundle();
 			args2.putString("btn", "reminder");
 			reminderDateFragment.setArguments(args2);
-			reminderDateFragment.show(getSupportFragmentManager(), "datePicker");	
+			reminderDateFragment
+					.show(getSupportFragmentManager(), "datePicker");
 			break;
-		}			
+		}
 	}
-	
-	public void onClickTimePicker(View v){
-		switch(v.getId()){
+
+	public void onClickTimePicker(View v) {
+		switch (v.getId()) {
 		case R.id.time_picker:
 			DialogFragment timeFragment = new TimePickerFragment();
 			Bundle args = new Bundle();
@@ -137,38 +155,139 @@ public class NewAppointment extends FragmentActivity {
 			Bundle args2 = new Bundle();
 			args2.putString("btn", "reminder");
 			reminderTimeFragment.setArguments(args2);
-			reminderTimeFragment.show(getSupportFragmentManager(), "timePicker");	
+			reminderTimeFragment
+					.show(getSupportFragmentManager(), "timePicker");
 			break;
-		}	
+		}
 	}
-	
-	public static void setDateButton(String text){
+
+	public static void setDateButton(String text) {
 		datePicker.setText(text);
 	}
-	
-	public static void setReminderDateButton(String text){
+
+	public static void setReminderDateButton(String text) {
 		reminderDatePicker.setText(text);
 	}
-	
-	public static void setTimeButton(String text){ 
+
+	public static void setTimeButton(String text) {
 		timePicker.setText(text);
 	}
-	
-	public static void setReminderTimeButton(String text){
+
+	public static void setReminderTimeButton(String text) {
 		reminderTimePicker.setText(text);
 	}
-	
-	private int setPriority(String priority){
+
+	private int setPriority(String priotiry) {
 		int p;
-		
-		if(priority.equals("High")){
+
+		if (priotiry.equals("High")) {
 			p = 2;
-		}else if(priority.equals("medium")){
+		} else if (priotiry.equals("medium")) {
 			p = 1;
-		}else{
+		} else {
 			p = 0;
 		}
-		
 		return p;
+	}
+
+	private void hideSoftKeyboard(View v) {
+		InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+	}
+
+	public void onClickLocation(View v) {
+		hideSoftKeyboard(v);
+
+		gc = new Geocoder(this);
+
+		String address = location.getText().toString();
+
+		System.err.println(address + "!!!!!!!!!!!!!!!!!!!!!!!");
+
+		try {
+			if (Geocoder.isPresent()) {
+				List<Address> addrList = null;
+
+				boolean worked = false;
+				int count = 0;
+				while (!worked && count < maxretry) {
+					try {
+						addrList = gc
+								.getFromLocationName(address, maxaddresses);
+						worked = true;
+					} catch (Exception te) {
+						System.err.println(te
+								+ " Exception occurred, will retry max "
+								+ maxretry + " times");
+						count++;
+					}
+				}
+				if (addrList != null) {
+					System.err.println("!!!!!! Found the following addresses:");
+					// Create an ArrayAdapter using the String array and a
+					// default spinner
+					// layout
+					ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+							this, android.R.layout.select_dialog_singlechoice);
+					// Specify the layout to use when the list of choices
+					// appears
+					adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+
+					// Loop over all the addresses returned by google maps
+					// and add them
+					// into the spinner adapter array
+					StringBuilder sb;
+					for (Address addr : addrList) {
+						// debug info can be deleted
+						System.err.println(addr.getAddressLine(0)
+								+ " Country: " + addr.getCountryName()
+								+ " Postal Code: " + addr.getPostalCode()
+								+ " Locality: " + addr.getLocality() + " lon: "
+								+ addr.getLongitude() + " lat: "
+								+ addr.getLatitude());
+
+						// Add the address into the adapter for the spinner
+						sb = new StringBuilder(addr.getAddressLine(0));
+						// if (addr.getFeatureName() != null
+						// && addr.getFeatureName().length() > 0) {
+						// sb.append(", ").append(addr.getFeatureName());
+						// }
+						if (addr.getLocality() != null
+								&& addr.getLocality().length() > 0) {
+							sb.append(" ").append(addr.getLocality());
+						}
+						if (addr.getPremises() != null
+								&& addr.getPremises().length() > 0) {
+							sb.append(" ").append(addr.getPremises());
+						}
+						if (addr.getCountryCode() != null
+								&& addr.getCountryCode().length() > 0) {
+							sb.append(" ").append(addr.getCountryCode());
+						}
+						// if (addr.getAdminArea() != null
+						// && addr.getAdminArea().length() > 0) {
+						// sb.append("5 ").append(addr.getAdminArea());
+						// }
+						adapter.add(sb.toString());
+					}
+					// Apply adapter to the spinner
+					// locationSpinner.setAdapter(adapter.createFromResource(this,
+					// adapter.(android.R.layout.simple_spinner_item),
+					// R.layout.spinner_item));
+					locationSpinner.setAdapter(adapter);
+					locationSpinner.performClick();
+				}
+
+				location.setText(locationSpinner.getSelectedItem().toString());
+
+			} else {
+				System.err
+						.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GEOCODER SERVICE IS NOT AVAILABLE");
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 	}
 }

@@ -50,7 +50,7 @@ public class AppointmentInfoPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
-		int idtemp =intent.getIntExtra("appointment_id", 0); 
+		int idtemp = intent.getIntExtra("appointment_id", 0);
 		id = Integer.toString(idtemp);
 		name = intent.getStringExtra("appointment_name");
 		description = intent.getStringExtra("appointment_description");
@@ -104,7 +104,7 @@ public class AppointmentInfoPage extends Activity {
 				while (!worked && count < maxretry) {
 					try {
 						list = gc.getFromLocationName(
-								"waldorpstraat 47, den haag", 1);
+								"Stromenlaan 35 Woerden NL", 1);
 						worked = true;
 					} catch (Exception te) {
 						System.err.println(te
@@ -149,8 +149,9 @@ public class AppointmentInfoPage extends Activity {
 			Intent i = new Intent(this, EditAppointment.class);
 			i.putExtra("id", this.id);
 			startActivity(i);
-			
-			//startActivity(new Intent(AppointmentInfoPage.this, EditAppointment.class));
+
+			// startActivity(new Intent(AppointmentInfoPage.this,
+			// EditAppointment.class));
 			break;
 		case R.id.button_Back:
 			finish();
@@ -251,21 +252,19 @@ public class AppointmentInfoPage extends Activity {
 		String[] array = res.getStringArray(R.array.Default_messages);
 		String item = array[mSelectedItem];
 
-		//Toast.makeText(this, item + " get number ", Toast.LENGTH_SHORT).show();
+		// Toast.makeText(this, item + " get number ",
+		// Toast.LENGTH_SHORT).show();
 		// TODO get numbers
 
 		SmsManager sm = SmsManager.getDefault();
 
 		List<User> users = new ArrayList<User>();
 		users = getUsersSelectedAppointment(id);
-		for (int i=0; i<users.size(); i++){
-			String temp= Integer.toString(users.get(i).getPhone());
-			sm.sendTextMessage(temp, null, item , null, null);
+		for (int i = 0; i < users.size(); i++) {
+			String temp = Integer.toString(users.get(i).getPhone());
+			sm.sendTextMessage(temp, null, item, null, null);
 		}
-		
-		
-		
-		
+
 	}
 
 	public void doNegativeClickSendMessage() {
