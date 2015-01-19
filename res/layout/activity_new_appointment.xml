@@ -81,6 +81,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/appointment_location" />
 
+
+
     <Space
         android:layout_width="1dp"
         android:layout_height="5dp" />

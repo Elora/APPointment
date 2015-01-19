@@ -1,8 +1,13 @@
 package kb50.appointment;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -124,9 +129,9 @@ public class EditAppointment extends FragmentActivity {
 				.execute(new ApiConnector());
 				
 		String[] date = reminderDatePicker.getText().toString().split("-");
-		int day = Integer.parseInt(date[2]);
+		int day = Integer.parseInt(date[0]);
 		int month = Integer.parseInt(date[1]);
-		int year = Integer.parseInt(date[0]);
+		int year = Integer.parseInt(date[2]);
 		
 		String[] time = reminderTimePicker.getText().toString().split(":");
 		int hour = Integer.parseInt(time[0]); 
@@ -134,7 +139,29 @@ public class EditAppointment extends FragmentActivity {
 		
 		Toast.makeText(this, hour + ":" + minute, Toast.LENGTH_LONG).show();
 		
+		//Calendar cur_cal = new GregorianCalendar();
+		//cur_cal.setTimeInMillis(System.currentTimeMillis());//set the current time and date for this calendar
+
+		Calendar cal = new GregorianCalendar();
+
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.MONTH, month -1);	
+		cal.set(Calendar.YEAR, year);
+		
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		cal.set(Calendar.SECOND, 00);
 	
+		Intent intentAlarm = new Intent(EditAppointment.this,
+				AlarmReceiver.class);
+	
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+		alarmManager.set(AlarmManager.RTC_WAKEUP,
+				cal.getTimeInMillis(),PendingIntent.getBroadcast(this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+
+		Toast.makeText(this, "Start Alarm",
+				Toast.LENGTH_SHORT).show();
 		
 		this.finish();
 	}

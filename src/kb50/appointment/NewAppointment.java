@@ -1,7 +1,19 @@
 package kb50.appointment;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
@@ -23,7 +35,6 @@ public class NewAppointment extends FragmentActivity {
 	
 	private EditText name;
 	private EditText description;
-	private EditText location;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +49,7 @@ public class NewAppointment extends FragmentActivity {
 		
 		name = (EditText) findViewById(R.id.appointment_name_field);
 		description = (EditText) findViewById(R.id.appointment_desc_field);
-		location = (EditText) findViewById(R.id.location_field);
-		
+					
 		// Create an ArrayAdapter using the String array and a default spinner layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,  R.array.priority_array, android.R.layout.simple_spinner_item);
 		// Specify the layout to use when the list of choices appears
@@ -47,6 +57,8 @@ public class NewAppointment extends FragmentActivity {
 		// Apply adapter to the spinner
 		prioritySpinner.setAdapter(adapter);
 	}
+	
+	
 	
 	public void onClickCancel(View v){
 		startActivity(new Intent(NewAppointment.this, TabLayout.class)); 
@@ -76,7 +88,19 @@ public class NewAppointment extends FragmentActivity {
 		new Controller().new Insert(a,
 				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
 				.execute(new ApiConnector());
+
 		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
+
+		
+		String[] date = reminderDatePicker.getText().toString().split("-");
+		int day = Integer.parseInt(date[2]);
+		int month = Integer.parseInt(date[1]);
+		int year = Integer.parseInt(date[0]);
+		
+		String[] time = reminderTimePicker.getText().toString().split(":");
+		int hour = Integer.parseInt(time[0]); 
+		int minute = Integer.parseInt(time[1]);
+
 		this.finish();
 	}
 	

@@ -17,6 +17,7 @@
     <string name="sendmessage">Send</string>
     <string name="viewmap">Route</string>
     <string name="delete">Delete</string>
+    <string name="location">Location</string>
     <string name="back">Back</string>
     <string name="New_appointment">New appointment</string>
     <string name="pic">Logo</string>

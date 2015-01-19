@@ -170,8 +170,29 @@ public class AppointmentInfoPage extends Activity {
 			startActivity(route);
 
 			break;
+			
+		case R.id.button_location:
+			sendLocation();
+			break;
 		}
 
+	}
+	
+	public void sendLocation(){
+		
+		String phoneNumber = "";
+		String message = "http://maps.google.com/maps?q=" + lat + "," + lng;
+		try {
+			// SmsManager smsManager = SmsManager.getDefault();
+			// smsManager.sendTextMessage(phoneNumber, null, message, null,
+			// null);
+			Toast.makeText(getApplicationContext(),
+					"Location sent: " + message, Toast.LENGTH_LONG).show();
+		} catch (Exception e) {
+			Toast.makeText(getApplicationContext(),
+					"SMS failed, please try again.", Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteAppoinment() {
