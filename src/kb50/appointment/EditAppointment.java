@@ -144,14 +144,14 @@ public class EditAppointment extends FragmentActivity {
 		case R.id.date_picker:
 			DialogFragment dateFragment = new DatePickerFragment();
 			Bundle args = new Bundle();
-			args.putString("btn", "normal");
+			args.putString("btn", "editNormal");
 			dateFragment.setArguments(args);
 			dateFragment.show(getSupportFragmentManager(), "datePicker");
 			break;
 		case R.id.reminder_date_picker:
 			DialogFragment reminderDateFragment = new DatePickerFragment();
 			Bundle args2 = new Bundle();
-			args2.putString("btn", "reminder");
+			args2.putString("btn", "editReminder");
 			reminderDateFragment.setArguments(args2);
 			reminderDateFragment
 					.show(getSupportFragmentManager(), "datePicker");
@@ -164,14 +164,14 @@ public class EditAppointment extends FragmentActivity {
 		case R.id.time_picker:
 			DialogFragment timeFragment = new TimePickerFragment();
 			Bundle args = new Bundle();
-			args.putString("btn", "normal");
+			args.putString("btn", "editNormal");
 			timeFragment.setArguments(args);
 			timeFragment.show(getSupportFragmentManager(), "timePicker");
 			break;
 		case R.id.reminder_time_picker:
 			DialogFragment reminderTimeFragment = new TimePickerFragment();
 			Bundle args2 = new Bundle();
-			args2.putString("btn", "reminder");
+			args2.putString("btn", "editReminder");
 			reminderTimeFragment.setArguments(args2);
 			reminderTimeFragment
 					.show(getSupportFragmentManager(), "timePicker");

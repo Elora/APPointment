@@ -41,9 +41,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 		}
 		if(btn.equals("normal")){
 			NewAppointment.setTimeButton(text);
+		}else if(btn.equals("reminder")){
+			NewAppointment.setReminderTimeButton(text);
+		}else if(btn.equals("editNormal")){
 			EditAppointment.setTimeButton(text);
-		}else{
-			//NewAppointment.setReminderTimeButton(text);
+		}else if(btn.equals("editReminder")){
 			EditAppointment.setReminderTimeButton(text);
 		}
 	}
