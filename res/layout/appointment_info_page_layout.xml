@@ -17,26 +17,65 @@
             android:layout_height="fill_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
-            <TextView
-                  android:id="@+id/appointment_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/appointment_name" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" >
 
-            <TextView
-                  android:id="@+id/appointment_desc"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/appointment_desc" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/appointment_date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/appointment_date" />
+                    <TextView
+                        android:id="@+id/appointment_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_name" />
 
+                    <TextView
+                        android:id="@+id/appointment_desc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_desc" />
+
+                    <TextView
+                        android:id="@+id/appointment_date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_date" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" 
+        		>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/AddGuestBtn"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Add guest" 
+                        android:onClick="onClick"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Guests" />
+                
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

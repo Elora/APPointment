@@ -161,6 +161,9 @@ public class AppointmentInfoPage extends Activity {
 		case R.id.button_sendMessage:
 			SendMessage();
 			break;
+		case R.id.AddGuestBtn:
+			AddGuest();
+			break;
 		case R.id.button_route:
 			String uri = "https://maps.google.com/maps?f=d&daddr=" + lat + ","
 					+ lng;
@@ -268,4 +271,17 @@ public class AppointmentInfoPage extends Activity {
 	public void doNegativeClickSendMessage() {
 	}
 
+	public void doNegativeClickAddGuestsMessage(){
+	}
+	
+	public void doPositiveClickAddGuestsMessage(ArrayList selecteditems) {
+	}
+	
+	public void AddGuest(){
+		AddGuestFragment dialogFragment3 = AddGuestFragment.newInstance();
+		dialogFragment3.show(getFragmentManager(), "dialog");
+		
+		
+		
+	}
 }
