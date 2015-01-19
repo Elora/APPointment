@@ -93,8 +93,9 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/button"
             android:onClick="onClickLocation"
-            android:text="search location"
-            android:textColor="#FFFFFF" />
+            android:text="@string/searchLocation"
+            android:textColor="#FFFFFF"
+            android:gravity="center_horizontal" />
 
         <Spinner
             android:id="@+id/location_spinner"

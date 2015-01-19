@@ -58,6 +58,7 @@
     <string name="appointment_desc">Description</string>
     <string name="appointment_date">Date</string>
     <string name="appointment_location">Location</string>
+    <string name="searchLocation">Search Location</string>
     <string name="appointment_priority">Priority</string>
     <string name="appointment_reminder">Reminder</string>
 
