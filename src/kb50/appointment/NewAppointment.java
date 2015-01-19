@@ -102,9 +102,8 @@ public class NewAppointment extends FragmentActivity {
 		a.setDescription(description.getText().toString());
 		a.setDate("2015-01-01 10:15:00");// TEMP. Datepicker gives NULLPOINTER?
 
-		Location l = new Location();
-		l.setId(1);
-		a.setLocation(l); // TODO: ADD locations (Domi is working on this)
+		
+		a.setLocation(location.getText().toString()); 
 
 		a.setPriority(p);
 		a.setOwner(owner);

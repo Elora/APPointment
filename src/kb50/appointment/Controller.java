@@ -23,7 +23,7 @@ public class Controller {
 		}
 
 		private List<Object> users = new ArrayList<Object>();
-		private List<Object> locations = new ArrayList<Object>();
+
 		private List<Object> appointments = new ArrayList<Object>();
 
 		@Override
@@ -38,13 +38,10 @@ public class Controller {
 			if (url.contains("GetUsers") || url.contains("CheckUserExist")) {
 				return usersToList(params[0].getTable(url));
 
-			} else if (url.contains("GetLocations")) {
-
-				return locationsToList(params[0].getTable(url));
 			} else {
 
 				usersToList(params[0].getTable(url));
-				locationsToList(params[0].getTable(url));
+
 				return appointmentsToList(params[0].getTable(url));
 			}
 
@@ -67,14 +64,8 @@ public class Controller {
 					a.setName(json.getString("name"));
 					a.setPriority(json.getInt("priority"));
 					a.setDescription(json.getString("description"));
-					for (Object o : locations) {
-						Location l = (Location) o;
-						if (l.getId() == json.getInt("locationid")) {
 
-							a.setLocation(l);
-
-						}
-					}
+					a.setLocation(json.getString("location"));
 
 					appointments.add(a);
 
@@ -85,34 +76,6 @@ public class Controller {
 			}
 
 			return appointments;
-		}
-
-		public List<Object> locationsToList(JSONArray jsonArray) {
-
-			// url = "http://eduweb.hhs.nl/~13061798/GetLocations.php";
-
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject json = null;
-				try {
-
-					json = jsonArray.getJSONObject(i);
-					Location l = new Location();
-
-					l.setId(json.getInt("id"));
-					l.setCountry(json.getString("Country"));
-					l.setCity(json.getString("City"));
-					l.setAddress(json.getString("Address"));
-					l.setHouseNumber(json.getInt("HouseNumber"));
-					l.setPostalCode(json.getString("postal_code"));
-					locations.add(l);
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-
-				}
-
-			}
-			return locations;
 		}
 
 		public List<Object> usersToList(JSONArray jsonArray) {
@@ -170,8 +133,10 @@ public class Controller {
 				List<NameValuePair> insertParams = new ArrayList<NameValuePair>();
 				insertParams.add(new BasicNameValuePair("name", u.getName()));
 				insertParams.add(new BasicNameValuePair("email", u.getEmail()));
-				insertParams.add(new BasicNameValuePair("password", u.getPwd()));
-				insertParams.add(new BasicNameValuePair("phone_number", u.getPhone() + ""));
+				insertParams
+						.add(new BasicNameValuePair("password", u.getPwd()));
+				insertParams.add(new BasicNameValuePair("phone_number", u
+						.getPhone() + ""));
 				insertParams.add(new BasicNameValuePair("imageurl", u
 						.getImageurl()));
 
@@ -211,8 +176,8 @@ public class Controller {
 						.getPriority() + ""));
 				insertParams.add(new BasicNameValuePair("datetime", a.getDate()
 						+ ""));
-				insertParams.add(new BasicNameValuePair("locationid", a
-						.getLocation().getId() + ""));
+				insertParams.add(new BasicNameValuePair("location", a
+						.getLocation()));
 				insertParams.add(new BasicNameValuePair("owner", a.getOwner()
 						+ ""));
 

@@ -12,7 +12,7 @@ public class Appointment {
 	private String date;
 	private int priority;
 	private List<User> users;
-	private Location location;
+	private String location;
 	private int owner;
 
 	public int getOwner() {
@@ -71,11 +71,11 @@ public class Appointment {
 		this.users = users;
 	}
 
-	public Location getLocation() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 

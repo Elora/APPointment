@@ -142,9 +142,7 @@ public class EditAppointment extends FragmentActivity {
 		a.setDate(datePicker.getText().toString() + " "
 				+ timePicker.getText().toString());
 
-		Location l = new Location();
-		l.setId(1);
-		a.setLocation(l); // TODO: ADD locations (Domi is working on this)
+		a.setLocation(location.getText().toString()); 
 
 		a.setPriority(p);
 
