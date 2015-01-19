@@ -11,15 +11,25 @@ import android.widget.Toast;
 
 public class AlarmDialogActivity extends Activity {
 
+	private String name;
+	private String date;
+	private String time;
+	
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.main);
 		Context ctx = this;
 		
+		Intent i = getIntent();
+		name = i.getStringExtra("name");
+		date = i.getStringExtra("date");
+		time = i.getStringExtra("time");
+		
+		
 		final AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
-	    alert.setTitle("Alarm");
-	    alert.setMessage("Appointment");
+	    alert.setTitle("Appointment!");
+	    alert.setMessage(name + "\n" + date + "\n" + time);
 	    alert.setPositiveButton("Accept",new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog,int whichButton)
 			{

@@ -180,6 +180,10 @@ public class EditAppointment extends FragmentActivity {
 		Intent intentAlarm = new Intent(EditAppointment.this,
 				AlarmReceiver.class);
 
+		intentAlarm.putExtra("appointment name", name.getText().toString());
+		intentAlarm.putExtra("date", datePicker.getText().toString());
+		intentAlarm.putExtra("time", timePicker.getText().toString());
+		
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
 		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),

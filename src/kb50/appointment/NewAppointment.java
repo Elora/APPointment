@@ -1,7 +1,12 @@
 package kb50.appointment;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -118,6 +123,29 @@ public class NewAppointment extends FragmentActivity {
 		int hour = Integer.parseInt(time[0]);
 		int minute = Integer.parseInt(time[1]);
 
+		Calendar cal = new GregorianCalendar();
+
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.MONTH, month - 1);
+		cal.set(Calendar.YEAR, year);
+
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		cal.set(Calendar.SECOND, 00);
+		
+		Intent intentAlarm = new Intent(NewAppointment.this,
+				AlarmReceiver.class);
+
+		intentAlarm.putExtra("appointment name", name.getText().toString());
+		intentAlarm.putExtra("date", datePicker.getText().toString());
+		intentAlarm.putExtra("time", timePicker.getText().toString());
+		
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+				PendingIntent.getBroadcast(this, 1, intentAlarm,
+						PendingIntent.FLAG_UPDATE_CURRENT));
+		
 		this.finish();
 	}
 
