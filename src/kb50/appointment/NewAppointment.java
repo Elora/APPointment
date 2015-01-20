@@ -90,30 +90,6 @@ public class NewAppointment extends FragmentActivity {
 	}
 
 	public void onClickSubmit(View v) {
-
-		final SharedPreferences mSharedPreference = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
-		int owner = mSharedPreference.getInt("id", 0);
-
-		String priority = prioritySpinner.getSelectedItem().toString();
-		int p = setPriority(priority);
-
-		Appointment a = new Appointment();
-		a.setName(name.getText().toString());
-		a.setDescription(description.getText().toString());
-		a.setDate("2015-01-01 10:15:00");// TEMP. Datepicker gives NULLPOINTER?
-
-		
-		a.setLocation(location.getText().toString()); 
-
-		a.setPriority(p);
-		a.setOwner(owner);
-		new Controller().new Insert(a,
-				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
-				.execute(new ApiConnector());
-
-		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
-
 		String[] date = reminderDatePicker.getText().toString().split("-");
 		int day = Integer.parseInt(date[0]);
 		int month = Integer.parseInt(date[1]);
@@ -122,6 +98,29 @@ public class NewAppointment extends FragmentActivity {
 		String[] time = reminderTimePicker.getText().toString().split(":");
 		int hour = Integer.parseInt(time[0]);
 		int minute = Integer.parseInt(time[1]);
+		
+		final SharedPreferences mSharedPreference = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
+		int owner = mSharedPreference.getInt("id", 0);
+
+		String priority = prioritySpinner.getSelectedItem().toString();
+		int p = setPriority(priority);
+		
+		Appointment a = new Appointment();
+		a.setName(name.getText().toString());
+		a.setDescription(description.getText().toString());		
+		a.setLocation(location.getText().toString()); 
+
+		a.setPriority(p);
+		a.setOwner(owner);
+		
+		String dateTime = year + "-" + month + "-" + day + " " + timePicker.getText().toString();
+		a.setDate(dateTime);
+		new Controller().new Insert(a,
+				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
+				.execute(new ApiConnector());
+
+		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
 
 		Calendar cal = new GregorianCalendar();
 
@@ -209,11 +208,11 @@ public class NewAppointment extends FragmentActivity {
 		int p;
 
 		if (priotiry.equals("High")) {
-			p = 2;
+			p = 3;
 		} else if (priotiry.equals("medium")) {
-			p = 1;
+			p = 2;
 		} else {
-			p = 0;
+			p = 1;
 		}
 		return p;
 	}

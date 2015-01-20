@@ -63,8 +63,8 @@ public class EditAppointment extends FragmentActivity {
 		setContentView(R.layout.activity_edit_appointment);
 
 		Intent i = getIntent();
-		appointment_id = Integer.parseInt(i.getStringExtra("id"));
-
+		appointment_id = Integer.parseInt(i.getStringExtra("id"));		
+		
 		// TODO: Fill ALL fields
 		try {
 			final SharedPreferences mSharedPreference = PreferenceManager
@@ -78,10 +78,31 @@ public class EditAppointment extends FragmentActivity {
 			if (!appointments.isEmpty()) {
 				for (Object o : appointments) {
 					Appointment a = (Appointment) o;
-
+					
 					if (a.getId() == appointment_id) {
 						prioritySpinner = (Spinner) findViewById(R.id.priority_spinner);
-						prioritySpinner.setSelection(a.getPriority());
+						
+						// Create an ArrayAdapter using the String array and a default spinner
+						// layout
+						ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+								this, R.array.priority_array,
+								android.R.layout.simple_spinner_item);
+						// Specify the layout to use when the list of choices appears
+						adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+						// Apply adapter to the spinner
+						prioritySpinner.setAdapter(adapter);
+						
+						switch(a.getPriority()){
+						case 1:
+							prioritySpinner.setSelection(2);
+							break;
+						case 2:
+							prioritySpinner.setSelection(1);
+							break;
+						case 3:
+							prioritySpinner.setSelection(0);
+						}
+						
 
 						datePicker = (Button) findViewById(R.id.date_picker);
 						String dateTime = a.getDate();
@@ -93,6 +114,7 @@ public class EditAppointment extends FragmentActivity {
 						timePicker = (Button) findViewById(R.id.time_picker);
 						timePicker.setText(time);
 
+						// TODO: add reminder date & time to DB
 						reminderDatePicker = (Button) findViewById(R.id.reminder_date_picker);
 						reminderTimePicker = (Button) findViewById(R.id.reminder_time_picker);
 
@@ -103,7 +125,7 @@ public class EditAppointment extends FragmentActivity {
 						description.setText(a.getDescription());
 
 						location = (EditText) findViewById(R.id.location_field);
-						locationSpinner = (Spinner) findViewById(R.id.location_spinner);
+						location.setText(a.getLocation());
 					}
 				}
 
@@ -113,16 +135,6 @@ public class EditAppointment extends FragmentActivity {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-
-		// Create an ArrayAdapter using the String array and a default spinner
-		// layout
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.priority_array,
-				android.R.layout.simple_spinner_item);
-		// Specify the layout to use when the list of choices appears
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		// Apply adapter to the spinner
-		prioritySpinner.setAdapter(adapter);
 	}
 
 	public void onClickCancel(View v) {
@@ -253,11 +265,11 @@ public class EditAppointment extends FragmentActivity {
 		int p;
 
 		if (priority.equals("High")) {
-			p = 2;
+			p = 3;
 		} else if (priority.equals("medium")) {
-			p = 1;
+			p = 2;
 		} else {
-			p = 0;
+			p = 1;
 		}
 
 		return p;
