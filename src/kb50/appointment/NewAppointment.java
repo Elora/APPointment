@@ -96,8 +96,6 @@ public class NewAppointment extends FragmentActivity {
 		int year = Integer.parseInt(date[2]);
 
 		String[] time = reminderTimePicker.getText().toString().split(":");
-		int hour = Integer.parseInt(time[0]);
-		int minute = Integer.parseInt(time[1]);
 		
 		final SharedPreferences mSharedPreference = PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext());
@@ -120,30 +118,9 @@ public class NewAppointment extends FragmentActivity {
 				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
 				.execute(new ApiConnector());
 
-		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
-
-		Calendar cal = new GregorianCalendar();
-
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.set(Calendar.MONTH, month - 1);
-		cal.set(Calendar.YEAR, year);
-
-		cal.set(Calendar.HOUR_OF_DAY, hour);
-		cal.set(Calendar.MINUTE, minute);
-		cal.set(Calendar.SECOND, 00);
+		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();	
 		
-		Intent intentAlarm = new Intent(NewAppointment.this,
-				AlarmReceiver.class);
-
-		intentAlarm.putExtra("appointment name", name.getText().toString());
-		intentAlarm.putExtra("date", datePicker.getText().toString());
-		intentAlarm.putExtra("time", timePicker.getText().toString());
-		
-		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-				PendingIntent.getBroadcast(this, 1, intentAlarm,
-						PendingIntent.FLAG_UPDATE_CURRENT));
+		setAlarm(date, time);
 		
 		this.finish();
 	}
@@ -316,5 +293,37 @@ public class NewAppointment extends FragmentActivity {
 			ex.printStackTrace();
 		}
 
+	}
+	
+	private void setAlarm(String[] date, String[] time){
+		int day = Integer.parseInt(date[0]);
+		int month = Integer.parseInt(date[1]);
+		int year = Integer.parseInt(date[2]);
+		
+		int hour = Integer.parseInt(time[0]);
+		int minute = Integer.parseInt(time[1]);
+		
+		Calendar cal = new GregorianCalendar();
+
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.MONTH, month - 1);
+		cal.set(Calendar.YEAR, year);
+
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		cal.set(Calendar.SECOND, 00);
+		
+		Intent intentAlarm = new Intent(NewAppointment.this,
+				AlarmReceiver.class);
+
+		intentAlarm.putExtra("appointment name", name.getText().toString());
+		intentAlarm.putExtra("date", datePicker.getText().toString());
+		intentAlarm.putExtra("time", timePicker.getText().toString());
+		
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+				PendingIntent.getBroadcast(this, 1, intentAlarm,
+						PendingIntent.FLAG_UPDATE_CURRENT));		
 	}
 }

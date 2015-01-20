@@ -17,7 +17,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_gravity="left"
-            android:background="@drawable/refresh" />
+            android:background="@drawable/refresh"
+            android:onClick="onClickRefresh" />
 
         <ImageButton
             android:id="@+id/button1new"

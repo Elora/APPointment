@@ -74,6 +74,10 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
 		startActivity(new Intent(TabLayout.this, NewAppointment.class));
 	}
     
+    public void onClickRefresh(View v){
+    	
+    }
+    
     public void onClickEditProfiel(View v){
     	Intent i = new Intent(TabLayout.this, EditProfielActivity.class);
     	//startActivity(i);

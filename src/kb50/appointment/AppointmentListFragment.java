@@ -19,13 +19,6 @@ import android.widget.SimpleAdapter;
 
 public class AppointmentListFragment extends ListFragment {
 
-	// temp data
-	String[] nameApp = new String[] { "docter", "school" };
-	String[] dateApp = new String[] { "2 september 2015", "3 september 2015" };
-	String[] timeApp = new String[] { "9:00 pm", "8:00 am" };
-
-	// end temp data
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -55,7 +48,7 @@ public class AppointmentListFragment extends ListFragment {
 				R.layout.appointmentlistfragment_layout, from, to);
 
 		setListAdapter(adapter);
-
+		adapter.notifyDataSetChanged();
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
@@ -104,13 +97,10 @@ public class AppointmentListFragment extends ListFragment {
 				i.putExtra("appointment_priority", a.getPriority());
 				i.putExtra("appointment_description", a.getDescription());
 				i.putExtra("appointment_date", a.getDate());
-				
-			
 			}
 
 		}
 		getActivity().finish();
 		startActivity(i);
 	}
-
 }

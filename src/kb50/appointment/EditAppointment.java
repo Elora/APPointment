@@ -61,7 +61,10 @@ public class EditAppointment extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_appointment);
+		fillFields();
+	}
 
+	private void fillFields(){
 		Intent i = getIntent();
 		appointment_id = Integer.parseInt(i.getStringExtra("id"));		
 		
@@ -134,9 +137,9 @@ public class EditAppointment extends FragmentActivity {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
-
+	
 	public void onClickCancel(View v) {
 		startActivity(new Intent(EditAppointment.this,
 				AppointmentInfoPage.class));
@@ -161,7 +164,11 @@ public class EditAppointment extends FragmentActivity {
 		new Controller().new Insert(a,
 				"http://eduweb.hhs.nl/~13061798/EditAppointment.php?id="
 						+ appointment_id).execute(new ApiConnector());
+		setAlarm();
+		this.finish();
+	}
 
+	private void setAlarm(){
 		String[] date = reminderDatePicker.getText().toString().split("-");
 		int day = Integer.parseInt(date[0]);
 		int month = Integer.parseInt(date[1]);
@@ -170,12 +177,6 @@ public class EditAppointment extends FragmentActivity {
 		String[] time = reminderTimePicker.getText().toString().split(":");
 		int hour = Integer.parseInt(time[0]);
 		int minute = Integer.parseInt(time[1]);
-
-		Toast.makeText(this, hour + ":" + minute, Toast.LENGTH_LONG).show();
-
-		// Calendar cur_cal = new GregorianCalendar();
-		// cur_cal.setTimeInMillis(System.currentTimeMillis());//set the current
-		// time and date for this calendar
 
 		Calendar cal = new GregorianCalendar();
 
@@ -198,13 +199,9 @@ public class EditAppointment extends FragmentActivity {
 
 		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
 				PendingIntent.getBroadcast(this, 1, intentAlarm,
-						PendingIntent.FLAG_UPDATE_CURRENT));
-
-		Toast.makeText(this, "Start Alarm", Toast.LENGTH_SHORT).show();
-
-		this.finish();
+						PendingIntent.FLAG_UPDATE_CURRENT));	
 	}
-
+	
 	public void onClickDatePicker(View v) {
 		switch (v.getId()) {
 		case R.id.date_picker:
