@@ -1,3 +1,4 @@
+
 package kb50.appointment;
 
 import java.util.Calendar;
@@ -114,9 +115,9 @@ public class NewAppointment extends FragmentActivity {
 		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();
 
 		String[] date = reminderDatePicker.getText().toString().split("-");
-		int day = Integer.parseInt(date[2]);
+		int day = Integer.parseInt(date[0]);
 		int month = Integer.parseInt(date[1]);
-		int year = Integer.parseInt(date[0]);
+		int year = Integer.parseInt(date[2]);
 
 		String[] time = reminderTimePicker.getText().toString().split(":");
 		int hour = Integer.parseInt(time[0]);

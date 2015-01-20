@@ -8,59 +8,99 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.42"
+        android:layout_weight="0.3"
         android:background="@drawable/appointment_bg"
         android:orientation="horizontal" >
-
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/userName" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/userEmail" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/userPhone" />
+                    <TextView
+                        android:id="@+id/appointment_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_name" />
+
+                    <TextView
+                        android:id="@+id/appointment_desc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_desc" />
+
+                    <TextView
+                        android:id="@+id/appointment_date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_date" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" 
+        		>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/AddGuestBtn"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Add guest" 
+                        android:onClick="onClick"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Guests" />
+                
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.19"
-        android:background="#FFFFFF"
-        android:orientation="horizontal" >
+        android:layout_weight="0.12"
+        android:orientation="horizontal"
+        android:background="@drawable/appointment_bg" >
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" >
 
             <Button
                 android:id="@+id/button_alter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:background="#FFFFFF"
                 android:drawableLeft="@drawable/edit"
                 android:onClick="onClick"
                 android:text="@string/alter"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/button_sendMessage"
@@ -72,7 +112,7 @@
                 android:drawableLeft="@drawable/send"
                 android:onClick="onClick"
                 android:text="@string/sendmessage"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/button_route"
@@ -81,10 +121,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:background="#FFFFFF"
-                android:drawableLeft="@drawable/map"
+                android:drawableLeft="@drawable/route"
                 android:onClick="onClick"
                 android:text="@string/viewmap"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/button_delete"
@@ -96,32 +136,35 @@
                 android:drawableLeft="@drawable/delete"
                 android:onClick="onClick"
                 android:text="@string/delete"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
+            
+            <Button
+                android:id="@+id/button_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/location"
+                android:onClick="onClick"
+                android:text="@string/location"
+                android:textSize="17sp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.39"
-        android:background="#FFFFFF"
-        android:orientation="horizontal" >
+        android:layout_weight="0.58"
+        android:background="#FFFFFF" >
 
         <fragment
             android:id="@+id/map"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.6"
             class="com.google.android.gms.maps.MapFragment" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_Back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:onClick="onClick"
-        android:text="@string/back"
-        android:textColor="#FFFFFF" >
-    </Button>
 
 </LinearLayout>

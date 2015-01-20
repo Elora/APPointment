@@ -1,3 +1,4 @@
+
 package kb50.appointment;
 
 import java.io.IOException;
@@ -153,9 +154,7 @@ public class AppointmentInfoPage extends Activity {
 			// startActivity(new Intent(AppointmentInfoPage.this,
 			// EditAppointment.class));
 			break;
-		case R.id.button_Back:
-			finish();
-			break;
+		
 		case R.id.button_delete:
 			deleteAppoinment();
 			break;

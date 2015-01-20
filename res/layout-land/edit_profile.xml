@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ 
     tools:context="${relativePackage}.${activityClass}" >
 
     <LinearLayout
@@ -10,29 +11,30 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/reg_user"
+            android:id="@+id/reg_userEPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reg_username" />
+            android:text="@string/reg_name" />
 
         <EditText
-            android:id="@+id/reg_user_field"
+            android:id="@+id/reg_user_fieldEPA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/reg_username" />
+            android:hint="@string/reg_name"
+            android:inputType="text" />
 
         <Space
             android:layout_width="1dp"
             android:layout_height="5dp" />
 
         <TextView
-            android:id="@+id/reg_phone"
+            android:id="@+id/reg_phoneEPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reg_phone" />
 
         <EditText
-            android:id="@+id/reg_phone_field"
+            android:id="@+id/reg_phone_fieldEPA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/reg_phone"
@@ -43,13 +45,13 @@
             android:layout_height="5dp" />
 
         <TextView
-            android:id="@+id/reg_mail"
+            android:id="@+id/reg_mailEPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reg_mail" />
 
         <EditText
-            android:id="@+id/reg_mail_field"
+            android:id="@+id/reg_mail_fieldEPA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/reg_mail"
@@ -60,13 +62,13 @@
             android:layout_height="5dp" />
 
         <TextView
-            android:id="@+id/reg_pass1"
+            android:id="@+id/reg_pass1EPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reg_pass1" />
 
         <EditText
-            android:id="@+id/reg_pass1_field"
+            android:id="@+id/reg_pass1_fieldEPA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/reg_pass1"
@@ -77,13 +79,13 @@
             android:layout_height="5dp" />
 
         <TextView
-            android:id="@+id/reg_pass2"
+            android:id="@+id/reg_pass2EPA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reg_pass2" />
 
         <EditText
-            android:id="@+id/reg_pass2_field"
+            android:id="@+id/reg_pass2_fieldEPA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/reg_pass1"
@@ -100,7 +102,7 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/reg_btnCancel"
+                android:id="@+id/reg_btnCancelEPA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -110,7 +112,7 @@
                 android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/reg_btnSubmit"
+                android:id="@+id/reg_btnSubmitEPA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
@@ -120,4 +122,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+    </ScrollView>

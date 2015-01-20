@@ -5,15 +5,30 @@
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <ImageButton
-        android:id="@+id/button1new"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/plus"
-        android:onClick="onClickNewApp" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/button_refresh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="left"
+            android:background="@drawable/refresh" />
+
+        <ImageButton
+            android:id="@+id/button1new"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right"
+            
+            android:background="@drawable/plus"
+            android:onClick="onClickNewApp" />
+    </LinearLayout>
 
     <fragment
         android:id="@+id/Appointments"

@@ -2,187 +2,193 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
-    
-<LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment_name" />
-
-    <EditText
-        android:id="@+id/appointment_name_field"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/appointment_name" />
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment_desc" />
-
-    <EditText
-        android:id="@+id/appointment_desc_field"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/appointment_desc" />
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment_date" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/date_picker"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickDatePicker"
-            android:text="@string/date"
-            android:textColor="#FFFFFF" />
+            android:text="@string/appointment_name" />
 
-        <Button
-            android:id="@+id/time_picker"
+        <EditText
+            android:id="@+id/appointment_name_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/appointment_name" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="5dp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickTimePicker"
-            android:text="@string/time"
-            android:textColor="#FFFFFF" />
+            android:text="@string/appointment_desc" />
+
+        <EditText
+            android:id="@+id/appointment_desc_field"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/appointment_desc" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickDatePicker"
+                android:text="@string/date"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickTimePicker"
+                android:text="@string/time"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_location" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/location_field"
+                android:layout_width="0dp"
+                android:layout_weight="0.85"
+                android:layout_height="wrap_content"
+                android:hint="@string/appointment_location" />
+
+            <Button
+                android:id="@+id/button_location"
+                android:layout_width="0dp"
+                android:layout_weight="0.15"
+                android:layout_height="match_parent"  
+                android:layout_marginRight="2dp"
+                android:background="@drawable/button"
+                android:drawableLeft="@drawable/search"
+                android:gravity="center_horizontal"
+                android:onClick="onClickLocation" />
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/location_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_priority" />
+
+        <Spinner
+            android:id="@+id/priority_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_reminder" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/reminder_date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickDatePicker"
+                android:text="@string/date"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/reminder_time_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickTimePicker"
+                android:text="@string/time"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/new_appointment_btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickCancel"
+                android:text="@string/btn_cancel"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/new_appointment_btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickSubmit"
+                android:text="@string/btn_submit"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
     </LinearLayout>
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment_location" />
-
-    <EditText
-        android:id="@+id/location_field"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/appointment_location" />
-    
-    <Button
-            android:id="@+id/button_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickLocation"
-            android:text="@string/searchLocation"
-            android:textColor="#FFFFFF"
-            android:gravity="center_horizontal"/>
-
-    <Spinner
-        android:id="@+id/location_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="false" />
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment_priority" />
-
-    <Spinner
-        android:id="@+id/priority_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/appointment_reminder" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/reminder_date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickDatePicker"
-            android:text="@string/date"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/reminder_time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickTimePicker"
-            android:text="@string/time"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-
-    <Space
-        android:layout_width="1dp"
-        android:layout_height="10dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/new_appointment_btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickCancel"
-            android:text="@string/btn_cancel"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/new_appointment_btnSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            android:onClick="onClickSubmit"
-            android:text="@string/btn_submit"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-
-</LinearLayout>
 
 </ScrollView>
