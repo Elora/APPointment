@@ -207,13 +207,11 @@ public class AppointmentInfoPage extends Activity {
 	}
 
 	public void doPositiveClick() {
-		// TODO: application crashes but will delete appointment
 		new Controller().new Select("http://eduweb.hhs.nl/~13061798/DeleteAppointment.php?id="+id).execute(new ApiConnector());
 		Toast toast = Toast.makeText(this, "Appointment deleted!", Toast.LENGTH_SHORT);
 		toast.show();
-		startActivity(new Intent(this,AppointmentListFragment.class));
+		startActivity(new Intent(this, TabLayout.class));
 		this.finish();
-		
 	}
 
 	public void doNegativeClick() {

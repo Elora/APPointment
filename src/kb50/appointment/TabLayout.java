@@ -75,7 +75,7 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
 	}
     
     public void onClickRefresh(View v){
-    	
+    	// TODO: find way to refresh AppointmentListFragment (preferably with notifyDataSetChanged method)
     }
     
     public void onClickEditProfiel(View v){

@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class AppointmentListFragment extends ListFragment {
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class AppointmentListFragment extends ListFragment {
 				R.layout.appointmentlistfragment_layout, from, to);
 
 		setListAdapter(adapter);
-		adapter.notifyDataSetChanged();
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
@@ -103,4 +102,5 @@ public class AppointmentListFragment extends ListFragment {
 		getActivity().finish();
 		startActivity(i);
 	}
+
 }
