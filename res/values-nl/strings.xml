@@ -43,6 +43,7 @@
 	<string name="hintToNumber">Naar nummer</string>
 	<string name="hintMessage">(Optioneel) Extra bericht</string>
 	<string name="BtnSend">Verstuur</string>
+	
 	<string-array name="Default_messages">
         <item>Ik ben verlaat.</item>
         <item>Ik kan het niet halen.</item>
@@ -52,6 +53,7 @@
         <item>Ik ben er vroeger.</item>
         <item>Ik ben aan het wachten.</item>
     </string-array>
+    
 	<string name="selectmessage">Select message</string>
 	
 	<string name="Deletemessage">Weet je zeker dat je deze afspraak wilt verwijderen?</string>

@@ -54,8 +54,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.5"
-                android:orientation="horizontal" 
-        		>
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -66,14 +65,14 @@
                         android:id="@+id/AddGuestBtn"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="Add guest" 
-                        android:onClick="onClick"/>
+                        android:onClick="onClick"
+                        android:text="Add guest" />
 
                     <TextView
+                        android:id="@+id/GuestNames"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="Guests" />
-                
+                        android:text="No guests" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -137,7 +136,7 @@
                 android:onClick="onClick"
                 android:text="@string/delete"
                 android:textSize="17sp" />
-            
+
             <Button
                 android:id="@+id/button_location"
                 android:layout_width="wrap_content"
@@ -165,6 +164,5 @@
             android:layout_weight="0.6"
             class="com.google.android.gms.maps.MapFragment" />
     </LinearLayout>
-
 
 </LinearLayout>

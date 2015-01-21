@@ -2,6 +2,8 @@ package kb50.appointment;
 
 import java.util.HashMap;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -20,7 +22,8 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
 	private HashMap mapTabInfo = new HashMap();
 	private TabInfo mLastTab = null;
 	private Resources res;
-	
+	private PendingIntent pendingIntent;
+	private AlarmManager manager;
 	private class TabInfo{
 		private String tag;
 		private Class clss;
@@ -68,6 +71,12 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
         if(savedInstanceState != null){
         	mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
+        
+     
+        Intent i = new Intent("Notifcation");
+        i.setAction("kb50.appointment.servicebroadcastreceiverdemo.NOTIFCATION_RECEIVER");
+        sendBroadcast(i);
+        
     }
     
     public void onClickNewApp(View v){

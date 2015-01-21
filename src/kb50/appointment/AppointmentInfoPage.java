@@ -47,6 +47,8 @@ public class AppointmentInfoPage extends Activity {
 	private String id;
 	private String description;
 
+	private List<User> ownerAndGuests;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,17 +58,32 @@ public class AppointmentInfoPage extends Activity {
 		name = intent.getStringExtra("appointment_name");
 		description = intent.getStringExtra("appointment_description");
 		date = intent.getStringExtra("appointment_date");
-
+		ownerAndGuests = getUsersSelectedAppointment(id);
 		setContentView(R.layout.appointment_info_page_layout);
 
 		TextView appointmentName = (TextView) findViewById(R.id.appointment_name);
 		TextView appointmentDescr = (TextView) findViewById(R.id.appointment_desc);
 		TextView appointmentDate = (TextView) findViewById(R.id.appointment_date);
 
+		
 		appointmentName.setText(name);
 		appointmentDescr.setText(description);
 		appointmentDate.setText(date);
+	
 
+		if(!ownerAndGuests.isEmpty()){
+			String guestString = "Guests:"+"\n";
+			TextView guests = (TextView)findViewById(R.id.GuestNames);
+			for(User u : ownerAndGuests){
+				
+				guestString =  guestString +"\n"+ u.getName();
+				
+				
+			}
+			guests.setText(guestString);
+			
+		}
+		
 		try {
 			map = ((MapFragment) getFragmentManager()
 					.findFragmentById(R.id.map)).getMap();
@@ -255,10 +272,9 @@ public class AppointmentInfoPage extends Activity {
 
 		SmsManager sm = SmsManager.getDefault();
 
-		List<User> users = new ArrayList<User>();
-		users = getUsersSelectedAppointment(id);
-		for (int i = 0; i < users.size(); i++) {
-			String temp = Integer.toString(users.get(i).getPhone());
+		
+		for (int i = 0; i < ownerAndGuests.size(); i++) {
+			String temp = Integer.toString(ownerAndGuests.get(i).getPhone());
 			sm.sendTextMessage(temp, null, item, null, null);
 		}
 
@@ -270,12 +286,13 @@ public class AppointmentInfoPage extends Activity {
 	public void doNegativeClickAddGuestsMessage(){
 	}
 	
-	public void doPositiveClickAddGuestsMessage(ArrayList selecteditems) {
+	public void doPositiveClickAddGuestsMessage(List<User> selecteditems) {
+		
 	}
 	
 	public void AddGuest(){
 		AddGuestFragment dialogFragment3 = AddGuestFragment.newInstance();
-		dialogFragment3.show(getFragmentManager(), "dialog");
+		dialogFragment3.show(getFragmentManager(), id);
 		
 		
 		

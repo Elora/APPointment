@@ -35,14 +35,18 @@ public class Controller {
 
 				return obs;
 			}
-			if (url.contains("GetUsers") || url.contains("CheckUserExist")) {
+			if (url.contains("User")) {
 				return usersToList(params[0].getTable(url));
 
-			} else {
-
-				usersToList(params[0].getTable(url));
-
-				return appointmentsToList(params[0].getTable(url));
+			} 
+			else if(url.contains("Appointment")){
+				
+				return 	appointmentsToList(params[0].getTable(url));
+				
+			}
+			else{
+				List<Object> empty = new ArrayList<Object>();
+				return empty;
 			}
 
 		}
@@ -201,6 +205,41 @@ public class Controller {
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
+				}
+			}
+
+			if (url.contains("AddGuests")) {
+				Appointment a = (Appointment) o;
+
+				JSONParser jsonParser = new JSONParser();
+				List<NameValuePair> insertParams = new ArrayList<NameValuePair>();
+
+				for (User u : a.getUsers()) {
+
+					insertParams.add(new BasicNameValuePair("appid", a.getId()+ ""));
+					insertParams.add(new BasicNameValuePair("userid", u.getId()+ ""));
+
+					// getting JSON Object
+					// Note that create product url accepts POST method
+					JSONObject json = jsonParser.makeHttpRequest(url, "POST",
+							insertParams);
+
+					// check log cat for response
+					Log.d("Create Response", json.toString());
+
+					// check for success tag
+					try {
+						int success = json.getInt("succes");
+
+						if (success == 1) {
+							Log.d("succes", "succes");
+
+						} else {
+							Log.d("fail", "fail");
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 

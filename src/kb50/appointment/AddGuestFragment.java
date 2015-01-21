@@ -14,64 +14,78 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-public class AddGuestFragment extends DialogFragment{
-	 ArrayList mSelectedItems = new ArrayList();
-	 String[] usernames;
-	
-	static AddGuestFragment newInstance(){
+public class AddGuestFragment extends DialogFragment {
+	List<User> mSelectedItems = new ArrayList<User>();
+	String[] usernames;
+	List<User> users; 
+	static AddGuestFragment newInstance() {
 		AddGuestFragment frag = new AddGuestFragment();
 		Bundle args = new Bundle();
 		frag.setArguments(args);
 		return frag;
 	}
-	
+
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState){
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
 		
-		List<User> users = getAvailableUsers();
+
+		users = getAvailableUsers();
 		usernames = new String[users.size()];
-		for(int b=0; b<users.size(); b++){
+		for (int b = 0; b < users.size(); b++) {
 			usernames[b] = users.get(b).getName();
 		}
-	    builder.setTitle(R.string.app_name).setMultiChoiceItems(usernames, null, new DialogInterface.OnMultiChoiceClickListener() {
-				
-	        	    @Override
-	                public void onClick(DialogInterface dialog, int which,
-	                        boolean isChecked) {
-	                    if (isChecked) {
-	                        // If the user checked the item, add it to the selected items
-	                        mSelectedItems.add(which);
-	                    } else if (mSelectedItems.contains(which)) {
-	                        // Else, if the item is already in the array, remove it 
-	                        mSelectedItems.remove(Integer.valueOf(which));
-	                    }
-	                }
-	             
-	              
-	               
-	    })
-	    .setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog,
-					int whichButton) {
-				((AppointmentInfoPage)
-						getActivity()).doPositiveClickAddGuestsMessage(mSelectedItems);
-			}
-		})
-		.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog,
-					int whichButton) {
-				((AppointmentInfoPage)
-						getActivity()).doNegativeClickAddGuestsMessage();
-			};
-			});
-	    return builder.create();
+		builder.setTitle(R.string.app_name)
+				.setMultiChoiceItems(usernames, null,
+						new DialogInterface.OnMultiChoiceClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which, boolean isChecked) {
+								if (isChecked) {
+									// If the user checked the item, add it to
+									// the selected items
+									//mSelectedItems.add(which);
+									
+									mSelectedItems.add(users.get(which));
+								} else if (mSelectedItems.contains(which)) {
+									// Else, if the item is already in the
+									// array, remove it
+									mSelectedItems.remove(Integer
+											.valueOf(which));
+								}
+							}
+
+						})
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						Appointment a = new Appointment();
+						a.setId(Integer.parseInt(getTag()));
+						a.setUsers(mSelectedItems);
+						
+						new Controller().new Insert(a,"http://eduweb.hhs.nl/~13061798/AddGuests.php").execute(new ApiConnector());
+						((AppointmentInfoPage) getActivity())
+								.doPositiveClickAddGuestsMessage(mSelectedItems);
+
+						Toast t = Toast.makeText(getActivity().getApplicationContext(),"Guests added!",Toast.LENGTH_SHORT);
+						t.show();
+					}
+				})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								((AppointmentInfoPage) getActivity())
+										.doNegativeClickAddGuestsMessage();
+							};
+						});
+		return builder.create();
 
 	}
-	
+
 	// returns registered users that are stored in the contactlist.
 	public List<User> getAvailableUsers() {
 
@@ -85,8 +99,8 @@ public class AddGuestFragment extends DialogFragment{
 					ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
 					ContactsContract.CommonDataKinds.Phone.NUMBER };
 
-			Cursor people = getActivity().getContentResolver().query(uri, projection, null,
-					null, null);
+			Cursor people = getActivity().getContentResolver().query(uri,
+					projection, null, null, null);
 
 			int indexNumber = people
 					.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
@@ -121,6 +135,3 @@ public class AddGuestFragment extends DialogFragment{
 
 	}
 }
-
-
-
