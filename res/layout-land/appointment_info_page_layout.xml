@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.4"
-        android:background="@drawable/appointment_bg"
+        android:background="@drawable/landappointment_bg"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -71,6 +71,7 @@
                         android:onClick="onClick"/>
 
                     <TextView
+                        android:id="@+id/GuestNames"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Guests" />
@@ -80,9 +81,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    	<LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.6"
+
         android:background="@drawable/appointment_bg"
         android:orientation="vertical" >
 
@@ -152,13 +155,13 @@
                 android:text="@string/location"
                 android:textSize="17sp" />
         </LinearLayout>
+
         <fragment
             android:id="@+id/map"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.23"
             class="com.google.android.gms.maps.MapFragment" />
-        
         
         </LinearLayout>
 

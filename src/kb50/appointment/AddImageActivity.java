@@ -22,6 +22,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//Source: Groep 3 
+
 public class AddImageActivity extends Activity{
 
 	
