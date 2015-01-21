@@ -1,13 +1,14 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context="${relativePackage}.${activityClass}" >
-
-    <LinearLayout
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="horizontal" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical" 
+        android:layout_weight="0.5"
+        android:background="@drawable/landappointment_bg">
 
         <TextView
             android:id="@+id/reg_user"
@@ -55,7 +56,19 @@
             android:hint="@string/reg_mail"
             android:inputType="textEmailAddress" />
 
-        <Space
+
+
+
+       
+
+    </LinearLayout>
+	 <LinearLayout
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical" 
+	        android:layout_weight="0.5">
+	
+	             <Space
             android:layout_width="1dp"
             android:layout_height="5dp" />
 
@@ -71,8 +84,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/reg_pass1"
             android:inputType="textPassword" />
-
-        <Space
+	     	
+	        <Space
             android:layout_width="1dp"
             android:layout_height="5dp" />
 
@@ -88,12 +101,14 @@
             android:layout_height="wrap_content"
             android:hint="@string/reg_pass1"
             android:inputType="textPassword" />
-
-        <Space
+	     
+	     	
+	      <Space
             android:layout_width="1dp"
             android:layout_height="5dp" />
-
-        <LinearLayout
+	     
+	     
+	             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -118,6 +133,9 @@
                 android:text="@string/btn_submit"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
-    </LinearLayout>
-
-</ScrollView>
+        
+	</LinearLayout>
+	    
+    
+</LinearLayout>
+    

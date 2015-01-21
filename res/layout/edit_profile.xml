@@ -5,18 +5,6 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <Button
-        android:id="@+id/addImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-		
-    	android:layout_gravity="center_vertical|center_horizontal"
-        android:background="@drawable/button"
-        android:onClick="onClickaddImg"
-        android:text="add imgage"
-        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/reg_userEPA"
@@ -99,6 +87,25 @@
         android:hint="@string/reg_pass1"
         android:inputType="textPassword" />
 
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="5dp" />
+    
+    
+        <Button
+        android:id="@+id/addImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+		
+    	android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/button"
+        android:onClick="onClickaddImg"
+        android:text="add imgage"
+        android:textColor="#FFFFFF" />
+    
+    
     <Space
         android:layout_width="1dp"
         android:layout_height="5dp" />

@@ -36,7 +36,8 @@
     <string name="reg_mail">E-mail</string>
     <string name="reg_pass1">Password</string>
     <string name="reg_pass2">Password again</string>
-
+	<string name="reg_username">User name</string>
+	
     <!-- Send message -->
     <string name="hintToNumber">To number</string>
     <string name="hintMessage">(Optional) Extra message</string>
