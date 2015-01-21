@@ -109,6 +109,19 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".AddImageActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="kb50.appointment.AddImageActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        
+        
+        
         <receiver android:name=".AlarmReceiver" />
         <!--
         Domi 

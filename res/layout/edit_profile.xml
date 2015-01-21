@@ -5,6 +5,16 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <Button
+        android:id="@+id/addImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        android:onClick="onClickaddImg"
+        android:text="add imgage"
+        android:textColor="#FFFFFF" />
+
     <TextView
         android:id="@+id/reg_userEPA"
         android:layout_width="wrap_content"

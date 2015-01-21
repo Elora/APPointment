@@ -32,6 +32,7 @@
 	<string name="btn_cancel">Anuleren</string>
 
     <!-- strings for register activity -->
+	<string name="reg_name">Naam</string>
 	<string name="reg_username">User naam</string>
 	<string name="reg_phone">Telephone nummer</string>
 	<string name="reg_mail">E-mail</string>

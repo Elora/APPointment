@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -49,6 +50,11 @@ public class EditProfielActivity extends Activity {
 		password1.setText(user.getPwd(), TextView.BufferType.EDITABLE);
 		password2.setText(user.getPwd(), TextView.BufferType.EDITABLE);
 		
+		
+	}
+	
+	public void onClickaddImg(View v){
+		startActivity(new Intent(this, AddImageActivity.class));
 		
 	}
 
