@@ -49,7 +49,7 @@ public class NewAppointment extends FragmentActivity {
 
 	private List<EditText> fields;
 	private ArrayAdapter<String> adapter;
-	
+
 	/*
 	 * Number of times we will try to contact the google map server after
 	 * timeouts to resolve an address to longitude and latitude
@@ -135,23 +135,25 @@ public class NewAppointment extends FragmentActivity {
 			Appointment a = new Appointment();
 			a.setName(name.getText().toString());
 			a.setDescription(description.getText().toString());
-			a.setLocation(location.getText().toString());
+			a.setLocation(locationSpinner.getSelectedItem().toString());
 
 			a.setPriority(p);
 			a.setOwner(owner);
 
 			a.setDate(dateTime);
 
-			if(setAlarm(reminderDate, reminderTime) == true){
+			if (setAlarm(reminderDate, reminderTime) == true) {
 				new Controller().new Insert(a,
 						"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
 						.execute(new ApiConnector());
 
 				Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT)
 						.show();
+				// TODO: refresh list
+				AppointmentListFragment.refresh();
 
 				this.finish();
-			}else{
+			} else {
 				return;
 			}
 		} else {
@@ -317,9 +319,8 @@ public class NewAppointment extends FragmentActivity {
 					locationSpinner.setAdapter(adapter);
 					locationSpinner.performClick();
 				}
-
-				location.setText(locationSpinner.getSelectedItem().toString());
-
+				
+				location.setText("");
 			} else {
 				System.err
 						.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GEOCODER SERVICE IS NOT AVAILABLE");
