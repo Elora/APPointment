@@ -113,7 +113,7 @@ public class AddGuestFragment extends DialogFragment {
 			do {
 				String number = people.getString(indexNumber)
 						.replaceAll("-", "").replaceAll("\\(", "")
-						.replaceAll("\\)", "").replaceAll(" ", "");
+						.replaceAll("\\)", "").replaceAll(" ", "").replaceAll("+", "");
 
 				for (Object o : userObject) {
 					User u = (User) o;
