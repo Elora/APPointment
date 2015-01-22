@@ -23,7 +23,7 @@ public class RegisterActivity extends Activity {
 	private EditText password1;
 	private EditText password2;
 	private List<EditText> fields;
-	
+	private User u = new User();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,24 +56,28 @@ public class RegisterActivity extends Activity {
 			String pass1 = password1.getText().toString();
 			String pass2 = password2.getText().toString();
 
-			User u = new User();
-			u.setEmail(mail.getText().toString());
-			u.setName(name.getText().toString());
+		
+				
 			
-			try{
-				u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
-			}catch(NumberFormatException e){
-				phoneNum.setBackgroundColor(Color.RED);
-				Toast.makeText(this, "Enter only numbers please", Toast.LENGTH_SHORT).show();
-				return;
-			}
 			
-			u.setPwd(pass1);
-			u.setImageurl("http://image.com/test.jpg");
+		
 
-			if (emailAvailable(u.getEmail()) == true
+			if (emailAvailable(mail.getText().toString()) == true
 					&& matchingPassword(pass1, pass2) == true) {
 
+				
+				u.setEmail(mail.getText().toString());
+				u.setName(name.getText().toString());
+				u.setImageurl("http://image.com/test.jpg");
+				u.setPwd(pass1);
+				try{
+					u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
+				}catch(NumberFormatException e){
+					phoneNum.setBackgroundColor(Color.RED);
+					Toast.makeText(this, "Enter only numbers please", Toast.LENGTH_SHORT).show();
+					
+				}
+				
 				new Controller().new Insert(u,
 						"http://eduweb.hhs.nl/~13061798/CreateUser.php")
 						.execute(new ApiConnector());
@@ -89,7 +93,7 @@ public class RegisterActivity extends Activity {
 				password1.setText("");
 				password2.setText("");
 
-			} else if (emailAvailable(u.getEmail()) == false) {
+			} else if (emailAvailable(mail.getText().toString()) == false) {
 				Toast.makeText(this, "Email address already in use",
 						Toast.LENGTH_SHORT).show();
 

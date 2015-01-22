@@ -16,6 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
+/**
+ * 
+ * This class shows a dialog box containing users that are registered in the database and available in the contact list.
+ * 
+ */
+
+
 public class AddGuestFragment extends DialogFragment {
 	List<User> mSelectedItems = new ArrayList<User>();
 	String[] usernames;
@@ -46,14 +54,10 @@ public class AddGuestFragment extends DialogFragment {
 							public void onClick(DialogInterface dialog,
 									int which, boolean isChecked) {
 								if (isChecked) {
-									// If the user checked the item, add it to
-									// the selected items
-									//mSelectedItems.add(which);
-									
+								
 									mSelectedItems.add(users.get(which));
 								} else if (mSelectedItems.contains(which)) {
-									// Else, if the item is already in the
-									// array, remove it
+								
 									mSelectedItems.remove(Integer
 											.valueOf(which));
 								}

@@ -139,7 +139,7 @@ public class Controller {
 				insertParams.add(new BasicNameValuePair("email", u.getEmail()));
 				insertParams
 						.add(new BasicNameValuePair("password", u.getPwd()));
-				insertParams.add(new BasicNameValuePair("phone_number", u
+				insertParams.add(new BasicNameValuePair("phonenumber", u
 						.getPhone() + ""));
 				insertParams.add(new BasicNameValuePair("imageurl", u
 						.getImageurl()));
