@@ -80,8 +80,11 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
     }
     
     public void onClickNewApp(View v){
-		startActivity(new Intent(TabLayout.this, NewAppointment.class));
-	}
+		Intent i = new Intent(TabLayout.this, NewAppointment.class);
+		
+		startActivityForResult(i,2);
+	    
+    }
     
     public void onClickRefresh(View v){
     	// TODO: find way to refresh AppointmentListFragment (preferably with notifyDataSetChanged method)
@@ -105,6 +108,17 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
     			startActivity(new Intent(this, TabLayout.class));
     			//this.finish();
             	
+                // Do something with the contact here (bigger example below)
+            }
+        }
+        if (requestCode == 2) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+            	
+    			startActivity(new Intent(this, TabLayout.class));
+    			
                 // Do something with the contact here (bigger example below)
             }
         }

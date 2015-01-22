@@ -153,6 +153,8 @@ public class NewAppointment extends FragmentActivity {
 				// TODO: refresh list
 				// AppointmentListFragment.refresh();
 
+				setResult(RESULT_OK);
+				//finish();
 				this.finish();
 			} else {
 				return;
@@ -162,6 +164,8 @@ public class NewAppointment extends FragmentActivity {
 					Toast.LENGTH_SHORT).show();
 		}
 
+
+		
 	}
 
 	public void onClickDatePicker(View v) {
