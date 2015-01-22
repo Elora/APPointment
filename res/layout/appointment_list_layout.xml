@@ -1,40 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical" >
+    android:background="#FFFFFF" >
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        
+             <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
         <ImageButton
             android:id="@+id/button_refresh"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_gravity="left"
             android:background="@drawable/refresh"
             android:onClick="onClickRefresh" />
 
-        <ImageButton
-            android:id="@+id/button1new"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="right"
-            
-            android:background="@drawable/plus"
-            android:onClick="onClickNewApp" />
+
+            <ImageButton
+                android:id="@+id/button1new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/plus"
+                android:onClick="onClickNewApp" />
+        </RelativeLayout>
+
+        <fragment
+            android:id="@+id/Appointments"
+            android:name="kb50.appointment.AppointmentListFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/Appointments"
-        android:name="kb50.appointment.AppointmentListFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</RelativeLayout>

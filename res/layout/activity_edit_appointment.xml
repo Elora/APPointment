@@ -81,25 +81,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <EditText
                 android:id="@+id/location_field"
-                android:layout_width="0dp"
-                android:layout_weight="0.85"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="@string/appointment_location" />
 
             <Button
                 android:id="@+id/button_location"
-                android:layout_width="0dp"
-                android:layout_weight="0.15"
-                android:layout_height="match_parent"  
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_marginRight="2dp"
                 android:background="@drawable/button"
                 android:drawableLeft="@drawable/search"
-                android:gravity="center_horizontal"
                 android:onClick="onClickLocation" />
         </LinearLayout>
 

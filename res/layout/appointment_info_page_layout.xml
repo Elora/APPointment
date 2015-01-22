@@ -22,7 +22,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:orientation="horizontal" >
 
                 <LinearLayout
@@ -34,19 +34,23 @@
                         android:id="@+id/appointment_name"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_name" />
+                        android:text="@string/appointment_name"
+                        android:textColor="#48b047"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/appointment_desc"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_desc" />
+                        android:text="@string/appointment_desc"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/appointment_date"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_date" />
+                        android:text="@string/appointment_date"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -56,23 +60,29 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal" >
 
-                <LinearLayout
+               <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical" >
 
                     <Button
                         android:id="@+id/AddGuestBtn"
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:drawableLeft="@drawable/guests"
                         android:onClick="onClick"
-                        android:text="Add guest" />
+                        android:text="Add guest"
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/GuestNames"
+                        android:layout_marginTop="10dp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="No guests" />
+
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -83,7 +93,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.07"
         android:background="@drawable/appointment_bg"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
