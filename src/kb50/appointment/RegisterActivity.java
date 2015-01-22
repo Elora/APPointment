@@ -68,7 +68,8 @@ public class RegisterActivity extends Activity {
 				
 				u.setEmail(mail.getText().toString());
 				u.setName(name.getText().toString());
-				u.setImageurl("http://image.com/test.jpg");
+				u.setImageurl("http://eduweb.hhs.nl/~13061798/Profile/profilepic.jpg");
+				//http://image.com/test.jpg
 				u.setPwd(pass1);
 				try{
 					u.setPhone(Integer.parseInt(phoneNum.getText().toString()));

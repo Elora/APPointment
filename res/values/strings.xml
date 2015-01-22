@@ -12,9 +12,9 @@
     <string name="Profiel">Profiel</string>
     <string name="Appointment">Appointment</string>
     <string name="ProfielPic">Profiel picture</string>
-    <string name="userName">naam</string>
+    <string name="userName">Name</string>
     <string name="userEmail">Email</string>
-    <string name="userPhone">0192012</string>
+    <string name="userPhone">Tel.</string>
     <string name="alter">Edit</string>
     <string name="sendmessage">Send</string>
     <string name="viewmap">Route</string>
@@ -46,7 +46,6 @@
     <string-array name="Default_messages">
         <item>I am late.</item>
         <item>I cannot make it.</item>
-        <item>You are an ass.</item>
         <item>Stuck in traffic.</item>
         <item>I am sick.</item>
         <item>I am early.</item>

@@ -12,9 +12,9 @@
     <string name="Appointment">Afspraak</string>
     <string name="ProfielPic">Profiel plaatje</string>
     
-    <string name="userName">naam</string>
-    <string name="userEmail">email</string>
-    <string name="userPhone">0192012</string>
+    <string name="userName">Naam</string>
+    <string name="userEmail">Email</string>
+    <string name="userPhone">Tel.</string>
 
     <string name="alter">Edit</string>
     <string name="sendmessage">Bericht</string>
@@ -26,7 +26,7 @@
 
     <string name="pic">Logo</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hallo wereld!</string>
 	
 	<string name="btn_submit">Verstuur</string>
 	<string name="btn_cancel">Anuleren</string>
@@ -47,7 +47,6 @@
 	<string-array name="Default_messages">
         <item>Ik ben verlaat.</item>
         <item>Ik kan het niet halen.</item>
-        <item>You are an ass.</item>
         <item>Vast in het verkeer.</item>
         <item>Ik ben ziek.</item>
         <item>Ik ben er vroeger.</item>
@@ -58,6 +57,37 @@
 	
 	<string name="Deletemessage">Weet je zeker dat je deze afspraak wilt verwijderen?</string>
 	<string name="EditProfile">EditProfiel</string>
+	
+	
+	<string name="name">Naam</string>
+    <string name="location">Locatie</string>
+	<string name="date">Kies datum</string>
+    <string name="time">Kies tijd</string>
+	
+	<!-- strings for new appointment (may be re-used for altering an appointment -->
+    <string name="appointment_name">Naam</string>
+    <string name="appointment_desc">Beschrijving</string>
+    <string name="appointment_date">Datum</string>
+    <string name="appointment_location">Locatie</string>
+    <string name="searchLocation">Zoek Locatie</string>
+    <string name="appointment_priority">Prioriteid</string>
+    <string name="appointment_reminder">Herinering</string>
+
+    <string name="title_activity_edit_appointment">EditAppointment</string>
+	
+	
+	
+    <!-- Priority spinner in when creating new appointment -->
+    <string-array name="priority_array">
+        <item>Hoog</item>
+        <item>Middel</item>
+        <item>Laag</item>
+    </string-array>
 		
 	
 </resources>
+
+
+
+
+
