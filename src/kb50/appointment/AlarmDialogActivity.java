@@ -30,6 +30,7 @@ public class AlarmDialogActivity extends Activity {
 		final AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
 	    alert.setTitle("Appointment!");
 	    alert.setMessage(name + "\n" + date + "\n" + time);
+	    alert.setCancelable(false);
 	    alert.setPositiveButton("Accept",new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog,int whichButton)
 			{
