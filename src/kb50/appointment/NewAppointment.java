@@ -36,6 +36,7 @@ public class NewAppointment extends FragmentActivity {
 	private static Button reminderDatePicker;
 	private static Button reminderTimePicker;
 	private static Button searchLocation;
+
 	private EditText name;
 	private EditText description;
 
@@ -150,7 +151,7 @@ public class NewAppointment extends FragmentActivity {
 				Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT)
 						.show();
 				// TODO: refresh list
-				AppointmentListFragment.refresh();
+				// AppointmentListFragment.refresh();
 
 				this.finish();
 			} else {
@@ -319,8 +320,9 @@ public class NewAppointment extends FragmentActivity {
 					locationSpinner.setAdapter(adapter);
 					locationSpinner.performClick();
 				}
-				
-				location.setText("");
+
+				// does not work
+				// location.setText(locationSpinner.getSelectedItem().toString());
 			} else {
 				System.err
 						.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GEOCODER SERVICE IS NOT AVAILABLE");

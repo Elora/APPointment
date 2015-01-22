@@ -52,6 +52,12 @@
                         android:layout_height="wrap_content"
                         android:text="@string/appointment_date" 
                         android:textSize="15sp"/>
+                    
+                    <TextView
+                        android:id="@+id/appointment_location"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_location" />
                 </LinearLayout>
             </LinearLayout>
 

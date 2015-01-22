@@ -1,4 +1,3 @@
-
 package kb50.appointment;
 
 import java.io.IOException;
@@ -6,20 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import javax.xml.datatype.Duration;
+import kb50.appointment.Controller.Select;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
-import android.text.InputFilter.LengthFilter;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,9 +45,10 @@ public class AppointmentInfoPage extends Activity {
 	private String name;
 	private String id;
 	private String description;
+	private String location;
 
 	private List<User> ownerAndGuests;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,32 +58,62 @@ public class AppointmentInfoPage extends Activity {
 		name = intent.getStringExtra("appointment_name");
 		description = intent.getStringExtra("appointment_description");
 		date = intent.getStringExtra("appointment_date");
+
 		ownerAndGuests = getUsersSelectedAppointment(id);
+
+		location = intent.getStringExtra("appointment_location");
+
 		setContentView(R.layout.appointment_info_page_layout);
 
 		TextView appointmentName = (TextView) findViewById(R.id.appointment_name);
 		TextView appointmentDescr = (TextView) findViewById(R.id.appointment_desc);
 		TextView appointmentDate = (TextView) findViewById(R.id.appointment_date);
+		TextView appointmentLocation = (TextView) findViewById(R.id.appointment_location);
 
-		
 		appointmentName.setText(name);
 		appointmentDescr.setText(description);
 		appointmentDate.setText(date);
-	
 
-		if(!ownerAndGuests.isEmpty()){
-			String guestString = "Guests:"+"\n";
-			TextView guests = (TextView)findViewById(R.id.GuestNames);
-			for(User u : ownerAndGuests){
-				
-				guestString =  guestString +"\n"+ u.getName();
-				
-				
+		appointmentLocation.setText(location);
+
+		try {
+			final SharedPreferences mSharedPreference = PreferenceManager
+					.getDefaultSharedPreferences(getBaseContext());
+			int id = mSharedPreference.getInt("id", 0);
+
+			List<Object> appointments = new Controller().new Select(
+					"http://eduweb.hhs.nl/~13061798/GetAppointments.php?id="
+							+ id).execute(new ApiConnector()).get();
+
+			for (Object o : appointments) {
+				Appointment a = (Appointment) o;
+				int appID = Integer.parseInt(this.id);
+
+				if (a.getId() == appID) {
+					this.location = a.getLocation();
+					break;
+				}
+			}
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ExecutionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if (!ownerAndGuests.isEmpty()) {
+			String guestString = "Guests:" + "\n";
+			TextView guests = (TextView) findViewById(R.id.GuestNames);
+			for (User u : ownerAndGuests) {
+
+				guestString = guestString + "\n" + u.getName();
+
 			}
 			guests.setText(guestString);
-			
+
 		}
-		
+
 		try {
 			map = ((MapFragment) getFragmentManager()
 					.findFragmentById(R.id.map)).getMap();
@@ -121,8 +151,7 @@ public class AppointmentInfoPage extends Activity {
 				int count = 0, maxretry = 5;
 				while (!worked && count < maxretry) {
 					try {
-						list = gc.getFromLocationName(
-								"Stromenlaan 35 Woerden NL", 1);
+						list = gc.getFromLocationName(location, 1);
 						worked = true;
 					} catch (Exception te) {
 						System.err.println(te
@@ -171,7 +200,7 @@ public class AppointmentInfoPage extends Activity {
 			// startActivity(new Intent(AppointmentInfoPage.this,
 			// EditAppointment.class));
 			break;
-		
+
 		case R.id.button_delete:
 			deleteAppoinment();
 			break;
@@ -190,16 +219,16 @@ public class AppointmentInfoPage extends Activity {
 			startActivity(route);
 
 			break;
-			
+
 		case R.id.button_location:
 			sendLocation();
 			break;
 		}
 
 	}
-	
-	public void sendLocation(){
-		
+
+	public void sendLocation() {
+
 		String phoneNumber = "";
 		String message = "http://maps.google.com/maps?q=" + lat + "," + lng;
 		try {
@@ -224,8 +253,11 @@ public class AppointmentInfoPage extends Activity {
 	}
 
 	public void doPositiveClick() {
-		new Controller().new Select("http://eduweb.hhs.nl/~13061798/DeleteAppointment.php?id="+id).execute(new ApiConnector());
-		Toast toast = Toast.makeText(this, "Appointment deleted!", Toast.LENGTH_SHORT);
+		new Controller().new Select(
+				"http://eduweb.hhs.nl/~13061798/DeleteAppointment.php?id=" + id)
+				.execute(new ApiConnector());
+		Toast toast = Toast.makeText(this, "Appointment deleted!",
+				Toast.LENGTH_SHORT);
 		toast.show();
 		startActivity(new Intent(this, TabLayout.class));
 		this.finish();
@@ -272,7 +304,6 @@ public class AppointmentInfoPage extends Activity {
 
 		SmsManager sm = SmsManager.getDefault();
 
-		
 		for (int i = 0; i < ownerAndGuests.size(); i++) {
 			String temp = Integer.toString(ownerAndGuests.get(i).getPhone());
 			sm.sendTextMessage(temp, null, item, null, null);
@@ -283,18 +314,14 @@ public class AppointmentInfoPage extends Activity {
 	public void doNegativeClickSendMessage() {
 	}
 
-	public void doNegativeClickAddGuestsMessage(){
+	public void doNegativeClickAddGuestsMessage() {
 	}
-	
+
 	public void doPositiveClickAddGuestsMessage(List<User> selecteditems) {
-		
 	}
-	
-	public void AddGuest(){
+
+	public void AddGuest() {
 		AddGuestFragment dialogFragment3 = AddGuestFragment.newInstance();
 		dialogFragment3.show(getFragmentManager(), id);
-		
-		
-		
 	}
 }

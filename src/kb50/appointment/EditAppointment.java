@@ -38,9 +38,6 @@ public class EditAppointment extends FragmentActivity {
 
 	private static Button searchLocation;
 
-	private ArrayAdapter<String> adapter;
-	private Drawable originalBackground;
-	
 	/*
 	 * Number of times we will try to contact the google map server after
 	 * timeouts to resolve an address to longitude and latitude
@@ -60,13 +57,14 @@ public class EditAppointment extends FragmentActivity {
 	private double lng;
 
 	private int appointment_id;
-	
+
 	private List<EditText> fields;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_appointment);
+		locationSpinner = (Spinner) findViewById(R.id.location_spinner);
 		fillFields();
 		fields = new ArrayList<EditText>();
 		fields.add(name);
@@ -74,10 +72,10 @@ public class EditAppointment extends FragmentActivity {
 		fields.add(location);
 	}
 
-	private void fillFields(){
+	private void fillFields() {
 		Intent i = getIntent();
-		appointment_id = Integer.parseInt(i.getStringExtra("id"));		
-		
+		appointment_id = Integer.parseInt(i.getStringExtra("id"));
+
 		// TODO: Fill ALL fields
 		try {
 			final SharedPreferences mSharedPreference = PreferenceManager
@@ -91,21 +89,24 @@ public class EditAppointment extends FragmentActivity {
 			if (!appointments.isEmpty()) {
 				for (Object o : appointments) {
 					Appointment a = (Appointment) o;
-					
+
 					if (a.getId() == appointment_id) {
 						prioritySpinner = (Spinner) findViewById(R.id.priority_spinner);
-						
-						// Create an ArrayAdapter using the String array and a default spinner
+
+						// Create an ArrayAdapter using the String array and a
+						// default spinner
 						// layout
-						ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-								this, R.array.priority_array,
-								android.R.layout.simple_spinner_item);
-						// Specify the layout to use when the list of choices appears
+						ArrayAdapter<CharSequence> adapter = ArrayAdapter
+								.createFromResource(this,
+										R.array.priority_array,
+										android.R.layout.simple_spinner_item);
+						// Specify the layout to use when the list of choices
+						// appears
 						adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 						// Apply adapter to the spinner
 						prioritySpinner.setAdapter(adapter);
-						
-						switch(a.getPriority()){
+
+						switch (a.getPriority()) {
 						case 1:
 							prioritySpinner.setSelection(2);
 							break;
@@ -115,7 +116,6 @@ public class EditAppointment extends FragmentActivity {
 						case 3:
 							prioritySpinner.setSelection(0);
 						}
-						
 
 						datePicker = (Button) findViewById(R.id.date_picker);
 						String dateTime = a.getDate();
@@ -147,12 +147,10 @@ public class EditAppointment extends FragmentActivity {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
-	
+
 	public void onClickCancel(View v) {
-		startActivity(new Intent(EditAppointment.this,
-				AppointmentInfoPage.class));
 		this.finish();
 	}
 
@@ -160,11 +158,11 @@ public class EditAppointment extends FragmentActivity {
 		String dateTime;
 		String[] reminderDate;
 		String[] reminderTime;
-		
+
 		for (EditText t : fields) {
 			t.setBackgroundResource(android.R.drawable.editbox_background);
 		}
-		if(emptyFields() == false){
+		if (emptyFields() == false) {
 			try {
 				String[] date = datePicker.getText().toString().split("-");
 				int day = Integer.parseInt(date[0]);
@@ -173,7 +171,7 @@ public class EditAppointment extends FragmentActivity {
 
 				dateTime = year + "-" + month + "-" + day + " "
 						+ timePicker.getText().toString();
-				
+
 				reminderDate = reminderDatePicker.getText().toString()
 						.split("-");
 				reminderTime = reminderTimePicker.getText().toString()
@@ -192,25 +190,25 @@ public class EditAppointment extends FragmentActivity {
 			a.setDescription(description.getText().toString());
 			a.setDate(dateTime);
 
-			a.setLocation(location.getText().toString()); 
+			a.setLocation(location.getText().toString());
 
 			a.setPriority(p);
-			if(setAlarm(reminderDate, reminderTime) == true){
+			if (setAlarm(reminderDate, reminderTime) == true) {
 				new Controller().new Insert(a,
 						"http://eduweb.hhs.nl/~13061798/EditAppointment.php?id="
 								+ appointment_id).execute(new ApiConnector());
 				this.finish();
-			}else{
+			} else {
 				return;
 			}
-		}else {
+		} else {
 			Toast.makeText(this, "Please fill in every field!",
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 
-	private boolean setAlarm(String[] date, String[] time){
-		try{
+	private boolean setAlarm(String[] date, String[] time) {
+		try {
 			int day = Integer.parseInt(date[0]);
 			int month = Integer.parseInt(date[1]);
 			int year = Integer.parseInt(date[2]);
@@ -234,20 +232,23 @@ public class EditAppointment extends FragmentActivity {
 			intentAlarm.putExtra("appointment name", name.getText().toString());
 			intentAlarm.putExtra("date", datePicker.getText().toString());
 			intentAlarm.putExtra("time", timePicker.getText().toString());
-			
+
 			AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
 			alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
 					PendingIntent.getBroadcast(this, 1, intentAlarm,
-							PendingIntent.FLAG_UPDATE_CURRENT));	
-			
+							PendingIntent.FLAG_UPDATE_CURRENT));
+
 			return true;
-		}catch(NumberFormatException e){
-			Toast.makeText(this, "Pick a date and time for the reminder please", Toast.LENGTH_SHORT).show();
+		} catch (NumberFormatException e) {
+			Toast.makeText(this,
+					"Pick a date and time for the reminder please",
+					Toast.LENGTH_SHORT).show();
 			return false;
 		}
+
 	}
-	
+
 	public void onClickDatePicker(View v) {
 		switch (v.getId()) {
 		case R.id.date_picker:
@@ -406,7 +407,8 @@ public class EditAppointment extends FragmentActivity {
 					locationSpinner.performClick();
 				}
 
-				location.setText(locationSpinner.getSelectedItem().toString());
+				// does not work
+				// location.setText(locationSpinner.getSelectedItem().toString());
 
 			} else {
 				System.err
@@ -418,7 +420,7 @@ public class EditAppointment extends FragmentActivity {
 		}
 
 	}
-	
+
 	private boolean emptyFields() {
 		String aName = name.getText().toString();
 		String desc = description.getText().toString();
