@@ -50,7 +50,7 @@ public class RegisterActivity extends Activity {
 
 	public void onClickBtnSubmit(View v) {
 		for(EditText t : fields){
-			t.setBackgroundColor(Color.WHITE);
+			t.setBackgroundResource(android.R.drawable.editbox_background);
 		}
 		if (fieldsEmpty() == false) {
 			String pass1 = password1.getText().toString();
@@ -146,7 +146,7 @@ public class RegisterActivity extends Activity {
 		if (uName.isEmpty() || pNum.isEmpty() || mAddress.isEmpty() || p1.isEmpty() || p2.isEmpty()) {
 			for(EditText t : fields){
 				if(t.getText().toString().isEmpty()){
-					t.setBackgroundColor(Color.RED);
+					t.setBackgroundResource(R.drawable.empty_field);
 				}
 			}
 			return true;

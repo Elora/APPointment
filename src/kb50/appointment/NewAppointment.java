@@ -1,6 +1,6 @@
-
 package kb50.appointment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -34,16 +36,6 @@ public class NewAppointment extends FragmentActivity {
 	private static Button reminderDatePicker;
 	private static Button reminderTimePicker;
 	private static Button searchLocation;
-
-	private ArrayAdapter<String> adapter;
-	/*
-	 * Number of times we will try to contact the google map server after
-	 * timeouts to resolve an address to longitude and latitude
-	 */
-	private static final int maxretry = 5;
-	/* Max Number of addresses that we get from resolving the address by name */
-	private static final int maxaddresses = 5;
-
 	private EditText name;
 	private EditText description;
 
@@ -54,6 +46,17 @@ public class NewAppointment extends FragmentActivity {
 
 	private double lat;
 	private double lng;
+
+	private List<EditText> fields;
+	private ArrayAdapter<String> adapter;
+	
+	/*
+	 * Number of times we will try to contact the google map server after
+	 * timeouts to resolve an address to longitude and latitude
+	 */
+	private static final int maxretry = 5;
+	/* Max Number of addresses that we get from resolving the address by name */
+	private static final int maxaddresses = 5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,11 @@ public class NewAppointment extends FragmentActivity {
 		name = (EditText) findViewById(R.id.appointment_name_field);
 		description = (EditText) findViewById(R.id.appointment_desc_field);
 		location = (EditText) findViewById(R.id.location_field);
+
+		fields = new ArrayList<EditText>();
+		fields.add(name);
+		fields.add(description);
+		fields.add(location);
 
 		// Create an ArrayAdapter using the String array and a default spinner
 		// layout
@@ -90,39 +98,67 @@ public class NewAppointment extends FragmentActivity {
 	}
 
 	public void onClickSubmit(View v) {
-		String[] date = reminderDatePicker.getText().toString().split("-");
-		int day = Integer.parseInt(date[0]);
-		int month = Integer.parseInt(date[1]);
-		int year = Integer.parseInt(date[2]);
+		String dateTime;
+		String[] reminderDate;
+		String[] reminderTime;
+		for (EditText t : fields) {
+			t.setBackgroundResource(android.R.drawable.editbox_background);
+		}
 
-		String[] time = reminderTimePicker.getText().toString().split(":");
-		
-		final SharedPreferences mSharedPreference = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
-		int owner = mSharedPreference.getInt("id", 0);
+		if (emptyFields() == false) {
+			try {
+				String[] date = datePicker.getText().toString().split("-");
+				int day = Integer.parseInt(date[0]);
+				int month = Integer.parseInt(date[1]);
+				int year = Integer.parseInt(date[2]);
 
-		String priority = prioritySpinner.getSelectedItem().toString();
-		int p = setPriority(priority);
-		
-		Appointment a = new Appointment();
-		a.setName(name.getText().toString());
-		a.setDescription(description.getText().toString());		
-		a.setLocation(location.getText().toString()); 
+				reminderDate = reminderDatePicker.getText().toString()
+						.split("-");
+				reminderTime = reminderTimePicker.getText().toString()
+						.split(":");
 
-		a.setPriority(p);
-		a.setOwner(owner);
-		
-		String dateTime = year + "-" + month + "-" + day + " " + timePicker.getText().toString();
-		a.setDate(dateTime);
-		new Controller().new Insert(a,
-				"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
-				.execute(new ApiConnector());
+				dateTime = year + "-" + month + "-" + day + " "
+						+ timePicker.getText().toString();
+			} catch (NumberFormatException e) {
+				Toast.makeText(this, "Pick a date and time please!",
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
 
-		Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT).show();	
-		
-		setAlarm(date, time);
-		
-		this.finish();
+			final SharedPreferences mSharedPreference = PreferenceManager
+					.getDefaultSharedPreferences(getBaseContext());
+			int owner = mSharedPreference.getInt("id", 0);
+
+			String priority = prioritySpinner.getSelectedItem().toString();
+			int p = setPriority(priority);
+
+			Appointment a = new Appointment();
+			a.setName(name.getText().toString());
+			a.setDescription(description.getText().toString());
+			a.setLocation(location.getText().toString());
+
+			a.setPriority(p);
+			a.setOwner(owner);
+
+			a.setDate(dateTime);
+
+			if(setAlarm(reminderDate, reminderTime) == true){
+				new Controller().new Insert(a,
+						"http://eduweb.hhs.nl/~13061798/CreateAppointment.php")
+						.execute(new ApiConnector());
+
+				Toast.makeText(this, "Appointment added!", Toast.LENGTH_SHORT)
+						.show();
+
+				this.finish();
+			}else{
+				return;
+			}
+		} else {
+			Toast.makeText(this, "Please fill in every field!",
+					Toast.LENGTH_SHORT).show();
+		}
+
 	}
 
 	public void onClickDatePicker(View v) {
@@ -294,36 +330,61 @@ public class NewAppointment extends FragmentActivity {
 		}
 
 	}
-	
-	private void setAlarm(String[] date, String[] time){
-		int day = Integer.parseInt(date[0]);
-		int month = Integer.parseInt(date[1]);
-		int year = Integer.parseInt(date[2]);
-		
-		int hour = Integer.parseInt(time[0]);
-		int minute = Integer.parseInt(time[1]);
-		
-		Calendar cal = new GregorianCalendar();
 
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.set(Calendar.MONTH, month - 1);
-		cal.set(Calendar.YEAR, year);
+	private boolean setAlarm(String[] date, String[] time) {
+		try {
+			int day = Integer.parseInt(date[0]);
+			int month = Integer.parseInt(date[1]);
+			int year = Integer.parseInt(date[2]);
 
-		cal.set(Calendar.HOUR_OF_DAY, hour);
-		cal.set(Calendar.MINUTE, minute);
-		cal.set(Calendar.SECOND, 00);
-		
-		Intent intentAlarm = new Intent(NewAppointment.this,
-				AlarmReceiver.class);
+			int hour = Integer.parseInt(time[0]);
+			int minute = Integer.parseInt(time[1]);
 
-		intentAlarm.putExtra("appointment name", name.getText().toString());
-		intentAlarm.putExtra("date", datePicker.getText().toString());
-		intentAlarm.putExtra("time", timePicker.getText().toString());
-		
-		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+			Calendar cal = new GregorianCalendar();
 
-		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-				PendingIntent.getBroadcast(this, 1, intentAlarm,
-						PendingIntent.FLAG_UPDATE_CURRENT));		
+			cal.set(Calendar.DAY_OF_MONTH, day);
+			cal.set(Calendar.MONTH, month - 1);
+			cal.set(Calendar.YEAR, year);
+
+			cal.set(Calendar.HOUR_OF_DAY, hour);
+			cal.set(Calendar.MINUTE, minute);
+			cal.set(Calendar.SECOND, 00);
+
+			Intent intentAlarm = new Intent(NewAppointment.this,
+					AlarmReceiver.class);
+
+			intentAlarm.putExtra("appointment name", name.getText().toString());
+			intentAlarm.putExtra("date", datePicker.getText().toString());
+			intentAlarm.putExtra("time", timePicker.getText().toString());
+
+			AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+			alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+					PendingIntent.getBroadcast(this, 1, intentAlarm,
+							PendingIntent.FLAG_UPDATE_CURRENT));
+			return true;
+		} catch (NumberFormatException e) {
+			Toast.makeText(this,
+					"Pick a date and time for the reminder please",
+					Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	}
+
+	private boolean emptyFields() {
+		String aName = name.getText().toString();
+		String desc = description.getText().toString();
+		String loc = location.getText().toString();
+
+		if (aName.isEmpty() || desc.isEmpty() || loc.isEmpty()) {
+			for (EditText t : fields) {
+				if (t.getText().toString().isEmpty()) {
+					t.setBackgroundResource(R.drawable.empty_field);
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

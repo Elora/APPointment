@@ -1,5 +1,6 @@
 package kb50.appointment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -11,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -37,6 +39,8 @@ public class EditAppointment extends FragmentActivity {
 	private static Button searchLocation;
 
 	private ArrayAdapter<String> adapter;
+	private Drawable originalBackground;
+	
 	/*
 	 * Number of times we will try to contact the google map server after
 	 * timeouts to resolve an address to longitude and latitude
@@ -56,12 +60,18 @@ public class EditAppointment extends FragmentActivity {
 	private double lng;
 
 	private int appointment_id;
+	
+	private List<EditText> fields;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_appointment);
 		fillFields();
+		fields = new ArrayList<EditText>();
+		fields.add(name);
+		fields.add(description);
+		fields.add(location);
 	}
 
 	private void fillFields(){
@@ -147,59 +157,95 @@ public class EditAppointment extends FragmentActivity {
 	}
 
 	public void onClickSubmit(View v) {
+		String dateTime;
+		String[] reminderDate;
+		String[] reminderTime;
+		
+		for (EditText t : fields) {
+			t.setBackgroundResource(android.R.drawable.editbox_background);
+		}
+		if(emptyFields() == false){
+			try {
+				String[] date = datePicker.getText().toString().split("-");
+				int day = Integer.parseInt(date[0]);
+				int month = Integer.parseInt(date[1]);
+				int year = Integer.parseInt(date[2]);
 
-		String priority = prioritySpinner.getSelectedItem().toString();
-		int p = setPriority(priority);
+				dateTime = year + "-" + month + "-" + day + " "
+						+ timePicker.getText().toString();
+				
+				reminderDate = reminderDatePicker.getText().toString()
+						.split("-");
+				reminderTime = reminderTimePicker.getText().toString()
+						.split(":");
 
-		Appointment a = new Appointment();
-		a.setName(name.getText().toString());
-		a.setDescription(description.getText().toString());
-		a.setDate(datePicker.getText().toString() + " "
-				+ timePicker.getText().toString());
+			} catch (NumberFormatException e) {
+				Toast.makeText(this, "Pick a date and time please!",
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			String priority = prioritySpinner.getSelectedItem().toString();
+			int p = setPriority(priority);
 
-		a.setLocation(location.getText().toString()); 
+			Appointment a = new Appointment();
+			a.setName(name.getText().toString());
+			a.setDescription(description.getText().toString());
+			a.setDate(dateTime);
 
-		a.setPriority(p);
+			a.setLocation(location.getText().toString()); 
 
-		new Controller().new Insert(a,
-				"http://eduweb.hhs.nl/~13061798/EditAppointment.php?id="
-						+ appointment_id).execute(new ApiConnector());
-		setAlarm();
-		this.finish();
+			a.setPriority(p);
+			if(setAlarm(reminderDate, reminderTime) == true){
+				new Controller().new Insert(a,
+						"http://eduweb.hhs.nl/~13061798/EditAppointment.php?id="
+								+ appointment_id).execute(new ApiConnector());
+				this.finish();
+			}else{
+				return;
+			}
+		}else {
+			Toast.makeText(this, "Please fill in every field!",
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
-	private void setAlarm(){
-		String[] date = reminderDatePicker.getText().toString().split("-");
-		int day = Integer.parseInt(date[0]);
-		int month = Integer.parseInt(date[1]);
-		int year = Integer.parseInt(date[2]);
+	private boolean setAlarm(String[] date, String[] time){
+		try{
+			int day = Integer.parseInt(date[0]);
+			int month = Integer.parseInt(date[1]);
+			int year = Integer.parseInt(date[2]);
 
-		String[] time = reminderTimePicker.getText().toString().split(":");
-		int hour = Integer.parseInt(time[0]);
-		int minute = Integer.parseInt(time[1]);
+			int hour = Integer.parseInt(time[0]);
+			int minute = Integer.parseInt(time[1]);
 
-		Calendar cal = new GregorianCalendar();
+			Calendar cal = new GregorianCalendar();
 
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.set(Calendar.MONTH, month - 1);
-		cal.set(Calendar.YEAR, year);
+			cal.set(Calendar.DAY_OF_MONTH, day);
+			cal.set(Calendar.MONTH, month - 1);
+			cal.set(Calendar.YEAR, year);
 
-		cal.set(Calendar.HOUR_OF_DAY, hour);
-		cal.set(Calendar.MINUTE, minute);
-		cal.set(Calendar.SECOND, 00);
+			cal.set(Calendar.HOUR_OF_DAY, hour);
+			cal.set(Calendar.MINUTE, minute);
+			cal.set(Calendar.SECOND, 00);
 
-		Intent intentAlarm = new Intent(EditAppointment.this,
-				AlarmReceiver.class);
+			Intent intentAlarm = new Intent(EditAppointment.this,
+					AlarmReceiver.class);
 
-		intentAlarm.putExtra("appointment name", name.getText().toString());
-		intentAlarm.putExtra("date", datePicker.getText().toString());
-		intentAlarm.putExtra("time", timePicker.getText().toString());
-		
-		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+			intentAlarm.putExtra("appointment name", name.getText().toString());
+			intentAlarm.putExtra("date", datePicker.getText().toString());
+			intentAlarm.putExtra("time", timePicker.getText().toString());
+			
+			AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-		alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-				PendingIntent.getBroadcast(this, 1, intentAlarm,
-						PendingIntent.FLAG_UPDATE_CURRENT));	
+			alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+					PendingIntent.getBroadcast(this, 1, intentAlarm,
+							PendingIntent.FLAG_UPDATE_CURRENT));	
+			
+			return true;
+		}catch(NumberFormatException e){
+			Toast.makeText(this, "Pick a date and time for the reminder please", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 	}
 	
 	public void onClickDatePicker(View v) {
@@ -371,5 +417,22 @@ public class EditAppointment extends FragmentActivity {
 			ex.printStackTrace();
 		}
 
+	}
+	
+	private boolean emptyFields() {
+		String aName = name.getText().toString();
+		String desc = description.getText().toString();
+		String loc = location.getText().toString();
+
+		if (aName.isEmpty() || desc.isEmpty() || loc.isEmpty()) {
+			for (EditText t : fields) {
+				if (t.getText().toString().isEmpty()) {
+					t.setBackgroundResource(R.drawable.empty_field);
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
