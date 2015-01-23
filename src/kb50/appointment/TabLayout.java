@@ -118,6 +118,7 @@ public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeLi
                 // Do something with the contact here (bigger example below)
             }
         }
+        
     }
     
     protected void onSaveInstanceState(Bundle outState){

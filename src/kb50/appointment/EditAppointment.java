@@ -191,6 +191,7 @@ public class EditAppointment extends FragmentActivity {
 				new Controller().new Insert(a,
 						"http://eduweb.hhs.nl/~13061798/EditAppointment.php?id="
 								+ appointment_id).execute(new ApiConnector());
+				setResult(RESULT_OK);
 				this.finish();
 			} else {
 				return;

@@ -202,7 +202,7 @@ public class AppointmentInfoPage extends Activity {
 		case R.id.button_alter:
 			Intent i = new Intent(this, EditAppointment.class);
 			i.putExtra("id", this.id);
-			startActivity(i);
+			startActivityForResult(i, 2015);
 
 			// startActivity(new Intent(AppointmentInfoPage.this,
 			// EditAppointment.class));
@@ -337,4 +337,117 @@ public class AppointmentInfoPage extends Activity {
 		AddGuestFragment dialogFragment3 = AddGuestFragment.newInstance();
 		dialogFragment3.show(getFragmentManager(), id);
 	}
+	
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 2015) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+            	
+    			//startActivity(new Intent(this, AppointmentInfoPage.class));
+    			//this.finish();
+            	refreshFields();
+            	
+                // Do something with the contact here (bigger example below)
+            }
+        }
+        
+    }
+	
+	
+	private void refreshFields(){
+    	String appid = id;
+    	
+		final SharedPreferences mSharedPreference = PreferenceManager
+				.getDefaultSharedPreferences(getBaseContext());
+		int idpref = mSharedPreference.getInt("id", 0);
+
+    	
+    	List<Appointment> appointments = new ArrayList<Appointment>();
+		try {
+			for (Object o : new Controller().new Select(
+					"http://eduweb.hhs.nl/~13061798/GetAppointments.php?id="
+							+ idpref).execute(new ApiConnector()).get()) {
+
+				appointments.add((Appointment) o);
+
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Boolean found = false;
+		for (int j=0; j<appointments.size(); j++){
+			if (appointments.get(j).getId() == Integer.parseInt(appid)){
+				found = true;
+				
+				
+				
+				name = appointments.get(j).getName();
+				description = appointments.get(j).getDescription();
+				date = appointments.get(j).getDate();
+
+				ownerAndGuests = getUsersSelectedAppointment(id);
+
+				location = appointments.get(j).getLocation();
+
+
+				TextView appointmentName = (TextView) findViewById(R.id.appointment_name);
+				TextView appointmentDescr = (TextView) findViewById(R.id.appointment_desc);
+				TextView appointmentDate = (TextView) findViewById(R.id.appointment_date);
+				TextView appointmentLocation = (TextView) findViewById(R.id.appointment_location);
+
+				
+				appointmentName.setText(name);
+				appointmentDescr.setText(description);
+				appointmentDate.setText(date);
+				appointmentLocation.setText(location);
+				
+			}
+		}
+        
+		if (found == false){
+			this.finish();
+		}
+	}
+	
+	 public void onSaveInstanceState(Bundle outState) {
+		    outState.putString("name", name);
+	        outState.putString("description", description);
+	        outState.putString("date", date);
+	        outState.putString("location", location);
+	        outState.putString("id", id);
+	}
+	 
+	 
+	 protected void onRestoreInstanceState(Bundle savedInstanceState) {
+	        if (savedInstanceState != null) {
+	            name = savedInstanceState.getString("name");
+	            description = savedInstanceState.getString("description");
+	            date = savedInstanceState.getString("date");
+	            location = savedInstanceState.getString("location");
+	            id = savedInstanceState.getString("id");
+	            
+	            TextView appointmentName = (TextView) findViewById(R.id.appointment_name);
+				TextView appointmentDescr = (TextView) findViewById(R.id.appointment_desc);
+				TextView appointmentDate = (TextView) findViewById(R.id.appointment_date);
+				TextView appointmentLocation = (TextView) findViewById(R.id.appointment_location);
+
+				
+				appointmentName.setText(name);
+				appointmentDescr.setText(description);
+				appointmentDate.setText(date);
+				appointmentLocation.setText(location);
+
+	            
+	        }
+	        super.onRestoreInstanceState(savedInstanceState);
+	    }
+	
 }
