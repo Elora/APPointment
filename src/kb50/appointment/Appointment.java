@@ -1,6 +1,5 @@
 package kb50.appointment;
 
-
 import java.sql.Date;
 import java.util.List;
 
@@ -14,6 +13,25 @@ public class Appointment {
 	private List<User> users;
 	private String location;
 	private int owner;
+	private boolean received;
+
+	public boolean getReceived() {
+
+		return received;
+
+	}
+
+	public void setReceived(int r) {
+
+		if (r == 1) {
+
+			received = true;
+		} else {
+
+			received = false;
+		}
+
+	}
 
 	public int getOwner() {
 		return owner;
@@ -22,7 +40,7 @@ public class Appointment {
 	public void setOwner(int owner) {
 		this.owner = owner;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

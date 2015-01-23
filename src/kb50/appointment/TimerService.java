@@ -83,7 +83,7 @@ public class TimerService extends Service {
 						.getDefaultSharedPreferences(getBaseContext());
 
 				final int id = mSharedPreference.getInt("id", 0);
-				boolean sended = false;
+
 				@Override
 				public void run() {
 					// display toast
@@ -92,18 +92,46 @@ public class TimerService extends Service {
 								"http://eduweb.hhs.nl/~13061798/IncomingAppointment.php?id="
 										+ id).execute(new ApiConnector()).get();
 
-						
-						if (!incomingAppointments.isEmpty()&& !sended) {
+						if (!incomingAppointments.isEmpty()) {
 
-						Intent i = new Intent();
-						i.putExtra("notifcationdId", 1);
-						
-						PendingIntent pi = PendingIntent.getActivity(getBaseContext(),0, i, 0);
-						NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-						Notification notify = new Notification(R.drawable.ic_launcher, "New appointment invitation!", System.currentTimeMillis());
-						notify.setLatestEventInfo(getBaseContext(), "School meeting", "Date: 25-01-2015 10:30", pi);
-						nm.notify(1, notify);
-						sended = true;
+							for (Object o : incomingAppointments) {
+								Appointment a = (Appointment) o;
+								if(!a.getReceived()){
+									
+									Intent i = new Intent(TimerService.this,
+											AcceptAppDialog.class);
+
+									i.putExtra("appName", a.getName());
+									i.putExtra("appDate", a.getDate());
+									i.putExtra("appDescription", a.getDescription());
+									i.putExtra("userId", id+"");
+									i.putExtra("appId", a.getId()+"");
+									
+									PendingIntent pi = PendingIntent.getActivity(
+										getBaseContext(), 1, i,
+											PendingIntent.FLAG_UPDATE_CURRENT);
+									
+									NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+									Notification notify = new Notification(
+											R.drawable.ic_launcher,
+											"New appointment invitation!", System
+													.currentTimeMillis());
+
+								    
+								
+									notify.setLatestEventInfo(getBaseContext(),
+											a.getName(), "Date:" + a.getDate(), pi);
+									
+									new Controller().new Select("http://eduweb.hhs.nl/~13061798/SetReceived.php?userid="+id+"&appid="+a.getId()).execute(new ApiConnector());
+									nm.notify(1, notify);
+									
+									
+									
+								}
+							
+
+							}
+
 						}
 
 					} catch (InterruptedException e) {

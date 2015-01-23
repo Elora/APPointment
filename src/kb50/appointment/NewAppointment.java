@@ -144,7 +144,7 @@ public class NewAppointment extends FragmentActivity {
 				// AppointmentListFragment.refresh();
 
 				setResult(RESULT_OK);
-				//finish();
+				
 				this.finish();
 			} else {
 				return;

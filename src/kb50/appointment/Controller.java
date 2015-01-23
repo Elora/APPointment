@@ -53,7 +53,7 @@ public class Controller {
 
 		public List<Object> appointmentsToList(JSONArray jsonArray) {
 
-			// url = "http://eduweb.hhs.nl/~13061798/GetAppointments.php";
+			
 
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject json = null;
@@ -68,7 +68,7 @@ public class Controller {
 					a.setName(json.getString("name"));
 					a.setPriority(json.getInt("priority"));
 					a.setDescription(json.getString("description"));
-
+					a.setReceived(json.getInt("received"));
 					a.setLocation(json.getString("location"));
 
 					appointments.add(a);
