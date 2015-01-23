@@ -23,10 +23,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 public class ProfielListFragment extends ListFragment {
-	View view;
-	Button btn;
-	
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

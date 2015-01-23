@@ -33,7 +33,7 @@ public class EditProfielActivity extends Activity {
 		//int id = mSharedPreference.getInt("id", 0);
 		
 		
-		User user = GetUser();
+		User user = getUser();
 		
 		name = (EditText) findViewById(R.id.reg_user_fieldEPA);
 		phoneNum = (EditText) findViewById(R.id.reg_phone_fieldEPA);
@@ -114,14 +114,14 @@ public class EditProfielActivity extends Activity {
 	}
 
 
-	public User GetUser(){
+	public User getUser(){
 
 		final SharedPreferences mSharedPreference= PreferenceManager
 				.getDefaultSharedPreferences(getBaseContext()); 
 		id = mSharedPreference.getInt("id", 0);
 		
 		List<User> users = new ArrayList<User>();
-		users = GetProfiels();
+		users = getProfiels();
 		
 		User user = new User();
 		for(int i = 0; i<users.size(); i++){
@@ -134,7 +134,7 @@ public class EditProfielActivity extends Activity {
 	}
 	
 	
-	public List<User> GetProfiels(){
+	public List<User> getProfiels(){
 		
 		List<User> users = new ArrayList<User>();
 		try {

@@ -24,7 +24,7 @@ public class LogIn extends Activity {
 
 	private int userId;
 
-	SharedPreferences prefs;
+	private SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

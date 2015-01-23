@@ -10,9 +10,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -35,7 +32,6 @@ public class NewAppointment extends FragmentActivity {
 	private static Button timePicker;
 	private static Button reminderDatePicker;
 	private static Button reminderTimePicker;
-	private static Button searchLocation;
 
 	private EditText name;
 	private EditText description;
@@ -43,21 +39,16 @@ public class NewAppointment extends FragmentActivity {
 	private EditText location;
 
 	private Geocoder gc;
-	private Resources res;
-
-	private double lat;
-	private double lng;
 
 	private List<EditText> fields;
-	private ArrayAdapter<String> adapter;
 
 	/*
 	 * Number of times we will try to contact the google map server after
 	 * timeouts to resolve an address to longitude and latitude
 	 */
-	private static final int maxretry = 5;
+	private static final int MAX_RETRY = 5;
 	/* Max Number of addresses that we get from resolving the address by name */
-	private static final int maxaddresses = 5;
+	private static final int MAX_ADDRESSES = 5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +61,6 @@ public class NewAppointment extends FragmentActivity {
 		timePicker = (Button) findViewById(R.id.time_picker);
 		reminderDatePicker = (Button) findViewById(R.id.reminder_date_picker);
 		reminderTimePicker = (Button) findViewById(R.id.reminder_time_picker);
-		searchLocation = (Button) findViewById(R.id.button_location);
 
 		name = (EditText) findViewById(R.id.appointment_name_field);
 		description = (EditText) findViewById(R.id.appointment_desc_field);
@@ -257,15 +247,15 @@ public class NewAppointment extends FragmentActivity {
 
 				boolean worked = false;
 				int count = 0;
-				while (!worked && count < maxretry) {
+				while (!worked && count < MAX_RETRY) {
 					try {
 						addrList = gc
-								.getFromLocationName(address, maxaddresses);
+								.getFromLocationName(address, MAX_ADDRESSES);
 						worked = true;
 					} catch (Exception te) {
 						System.err.println(te
 								+ " Exception occurred, will retry max "
-								+ maxretry + " times");
+								+ MAX_RETRY + " times");
 						count++;
 					}
 				}

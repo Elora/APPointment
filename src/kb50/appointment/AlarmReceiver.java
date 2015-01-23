@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-	public MediaPlayer mp;
+	private MediaPlayer mp;
 	private String name;
 	private String date;
 	private String time;

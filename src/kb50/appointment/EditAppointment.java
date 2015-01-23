@@ -11,8 +11,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -36,26 +34,20 @@ public class EditAppointment extends FragmentActivity {
 	private static Button reminderDatePicker;
 	private static Button reminderTimePicker;
 
-	private static Button searchLocation;
-
 	/*
 	 * Number of times we will try to contact the google map server after
 	 * timeouts to resolve an address to longitude and latitude
 	 */
-	private static final int maxretry = 5;
+	private static final int MAX_RETRY = 5;
 	/* Max Number of addresses that we get from resolving the address by name */
-	private static final int maxaddresses = 5;
+	private static final int MAX_ADDRESSES = 5;
 
 	private EditText name;
 	private EditText description;
 	private EditText location;
 
 	private Geocoder gc;
-	private Resources res;
-
-	private double lat;
-	private double lng;
-
+	
 	private int appointment_id;
 
 	private int owner_id;
@@ -341,15 +333,15 @@ public class EditAppointment extends FragmentActivity {
 
 				boolean worked = false;
 				int count = 0;
-				while (!worked && count < maxretry) {
+				while (!worked && count < MAX_RETRY) {
 					try {
 						addrList = gc
-								.getFromLocationName(address, maxaddresses);
+								.getFromLocationName(address, MAX_ADDRESSES);
 						worked = true;
 					} catch (Exception te) {
 						System.err.println(te
 								+ " Exception occurred, will retry max "
-								+ maxretry + " times");
+								+ MAX_RETRY + " times");
 						count++;
 					}
 				}

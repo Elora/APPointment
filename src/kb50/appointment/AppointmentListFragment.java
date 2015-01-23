@@ -22,7 +22,7 @@ public class AppointmentListFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
+		
 		// Each row in the list stores country name, currency and flag
 		List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
 

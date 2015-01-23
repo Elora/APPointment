@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class AppointmentInfoPage extends Activity {
 	private GoogleMap map;
-	private float zoom = 14;
+	private final float ZOOM = 14;
 
 	private double lat;
 	private double lng;
@@ -177,7 +177,7 @@ public class AppointmentInfoPage extends Activity {
 					lng = addresses.getLongitude();
 					lat = addresses.getLatitude();
 
-					gotoLocation(lat, lng, zoom);
+					gotoLocation(lat, lng, ZOOM);
 				}
 			} else {
 				System.err
@@ -212,10 +212,10 @@ public class AppointmentInfoPage extends Activity {
 			deleteAppoinment();
 			break;
 		case R.id.button_sendMessage:
-			SendMessage();
+			sendMessage();
 			break;
 		case R.id.AddGuestBtn:
-			AddGuest();
+			addGuest();
 			break;
 		case R.id.button_route:
 			String uri = "https://maps.google.com/maps?f=d&daddr=" + lat + ","
@@ -234,7 +234,7 @@ public class AppointmentInfoPage extends Activity {
 
 	}
 
-	public void sendLocation() {
+	private void sendLocation() {
 
 		String message = "http://maps.google.com/maps?q=" + lat + "," + lng;
 		
@@ -257,7 +257,7 @@ public class AppointmentInfoPage extends Activity {
 		Toast.makeText(getApplicationContext(),"Location sent: " + message, Toast.LENGTH_LONG).show();
 	}
 
-	public void deleteAppoinment() {
+	private void deleteAppoinment() {
 
 		DeleteFragment dialogFragment = DeleteFragment.newInstance(res
 				.getString(R.string.Deletemessage));
@@ -302,7 +302,7 @@ public class AppointmentInfoPage extends Activity {
 		return users;
 	}
 
-	public void SendMessage() {
+	private void sendMessage() {
 		SendFragment dialogFragment2 = SendFragment.newInstance();
 		dialogFragment2.show(getFragmentManager(), "dialog");
 	}
@@ -333,7 +333,7 @@ public class AppointmentInfoPage extends Activity {
 	public void doPositiveClickAddGuestsMessage(List<User> selecteditems) {
 	}
 
-	public void AddGuest() {
+	private void addGuest() {
 		AddGuestFragment dialogFragment3 = AddGuestFragment.newInstance();
 		dialogFragment3.show(getFragmentManager(), id);
 	}

@@ -52,7 +52,7 @@ public class Profile extends Fragment{
 	        /* map is already there, just return view as it is */
 	    }
 	    
-	    User user = GetUser();
+	    User user = getUser();
 	    
 	    TextView UN = (TextView)view.findViewById(R.id.UserNamePL);
         UN.setText(user.getName());
@@ -94,13 +94,13 @@ public class Profile extends Fragment{
 	
 
 	
-	public User GetUser(){
+	public User getUser(){
 
 		final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()); 
 		int id = mSharedPreference.getInt("id", 0);
 		
 		List<User> users = new ArrayList<User>();
-		users = GetProfiels();
+		users = getProfiels();
 		
 		User user = new User();
 		for(int i = 0; i<users.size(); i++){
@@ -113,7 +113,7 @@ public class Profile extends Fragment{
 	}
 	
 	
-	public List<User> GetProfiels(){
+	public List<User> getProfiels(){
 		
 		List<User> users = new ArrayList<User>();
 		try {
