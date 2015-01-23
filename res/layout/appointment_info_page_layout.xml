@@ -36,7 +36,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/appointment_name"
                         android:textColor="#48b047"
-                        android:textSize="20sp" />
+                        android:textSize="25sp" />
 
                     <TextView
                         android:id="@+id/appointment_desc"
@@ -51,13 +51,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/appointment_date"
                         android:textSize="15sp" />
-                    
+
+                    <TextView
+                        android:id="@+id/appointment_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_date"
+                        android:textSize="15sp" />
+
                     <TextView
                         android:id="@+id/appointment_location"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_location" />
-                    
+                        android:text="@string/appointment_location" 
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -67,7 +74,7 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal" >
 
-               <LinearLayout
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical" >
@@ -84,12 +91,11 @@
 
                     <TextView
                         android:id="@+id/GuestNames"
-                        android:layout_marginTop="10dp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="No guests" />
-
-
+                        android:layout_marginTop="10dp"
+                        android:text="No guests"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -100,8 +106,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.07"
         android:background="@drawable/appointment_bg"
-        android:orientation="horizontal" 
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="match_parent"

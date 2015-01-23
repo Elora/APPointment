@@ -37,27 +37,35 @@
                         android:layout_height="wrap_content"
                         android:text="@string/appointment_name"
                         android:textColor="#48b047"
-                        android:textSize="20sp"  />
+                        android:textSize="25sp" />
 
                     <TextView
                         android:id="@+id/appointment_desc"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_desc" 
-                        android:textSize="15sp"/>
+                        android:text="@string/appointment_desc"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/appointment_date"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_date" 
-                        android:textSize="15sp"/>
-                    
+                        android:text="@string/appointment_date"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/appointment_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_date"
+                        android:textSize="15sp" />
+
                     <TextView
                         android:id="@+id/appointment_location"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/appointment_location" />
+                        android:text="@string/appointment_location" 
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -87,7 +95,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Guests" />
+                        android:text="Guests"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

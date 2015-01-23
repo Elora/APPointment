@@ -68,11 +68,17 @@ public class AppointmentInfoPage extends Activity {
 		TextView appointmentName = (TextView) findViewById(R.id.appointment_name);
 		TextView appointmentDescr = (TextView) findViewById(R.id.appointment_desc);
 		TextView appointmentDate = (TextView) findViewById(R.id.appointment_date);
+		TextView appointmentTime = (TextView) findViewById(R.id.appointment_time);
 		TextView appointmentLocation = (TextView) findViewById(R.id.appointment_location);
 
+		String[] dateTime = date.split("\\s+");
+		String date = dateTime[0];
+		String time = dateTime[1];
+		
 		appointmentName.setText(name);
 		appointmentDescr.setText(description);
 		appointmentDate.setText(date);
+		appointmentTime.setText(time);
 
 		
 			appointmentLocation.setText(location);
@@ -230,19 +236,25 @@ public class AppointmentInfoPage extends Activity {
 
 	public void sendLocation() {
 
-		String phoneNumber = "";
 		String message = "http://maps.google.com/maps?q=" + lat + "," + lng;
+		
+		/*
+		 * phone numbers from database
 		try {
-			// SmsManager smsManager = SmsManager.getDefault();
-			// smsManager.sendTextMessage(phoneNumber, null, message, null,
-			// null);
-			Toast.makeText(getApplicationContext(),
-					"Location sent: " + message, Toast.LENGTH_LONG).show();
+			SmsManager smsManager = SmsManager.getDefault();
+			
+			for (int i = 0; i < ownerAndGuests.size(); i++) {
+				String temp = Integer.toString(ownerAndGuests.get(i).getPhone());
+				smsManager.sendTextMessage(temp, null, message, null, null);
+			}		
 		} catch (Exception e) {
 			Toast.makeText(getApplicationContext(),
 					"SMS failed, please try again.", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
+		*/
+		
+		Toast.makeText(getApplicationContext(),"Location sent: " + message, Toast.LENGTH_LONG).show();
 	}
 
 	public void deleteAppoinment() {
