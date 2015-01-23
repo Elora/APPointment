@@ -12,7 +12,7 @@
              <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
+<!-- 
         <ImageButton
             android:id="@+id/button_refresh"
             android:layout_width="40dp"
@@ -22,7 +22,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/refresh"
             android:onClick="onClickRefresh" />
-
+ -->
 
             <ImageButton
                 android:id="@+id/button1new"

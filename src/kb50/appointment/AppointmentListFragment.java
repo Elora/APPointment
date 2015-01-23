@@ -37,7 +37,7 @@ public class AppointmentListFragment extends ListFragment {
 		}
 
 		// Keys used in Hashmap
-		String[] from = { "id", "name", "date", "time" };
+		String[] from = { "name", "date", "time", "id" };
 		// Ids of views in profiellistfragment_layout
 		int[] to = { R.id.name2, R.id.date2, R.id.time2 };
 
@@ -96,6 +96,7 @@ public class AppointmentListFragment extends ListFragment {
 				i.putExtra("appointment_priority", a.getPriority());
 				i.putExtra("appointment_description", a.getDescription());
 				i.putExtra("appointment_date", a.getDate());
+				i.putExtra("appointment_location", a.getLocation());
 			}
 
 		}

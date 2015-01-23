@@ -58,6 +58,8 @@ public class EditAppointment extends FragmentActivity {
 
 	private int appointment_id;
 
+	private int owner_id;
+	
 	private List<EditText> fields;
 
 	@Override
@@ -81,7 +83,7 @@ public class EditAppointment extends FragmentActivity {
 			final SharedPreferences mSharedPreference = PreferenceManager
 					.getDefaultSharedPreferences(getBaseContext());
 			int id = mSharedPreference.getInt("id", 0);
-
+			owner_id = id;
 			List<Object> appointments = new Controller().new Select(
 					"http://eduweb.hhs.nl/~13061798/GetAppointments.php?id="
 							+ id).execute(new ApiConnector()).get();
@@ -189,8 +191,8 @@ public class EditAppointment extends FragmentActivity {
 			a.setName(name.getText().toString());
 			a.setDescription(description.getText().toString());
 			a.setDate(dateTime);
-
-			a.setLocation(location.getText().toString());
+			a.setOwner(owner_id);
+			a.setLocation(locationSpinner.getSelectedItem().toString());
 
 			a.setPriority(p);
 			if (setAlarm(reminderDate, reminderTime) == true) {

@@ -117,7 +117,7 @@ public class ProfielListFragment extends ListFragment {
 				i.putExtra("appointment_priority", a.getPriority());
 				i.putExtra("appointment_description", a.getDescription());
 				i.putExtra("appointment_date", a.getDate());
-				
+				i.putExtra("appointment_location", a.getLocation());
 			
 			}
 

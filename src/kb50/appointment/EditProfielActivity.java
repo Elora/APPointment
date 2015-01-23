@@ -54,7 +54,7 @@ public class EditProfielActivity extends Activity {
 	}
 	
 	public void onClickaddImg(View v){
-		startActivity(new Intent(this, AddImageActivity.class));
+		//startActivity(new Intent(this, AddImageActivity.class));
 		
 	}
 

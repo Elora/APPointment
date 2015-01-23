@@ -74,8 +74,9 @@ public class AppointmentInfoPage extends Activity {
 		appointmentDescr.setText(description);
 		appointmentDate.setText(date);
 
-		appointmentLocation.setText(location);
-
+		
+			appointmentLocation.setText(location);
+		
 		try {
 			final SharedPreferences mSharedPreference = PreferenceManager
 					.getDefaultSharedPreferences(getBaseContext());
