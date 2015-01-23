@@ -59,9 +59,11 @@ public class AppointmentListFragment extends ListFragment {
 
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		try {
-			for (Object o : new Controller().new Select(
+			List<Object> apps = new Controller().new Select(
 					"http://eduweb.hhs.nl/~13061798/GetAppointments.php?id="
-							+ id).execute(new ApiConnector()).get()) {
+							+ id).execute(new ApiConnector()).get();
+			
+			for (Object o : apps) {
 
 				appointments.add((Appointment) o);
 
