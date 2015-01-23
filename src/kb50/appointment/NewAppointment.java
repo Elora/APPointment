@@ -126,7 +126,13 @@ public class NewAppointment extends FragmentActivity {
 			Appointment a = new Appointment();
 			a.setName(name.getText().toString());
 			a.setDescription(description.getText().toString());
-			a.setLocation(locationSpinner.getSelectedItem().toString());
+			try{
+				a.setLocation(locationSpinner.getSelectedItem().toString());
+			}
+			catch(Exception e){
+				a.setLocation(location.getText().toString());
+			}
+			
 
 			a.setPriority(p);
 			a.setOwner(owner);

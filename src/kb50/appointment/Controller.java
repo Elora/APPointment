@@ -68,7 +68,10 @@ public class Controller {
 					a.setName(json.getString("name"));
 					a.setPriority(json.getInt("priority"));
 					a.setDescription(json.getString("description"));
-					a.setReceived(json.getInt("received"));
+					if(json.getString("received") != "null"){
+						a.setReceived(json.getInt("received"));
+					}
+					
 					a.setLocation(json.getString("location"));
 
 					appointments.add(a);
