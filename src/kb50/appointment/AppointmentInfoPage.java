@@ -318,7 +318,7 @@ public class AppointmentInfoPage extends Activity {
 		SmsManager sm = SmsManager.getDefault();
 
 		for (int i = 0; i < ownerAndGuests.size(); i++) {
-			String temp = Integer.toString(ownerAndGuests.get(i).getPhone());
+			String temp = ownerAndGuests.get(i).getPhone();
 			sm.sendTextMessage(temp, null, item, null, null);
 		}
 

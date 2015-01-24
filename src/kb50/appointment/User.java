@@ -5,7 +5,7 @@ public class User {
 
 	private int id;
 	private String name;
-	private int phone;
+	private String phone;
 	private String email;
 	private String pwd;
 	private String imageurl;
@@ -26,11 +26,11 @@ public class User {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

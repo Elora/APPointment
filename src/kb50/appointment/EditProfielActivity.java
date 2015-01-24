@@ -42,7 +42,7 @@ public class EditProfielActivity extends Activity {
 		password2 = (EditText) findViewById(R.id.reg_pass2_fieldEPA);
 		
 		
-		String phone = Integer.toString(user.getPhone());
+		String phone = user.getPhone();
 		
 		name.setText(user.getName(), TextView.BufferType.EDITABLE);
 		phoneNum.setText(phone, TextView.BufferType.EDITABLE);
@@ -73,7 +73,7 @@ public class EditProfielActivity extends Activity {
 		User u = new User();
 		u.setEmail(mail.getText().toString());
 		u.setName(name.getText().toString());
-		u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
+		u.setPhone(phoneNum.getText().toString());
 		u.setPwd(pass1);
 		u.setId(id);
 		u.setImageurl("http://eduweb.hhs.nl/~13061798/Profile/profilepic.jpg");

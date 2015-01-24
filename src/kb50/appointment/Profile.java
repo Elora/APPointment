@@ -59,7 +59,7 @@ public class Profile extends Fragment{
         TextView UE = (TextView)view.findViewById(R.id.UserEmailPL);
         UE.setText(user.getEmail());
         TextView UP = (TextView)view.findViewById(R.id.UserPhonePL);
-		String phone = Integer.toString(user.getPhone());
+		String phone = user.getPhone();
         UP.setText(phone);
         
         //Uri uri = Uri.parse(user.getImageurl()+ ".jpg");

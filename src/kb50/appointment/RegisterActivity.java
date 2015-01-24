@@ -72,7 +72,7 @@ public class RegisterActivity extends Activity {
 				//http://image.com/test.jpg
 				u.setPwd(pass1);
 				try{
-					u.setPhone(Integer.parseInt(phoneNum.getText().toString()));
+					u.setPhone(phoneNum.getText().toString());
 				}catch(NumberFormatException e){
 					phoneNum.setBackgroundColor(Color.RED);
 					Toast.makeText(this, "Enter only numbers please", Toast.LENGTH_SHORT).show();

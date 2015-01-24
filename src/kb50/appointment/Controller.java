@@ -102,7 +102,7 @@ public class Controller {
 					u.setName(json.getString("name"));
 					u.setEmail(json.getString("email"));
 					u.setPwd(json.getString("password"));
-					u.setPhone(json.getInt("phone_number"));
+					u.setPhone(json.getString("phone_number"));
 					u.setImageurl(json.getString("imageurl"));
 					users.add(u);
 

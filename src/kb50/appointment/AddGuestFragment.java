@@ -12,22 +12,20 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
-
 
 /**
  * 
- * This class shows a dialog box containing users that are registered in the database and available in the contact list.
+ * This class shows a dialog box containing users that are registered in the
+ * database and available in the contact list.
  * 
  */
-
 
 public class AddGuestFragment extends DialogFragment {
 	List<User> mSelectedItems = new ArrayList<User>();
 	String[] usernames;
-	List<User> users; 
+	List<User> users;
+
 	static AddGuestFragment newInstance() {
 		AddGuestFragment frag = new AddGuestFragment();
 		Bundle args = new Bundle();
@@ -38,8 +36,6 @@ public class AddGuestFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-		
 
 		users = getAvailableUsers();
 		usernames = new String[users.size()];
@@ -54,10 +50,10 @@ public class AddGuestFragment extends DialogFragment {
 							public void onClick(DialogInterface dialog,
 									int which, boolean isChecked) {
 								if (isChecked) {
-								
+
 									mSelectedItems.add(users.get(which));
 								} else if (mSelectedItems.contains(which)) {
-								
+
 									mSelectedItems.remove(Integer
 											.valueOf(which));
 								}
@@ -69,12 +65,16 @@ public class AddGuestFragment extends DialogFragment {
 						Appointment a = new Appointment();
 						a.setId(Integer.parseInt(getTag()));
 						a.setUsers(mSelectedItems);
-						
-						new Controller().new Insert(a,"http://eduweb.hhs.nl/~13061798/AddGuests.php").execute(new ApiConnector());
+
+						new Controller().new Insert(a,
+								"http://eduweb.hhs.nl/~13061798/AddGuests.php")
+								.execute(new ApiConnector());
 						((AppointmentInfoPage) getActivity())
 								.doPositiveClickAddGuestsMessage(mSelectedItems);
 
-						Toast t = Toast.makeText(getActivity().getApplicationContext(),"Guests added!",Toast.LENGTH_SHORT);
+						Toast t = Toast.makeText(getActivity()
+								.getApplicationContext(), "Guests added!",
+								Toast.LENGTH_SHORT);
 						t.show();
 					}
 				})
@@ -90,7 +90,7 @@ public class AddGuestFragment extends DialogFragment {
 
 	}
 
-	// returns registered users that are stored in the contactlist.
+	// returns registered users that are stored in the contact list.
 	public List<User> getAvailableUsers() {
 
 		List<User> users = new ArrayList<User>();
@@ -110,23 +110,23 @@ public class AddGuestFragment extends DialogFragment {
 					.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 
 			people.moveToFirst();
-			do {
+
+			while (people.moveToNext()) {
 				String number = people.getString(indexNumber)
 						.replaceAll("-", "").replaceAll("\\(", "")
-						.replaceAll("\\)", "").replaceAll(" ", "").replaceAll("\\+", "");
+						.replaceAll("\\)", "").replaceAll(" ", "")
+						.replaceAll("\\+", "");
 
 				for (Object o : userObject) {
 					User u = (User) o;
 					String phone = "0" + u.getPhone();
-					if (Integer.parseInt(phone) == Integer.parseInt(number)) {
+					if (phone.equals(number)) {
 
 						users.add(u);
 
 					}
-
 				}
-
-			} while (people.moveToNext());
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
