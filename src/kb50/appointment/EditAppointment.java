@@ -1,10 +1,14 @@
 package kb50.appointment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -149,23 +153,31 @@ public class EditAppointment extends FragmentActivity {
 	}
 
 	public void onClickSubmit(View v) {
-		String dateTime;
-		String[] reminderDate;
-		String[] reminderTime;
+		String dateTime = "";
+		String[] reminderDate = null;
+		String[] reminderTime = null;
 
 		for (EditText t : fields) {
 			t.setBackgroundResource(android.R.drawable.editbox_background);
 		}
 		if (emptyFields() == false) {
 			try {
+				//dateTime = tempdate.toString();	
 				String[] date = datePicker.getText().toString().split("-");
 				int day = Integer.parseInt(date[0]);
 				int month = Integer.parseInt(date[1]);
 				int year = Integer.parseInt(date[2]);
-
+				
+				if (day>31){
+					int tempp = day;
+					day = year;
+					year = tempp;
+				}
+				
 				dateTime = year + "-" + month + "-" + day + " "
 						+ timePicker.getText().toString();
-
+				
+				
 				reminderDate = reminderDatePicker.getText().toString()
 						.split("-");
 				reminderTime = reminderTimePicker.getText().toString()
@@ -175,6 +187,9 @@ public class EditAppointment extends FragmentActivity {
 				Toast.makeText(this, "Pick a date and time please!",
 						Toast.LENGTH_SHORT).show();
 				return;
+			}
+			catch(Exception e){
+				
 			}
 			String priority = prioritySpinner.getSelectedItem().toString();
 			int p = setPriority(priority);
