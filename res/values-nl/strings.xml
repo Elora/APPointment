@@ -6,7 +6,7 @@
     <string name="password">Wachtwoord</string>
     <string name="login">Log In</string>
     <string name="register">Registeren</string>
-    <string name="regText">Nog geen account account? Click Hier:</string>
+    <string name="regText">Nog geen account? Klik Hier:</string>
 	
 	<string name="Profiel">Profiel</string>
     <string name="Appointment">Afspraak</string>
@@ -21,7 +21,7 @@
     <string name="viewmap">Route</string>
     <string name="delete">Delete</string>
     <string name="back">Terug</string>
-    <string name="New_appointment">Nieuw afspraak</string>
+    <string name="New_appointment">Nieuwe afspraak</string>
     
 
     <string name="pic">Logo</string>
@@ -34,7 +34,7 @@
     <!-- strings for register activity -->
 	<string name="reg_name">Naam</string>
 	<string name="reg_username">User naam</string>
-	<string name="reg_phone">Telephone nummer</string>
+	<string name="reg_phone">Telefoon nummer</string>
 	<string name="reg_mail">E-mail</string>
 	<string name="reg_pass1">Wachtwoord</string>
 	<string name="reg_pass2">Wachtwoord herhalen</string>
