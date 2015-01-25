@@ -79,27 +79,25 @@
             android:layout_height="wrap_content"
             android:text="@string/appointment_location" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
 
             <EditText
                 android:id="@+id/location_field"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/appointment_location" />
+                android:hint="@string/location_hinttext" />
 
             <Button
                 android:id="@+id/button_location"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
                 android:background="@drawable/button"
                 android:drawableLeft="@drawable/search"
+                android:text="@string/searchLocation"
+                android:textColor="#FFFFFF"
                 android:onClick="onClickLocation" />
-        </LinearLayout>
+     
 
         <Spinner
             android:id="@+id/location_spinner"
@@ -167,6 +165,16 @@
             android:gravity="center"
             android:orientation="horizontal" >
 
+                  <Button
+                android:id="@+id/new_appointment_btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button"
+                android:onClick="onClickSubmit"
+                android:text="@string/btn_submit"
+                android:textColor="#FFFFFF" /> 
+                
             <Button
                 android:id="@+id/new_appointment_btnCancel"
                 android:layout_width="wrap_content"
@@ -177,15 +185,7 @@
                 android:text="@string/btn_cancel"
                 android:textColor="#FFFFFF" />
 
-            <Button
-                android:id="@+id/new_appointment_btnSubmit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/button"
-                android:onClick="onClickSubmit"
-                android:text="@string/btn_submit"
-                android:textColor="#FFFFFF" />
+      
         </LinearLayout>
     </LinearLayout>
 

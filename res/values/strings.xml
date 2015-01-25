@@ -60,9 +60,10 @@
     <string name="appointment_desc">Description</string>
     <string name="appointment_date">Date</string>
     <string name="appointment_location">Location</string>
-    <string name="searchLocation">Search Location</string>
+    <string name="searchLocation">add your location</string>
     <string name="appointment_priority">Priority</string>
     <string name="appointment_reminder">Reminder</string>
+    <string name="location_hinttext">street name, nr., city</string>
 
     <!-- Priority spinner in when creating new appointment -->
     <string-array name="priority_array">
