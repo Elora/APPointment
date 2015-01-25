@@ -116,17 +116,19 @@ public class AddGuestFragment extends DialogFragment {
 						.replaceAll("-", "").replaceAll("\\(", "")
 						.replaceAll("\\)", "").replaceAll(" ", "")
 						.replaceAll("\\+", "");
+				
+				if(number.startsWith("31")){
+					
+					number = "0"+number.substring(2);
+					
+				}
 
 				for (Object o : userObject) {
 					User u = (User) o;
 					String phone = "0" + u.getPhone();
 					
 					if (phone.equals(number)) {
-						if(phone.startsWith("31")){
-							
-							phone = phone.substring(2);
-														
-						}
+
 						users.add(u);
 
 					}
