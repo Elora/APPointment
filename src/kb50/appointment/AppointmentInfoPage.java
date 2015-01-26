@@ -290,7 +290,7 @@ public class AppointmentInfoPage extends Activity {
 
 				User user = (User)o;
 				user.setPhone("0"+user.getPhone());
-				users.add((User) o);
+				users.add(user);
 
 			}
 		} catch (InterruptedException e) {
