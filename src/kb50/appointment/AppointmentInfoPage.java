@@ -288,6 +288,8 @@ public class AppointmentInfoPage extends Activity {
 					"http://eduweb.hhs.nl/~13061798/GetAppointmentUsers.php?id="
 							+ id).execute(new ApiConnector()).get()) {
 
+				User user = (User)o;
+				user.setPhone("0"+user.getPhone());
 				users.add((User) o);
 
 			}
