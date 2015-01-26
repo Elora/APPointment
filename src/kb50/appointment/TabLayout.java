@@ -16,6 +16,8 @@ import android.widget.Toast;
 import android.widget.TabHost.TabContentFactory;
 
 public class TabLayout extends FragmentActivity implements TabHost.OnTabChangeListener {
+	// CODE PROVIDED BY: http://thepseudocoder.wordpress.com/2011/10/04/android-tabs-the-fragment-way
+	
 	private TabHost mTabHost;
 	private HashMap mapTabInfo = new HashMap();
 	private TabInfo mLastTab = null;
